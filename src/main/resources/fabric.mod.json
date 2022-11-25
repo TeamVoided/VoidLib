@@ -18,13 +18,13 @@
     "main": [
       {
         "adapter": "kotlin",
-        "value": "com.team.voided.voidlib.VoidLibKt::onInitialize"
+        "value": "org.team.voided.voidlib.VoidLibKt::onInitialize"
       }
     ],
     "client": [
       {
         "adapter": "kotlin",
-        "value": "com.team.voided.voidlib.client.VoidLibClientKt::onInitialize"
+        "value": "org.team.voided.voidlib.client.VoidLibClientKt::onInitialize"
       }
     ]
   },
