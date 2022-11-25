@@ -62,6 +62,13 @@ data class Vec3i(var x: Int, var y: Int, var z: Int) {
         return (totalValThis - totalValCompare)
     }
 
+    fun add(x: Int, y: Int, z: Int): Vec3i = Vec3i(x = this.x + x, y = this.y + y, this.z + z)
+    fun addAssign(x: Int, y: Int, z: Int) {
+        this.x += x
+        this.y += y
+        this.z += z
+    }
+
     fun copy(): Vec3i {
         return Vec3i(this.x, this.y, this.z)
     }

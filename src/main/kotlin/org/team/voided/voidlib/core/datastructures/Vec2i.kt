@@ -55,6 +55,12 @@ data class Vec2i(var x: Int, var y: Int) {
         return (totalValThis - totalValCompare)
     }
 
+    fun add(x: Int, y: Int): Vec2i = Vec2i(x = this.x + x, y = this.y + y)
+    fun addAssign(x: Int, y: Int) {
+        this.x += x
+        this.y += y
+    }
+
     fun copy(): Vec2i {
         return Vec2i(this.x, this.y)
     }
