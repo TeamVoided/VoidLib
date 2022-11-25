@@ -1,7 +1,7 @@
-package com.team.voided.voidlib.fwfc.wave
+package org.team.voided.voidlib.fwfc.wave
 
-import com.team.voided.voidlib.core.datastructures.Vec2i
-import com.team.voided.voidlib.fwfc.wave.structuregen.StructureGenerator
+import org.team.voided.voidlib.core.datastructures.Vec2i
+import org.team.voided.voidlib.fwfc.wave.structuregen.StructureGenerator
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.BlockMirror
 import net.minecraft.util.BlockRotation

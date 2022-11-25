@@ -1,4 +1,4 @@
-package com.team.voided.voidlib.core.datastructures
+package org.team.voided.voidlib.core.datastructures
 
 data class Vec2i(var x: Int, var y: Int) {
     operator fun unaryPlus() = Vec2i(+x, +y)

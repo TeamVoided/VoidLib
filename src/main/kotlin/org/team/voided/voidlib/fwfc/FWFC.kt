@@ -1,11 +1,11 @@
-package com.team.voided.voidlib.fwfc
+package org.team.voided.voidlib.fwfc
 
 import com.mojang.brigadier.arguments.IntegerArgumentType
 import com.mojang.brigadier.tree.LiteralCommandNode
-import com.team.voided.voidlib.LOGGER
-import com.team.voided.voidlib.core.LibModule
-import com.team.voided.voidlib.fwfc.wave.Tiles
-import com.team.voided.voidlib.fwfc.wave.WaveFunction
+import org.team.voided.voidlib.LOGGER
+import org.team.voided.voidlib.core.LibModule
+import org.team.voided.voidlib.fwfc.wave.Tiles
+import org.team.voided.voidlib.fwfc.wave.WaveFunction
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback
 import net.minecraft.server.command.CommandManager
 import net.minecraft.server.command.ServerCommandSource

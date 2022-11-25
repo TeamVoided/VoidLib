@@ -1,7 +1,7 @@
-package com.team.voided.voidlib.fwfc.wave.structuregen
+package org.team.voided.voidlib.fwfc.wave.structuregen
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException
-import com.team.voided.voidlib.fwfc.wave.Tile
+import org.team.voided.voidlib.fwfc.wave.Tile
 import net.minecraft.block.entity.StructureBlockBlockEntity
 import net.minecraft.command.argument.BlockPosArgumentType
 import net.minecraft.server.world.ServerWorld

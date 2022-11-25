@@ -1,6 +1,6 @@
-package com.team.voided.voidlib.fwfc.wave
+package org.team.voided.voidlib.fwfc.wave
 
-import com.team.voided.voidlib.id
+import org.team.voided.voidlib.id
 
 class Tiles {
     companion object {

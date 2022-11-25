@@ -1,8 +1,8 @@
-package com.team.voided.voidlib.fwfc.wave.rule
+package org.team.voided.voidlib.fwfc.wave.rule
 
-import com.team.voided.voidlib.fwfc.wave.PositionalTile
-import com.team.voided.voidlib.fwfc.wave.Tile
-import com.team.voided.voidlib.fwfc.wave.TileGrid
+import org.team.voided.voidlib.fwfc.wave.PositionalTile
+import org.team.voided.voidlib.fwfc.wave.Tile
+import org.team.voided.voidlib.fwfc.wave.TileGrid
 
 class LimitedPlacementRule(val tile: Tile, val maxPlacements: Int): ITileGenerationRule {
     private var placements = 0;

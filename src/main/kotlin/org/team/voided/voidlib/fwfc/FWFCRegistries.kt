@@ -1,7 +1,7 @@
-package com.team.voided.voidlib.fwfc
+package org.team.voided.voidlib.fwfc
 
-import com.team.voided.voidlib.fwfc.wave.Tile
-import com.team.voided.voidlib.id
+import org.team.voided.voidlib.fwfc.wave.Tile
+import org.team.voided.voidlib.id
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder
 import net.minecraft.util.registry.Registry
 

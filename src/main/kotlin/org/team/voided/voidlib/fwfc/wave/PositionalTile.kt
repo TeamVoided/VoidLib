@@ -1,6 +1,6 @@
-package com.team.voided.voidlib.fwfc.wave
+package org.team.voided.voidlib.fwfc.wave
 
-import com.team.voided.voidlib.core.datastructures.Vec2i
+import org.team.voided.voidlib.core.datastructures.Vec2i
 import java.util.LinkedList
 
 data class PositionalTile(val position: Vec2i, var tile: Tile?) {

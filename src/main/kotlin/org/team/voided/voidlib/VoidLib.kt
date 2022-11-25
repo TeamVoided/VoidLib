@@ -1,7 +1,7 @@
-package com.team.voided.voidlib
+package org.team.voided.voidlib
 
-import com.team.voided.voidlib.core.LibModule
-import com.team.voided.voidlib.fwfc.FWFC
+import org.team.voided.voidlib.core.LibModule
+import org.team.voided.voidlib.fwfc.FWFC
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 import net.minecraft.util.Identifier
 import org.slf4j.Logger
