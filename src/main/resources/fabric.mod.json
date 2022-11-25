@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "voidlib",
+  "version": "${version}",
+
+  "name": "Void Lib",
+  "description": "A common library for Team Voided's projects",
+  "authors": [
+    "Team Voided"
+  ],
+  "contact": { },
+
+  "license": "MIT",
+  "icon": "assets/voidlib/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "adapter": "kotlin",
+        "value": "com.team.voided.voidlib.VoidLibKt::onInitialize"
+      }
+    ],
+    "client": [
+      {
+        "adapter": "kotlin",
+        "value": "com.team.voided.voidlib.client.VoidLibClientKt::onInitialize"
+      }
+    ]
+  },
+  "mixins": [ ],
+
+  "depends": {
+    "fabricloader": ">=0.14.9",
+    "fabric-api": "*",
+    "fabric-language-kotlin": ">=1.8.5+kotlin.1.7.20",
+    "minecraft": "~1.19",
+    "java": ">=17"
+  },
+  "suggests": { }
+}
