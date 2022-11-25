@@ -1,7 +1,7 @@
 # VoidLib
 
 ## The common library used for Team Voided mods
-#### Includes an implementation of the Wave Function Collapse algorithm (originally by [me](https://github.com/BrokenFuse), still be [me](https://github.com/BrokenFuse))
+#### Includes an implementation of the Wave Function Collapse algorithm (originally by [me](https://github.com/BrokenFuse), still by [me](https://github.com/BrokenFuse))
 
 <br>
 <br>
