@@ -31,7 +31,7 @@ class FWFC: LibModule("fwfc") {
                                                 IntegerArgumentType.getInteger(it, "discardSaveAfter"),
                                                 tiles = listOf(
                                                     Tiles.BLANK, Tiles.UP, Tiles.DOWN, Tiles.LEFT, Tiles.RIGHT
-                                                )).collapse().generateStructure(it.source.world, it.source.entity!!.blockPos, BlockRotation.NONE, BlockMirror.NONE, 1.0f)
+                                                )).collapse().generateStructure(it.source.world, it.source.entity!!.blockPos.add(0,-1,0), BlockRotation.NONE, BlockMirror.NONE, 1.0f)
                                         }.start()
                                         return@executes 1
                                     } else return@executes 0
