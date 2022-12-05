@@ -1,7 +1,6 @@
-package org.team.voided.voidlib.fwfc.wave.structuregen
+package org.team.voided.voidlib.wfc.wave.structuregen
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException
-import org.team.voided.voidlib.fwfc.wave.Tile
 import net.minecraft.block.entity.StructureBlockBlockEntity
 import net.minecraft.command.argument.BlockPosArgumentType
 import net.minecraft.server.world.ServerWorld
@@ -14,6 +13,7 @@ import net.minecraft.util.InvalidIdentifierException
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.ChunkPos
 import net.minecraft.util.math.Vec3i
+import org.team.voided.voidlib.wfc.wave.Tile
 import java.util.*
 
 class StructureGenerator(val tileGrid: Array<Array<Tile?>>) {
@@ -57,20 +57,5 @@ class StructureGenerator(val tileGrid: Array<Array<Tile?>>) {
             }.findAny().isPresent) {
             throw BlockPosArgumentType.UNLOADED_EXCEPTION.create()
         }
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as StructureGenerator
-
-        if (!tileGrid.contentDeepEquals(other.tileGrid)) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        return tileGrid.contentDeepHashCode()
     }
 }

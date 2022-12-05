@@ -1,7 +1,7 @@
-package org.team.voided.voidlib.fwfc.wave
+package org.team.voided.voidlib.wfc.wave
 
 import org.team.voided.voidlib.core.datastructures.Vec2i
-import java.util.LinkedList
+import java.util.*
 
 data class PositionalTile(val position: Vec2i, var tile: Tile?) {
     fun isComplete(): Boolean = tile != null

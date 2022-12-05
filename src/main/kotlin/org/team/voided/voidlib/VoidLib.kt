@@ -1,12 +1,12 @@
 package org.team.voided.voidlib
 
-import org.team.voided.voidlib.core.LibModule
-import org.team.voided.voidlib.fwfc.FWFC
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 import net.minecraft.util.Identifier
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.util.LinkedList
+import org.team.voided.voidlib.core.LibModule
+import org.team.voided.voidlib.cresm.CResM
+import org.team.voided.voidlib.wfc.WFC
+import java.util.*
 import java.util.List.copyOf
 
 const val MODID = "voidlib"
@@ -16,8 +16,8 @@ private val modules: MutableList<LibModule> = LinkedList()
 
 @Suppress("unused")
 fun onInitialize() {
-    addModule(FWFC())
-
+    addModule(WFC())
+    addModule(CResM())
     modules.forEach(LibModule::commonSetup)
 }
 

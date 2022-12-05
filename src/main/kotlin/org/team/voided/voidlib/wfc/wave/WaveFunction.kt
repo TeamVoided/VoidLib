@@ -1,21 +1,22 @@
-package org.team.voided.voidlib.fwfc.wave
+package org.team.voided.voidlib.wfc.wave
 
-import org.team.voided.voidlib.core.datastructures.Vec2i
-import org.team.voided.voidlib.fwfc.wave.rule.ITileGenerationRule
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.BlockMirror
 import net.minecraft.util.BlockRotation
 import net.minecraft.util.math.BlockPos
-import java.util.LinkedList
+import org.team.voided.voidlib.core.datastructures.Vec2i
+import org.team.voided.voidlib.wfc.WFC
+import org.team.voided.voidlib.wfc.wave.rule.ITileGenerationRule
+import java.util.*
 import kotlin.random.Random
 
 data class WaveFunction(
     val width: Int, val height: Int,
     val startWith: Int = 1,
     val discardSaveAfter: Int = 10,
-    val seed: Long = System.currentTimeMillis(),
+    var seed: Long = System.currentTimeMillis(),
     val tiles: List<Tile>,
-    val generationRules: List<ITileGenerationRule> = LinkedList()
+    val generationRules: List<ITileGenerationRule<*>> = LinkedList()
 ) {
     private val grid = TileGrid(Vec2i(width, height))
     private val random = Random(seed)
@@ -66,8 +67,19 @@ data class WaveFunction(
         }
     }
 
+    fun reseed(): WaveFunction {
+        seed = System.currentTimeMillis()
+        return this
+    }
+
+    fun setSeed(seed: Long): WaveFunction {
+        this.seed = seed
+        return this
+    }
+
     private fun lowestEntropy(): Pair<List<Tile>, PositionalTile> {
-        val entropies: MutableMap<PositionalTile, Pair<List<Tile>, PositionalTile>> = LinkedHashMap()
+        WFC.LOGGER.info("${generationRules.size}")
+        var entropies: MutableMap<PositionalTile, Pair<List<Tile>, PositionalTile>> = LinkedHashMap()
         grid.forEachPositionalTile {
             if (!it.isComplete()) {
                 val options = it.calculateOptions(grid, tiles)
@@ -75,23 +87,23 @@ data class WaveFunction(
             }
         }
 
-        var sorted = entropies.values.sortedBy { pair -> pair.first.size }
-
-        val lookFor = sorted[0].first.size
-        sorted = sorted.filter {
-            it.first.size == lookFor
-        }
-
-        sorted = sorted.filter {
+        entropies = entropies.filter { (_, pair) ->
             var rulesMatch = true
 
             generationRules.forEach { rule ->
-                if (!rule.computeRule(grid, it.second)) {
+                if (!rule.computeRule(grid, pair.second)) {
                     rulesMatch = false
                 }
             }
 
             rulesMatch
+        }.toMutableMap()
+
+        var sorted = entropies.values.sortedBy { pair -> pair.first.size }
+
+        val lookFor = sorted[0].first.size
+        sorted = sorted.filter {
+            it.first.size == lookFor
         }
 
         return sorted.random(random)

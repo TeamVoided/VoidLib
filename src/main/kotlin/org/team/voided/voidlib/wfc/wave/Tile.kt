@@ -1,4 +1,4 @@
-package org.team.voided.voidlib.fwfc.wave
+package org.team.voided.voidlib.wfc.wave
 
 import net.minecraft.util.Identifier
 

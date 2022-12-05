@@ -1,11 +1,11 @@
-package org.team.voided.voidlib.fwfc.wave
+package org.team.voided.voidlib.wfc.wave
 
-import org.team.voided.voidlib.core.datastructures.Vec2i
-import org.team.voided.voidlib.fwfc.wave.structuregen.StructureGenerator
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.BlockMirror
 import net.minecraft.util.BlockRotation
 import net.minecraft.util.math.BlockPos
+import org.team.voided.voidlib.core.datastructures.Vec2i
+import org.team.voided.voidlib.wfc.wave.structuregen.StructureGenerator
 import kotlin.random.Random
 
 data class TileGrid(val dimensions: Vec2i, val init: (Vec2i) -> PositionalTile = { pos -> PositionalTile(pos, null) }) {
