@@ -17,7 +17,7 @@ class WaveFunctionArgumentType: IdentifierArgumentType() {
         }
 
         fun getWaveFunction(context: CommandContext<ServerCommandSource>, name: String): WaveFunction {
-            return WFCRegistries.WAVE_FUNCTION[context.getArgument(name, Identifier::class.java)]!!
+            return WFCRegistries.WAVE_FUNCTION[context.getArgument(name, Identifier::class.java)]!!.createWaveFunction()
         }
     }
 

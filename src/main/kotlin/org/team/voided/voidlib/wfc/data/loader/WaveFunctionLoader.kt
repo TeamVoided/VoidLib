@@ -5,7 +5,7 @@ import net.minecraft.util.Identifier
 import org.team.voided.voidlib.cresm.loader.CResMSingleLoader
 import org.team.voided.voidlib.wfc.WFC
 import org.team.voided.voidlib.wfc.WFCRegistries
-import org.team.voided.voidlib.wfc.wave.WaveFunction
+import org.team.voided.voidlib.wfc.data.WaveFunctionProperties
 import org.team.voided.voidlib.wfc.wave.rule.ITileGenerationRule
 import java.util.*
 
@@ -27,13 +27,6 @@ class WaveFunctionLoader: CResMSingleLoader {
             generationRules.add(type.construct(it.asJsonObject))
         }
 
-        WFCRegistries.registerWaveFunction(fId, WaveFunction(
-            width = width,
-            height = height,
-            startWith = startingTiles,
-            discardSaveAfter = discardSaveAfter,
-            tiles = tiles,
-            generationRules = generationRules
-        ))
+        WFCRegistries.registerWaveFunction(fId, WaveFunctionProperties(width, height, startingTiles, discardSaveAfter, tiles, generationRules))
     }
 }
