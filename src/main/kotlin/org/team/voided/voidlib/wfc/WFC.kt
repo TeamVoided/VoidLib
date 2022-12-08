@@ -28,7 +28,7 @@ class WFC: LibModule("wfc") {
         val LOGGER: Logger = LoggerFactory.getLogger("VoidLib: WFC")
         val LIMITED_PLACEMENT_TYPE: TileGenerationRuleType<LimitedPlacementRule> = TileGenerationRuleType(listOf(Pair("tile", JsonType.IDENTIFIER), Pair("max_placements", JsonType.INT))) { json ->
             val id = idFromString(json.get("tile").asString)
-            val maxPlacements = json.get("max_placements").asInt
+            val maxPlacements = json.get("maxPlacements").asInt
 
             val tile = WFCRegistries.TILE_REGISTRY[id] ?: throw IllegalStateException("no tile matching $id could be found")
 
