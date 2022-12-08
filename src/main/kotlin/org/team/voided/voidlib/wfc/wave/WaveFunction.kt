@@ -78,7 +78,6 @@ data class WaveFunction(
     }
 
     private fun lowestEntropy(): Pair<List<Tile>, PositionalTile> {
-        WFC.LOGGER.info("${generationRules.size}")
         var entropies: MutableMap<PositionalTile, Pair<List<Tile>, PositionalTile>> = LinkedHashMap()
         grid.forEachPositionalTile {
             if (!it.isComplete()) {

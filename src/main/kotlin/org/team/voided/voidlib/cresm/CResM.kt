@@ -13,7 +13,7 @@ class CResM: LibModule("Custom Resource Manager") {
         private val loaders: MutableList<ICResMLoader> = LinkedList()
         private val loaded: MutableList<ICResMLoader> = LinkedList()
 
-        fun registerLoader(loader: ICResMLoader): ICResMLoader {
+        fun <T: ICResMLoader> registerLoader(loader: T): T {
             loaders.add(loader)
             return loader
         }

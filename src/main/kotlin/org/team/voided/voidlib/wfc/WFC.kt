@@ -10,6 +10,7 @@ import net.minecraft.server.command.ServerCommandSource
 import net.minecraft.util.BlockMirror
 import net.minecraft.util.BlockRotation
 import net.minecraft.util.Identifier
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.team.voided.voidlib.core.LibModule
 import org.team.voided.voidlib.cresm.CResM
@@ -24,7 +25,7 @@ import org.team.voided.voidlib.wfc.wave.rule.TileGenerationRuleType
 
 class WFC: LibModule("wfc") {
     companion object {
-        val LOGGER = LoggerFactory.getLogger("VoidLib: WFC")
+        val LOGGER: Logger = LoggerFactory.getLogger("VoidLib: WFC")
         val LIMITED_PLACEMENT_TYPE: TileGenerationRuleType<LimitedPlacementRule> = TileGenerationRuleType(listOf(Pair("tile", JsonType.IDENTIFIER), Pair("max_placements", JsonType.INT))) { json ->
             val id = idFromString(json.get("tile").asString)
             val maxPlacements = json.get("max_placements").asInt
@@ -91,7 +92,7 @@ class WFC: LibModule("wfc") {
                     .executes {
                         if (it.source.entity?.hasPermissionLevel(4) == true) {
                             Thread {
-                                WaveFunctionArgumentType.getWaveFunction(it, "wave").reseed()
+                                WaveFunctionArgumentType.getWaveFunction(it, "wave")
                                     .collapse().generateStructure(it.source.world, it.source.entity!!.blockPos.add(0,-1,0), BlockRotation.NONE, BlockMirror.NONE, 1.0f)
                             }.start()
                         }
@@ -100,7 +101,8 @@ class WFC: LibModule("wfc") {
                 ).build()
             dispatcher.root.addChild(waveCallNode)
         }
-        LOGGER.info("Loaded VoidLib: FWFC")
+
+        LOGGER.info("Loaded VoidLib: WFC")
     }
 
     override fun clientSetup() { }

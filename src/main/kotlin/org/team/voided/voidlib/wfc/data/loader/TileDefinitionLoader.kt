@@ -10,8 +10,6 @@ import org.team.voided.voidlib.wfc.wave.Tile
 
 class TileDefinitionLoader : CResMSingleLoader {
     override fun loadResource(id: Identifier, manager: ResourceManager) {
-        WFC.LOGGER.info("found resource with id $id")
-
         val json = parseJson(id, manager)
         val tiles = json.get("tiles").asJsonArray
         tiles.forEach { element ->

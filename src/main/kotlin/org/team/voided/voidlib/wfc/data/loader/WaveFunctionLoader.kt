@@ -11,7 +11,7 @@ import java.util.*
 
 class WaveFunctionLoader: CResMSingleLoader {
     override fun loadResource(id: Identifier, manager: ResourceManager) {
-        val json = parseJson(id, manager)
+        val json = parseJson(Identifier(id.namespace, "functions/${id.path}"), manager)
 
         val fId = WFC.idFromString(json.get("id").asString)
         val width = json.get("width").asInt

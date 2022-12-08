@@ -1,10 +1,12 @@
 package org.team.voided.voidlib.wfc.wave
 
+import net.minecraft.util.BlockRotation
 import net.minecraft.util.Identifier
+import org.team.voided.voidlib.id
 
 data class Tile(val id: Identifier, val adjacencyIndex: AdjacencyIndex) {
     companion object {
-        val EMPTY = Tile(Identifier("fwfc", "empty"), AdjacencyIndex(0 ,0, 0, 0))
+        val EMPTY = Tile(id("empty"), AdjacencyIndex(0 ,0, 0, 0))
     }
 
     fun acceptAbove(other: Tile): Boolean {
