@@ -21,8 +21,9 @@ class TileDefinitionLoader : CResMSingleLoader {
                 adjacencyIndexObject.get("down").asInt,
                 adjacencyIndexObject.get("left").asInt
             )
+            val rotatable = element.asJsonObject.get("rotatable").asBoolean
 
-            WFCRegistries.registerTile(tileId, Tile(tileId, adjacencyIndex))
+            WFCRegistries.registerTile(tileId, Tile(tileId, adjacencyIndex, rotatable))
             WFC.LOGGER.info("Registered tile with id $tileId and adjacency index [${adjacencyIndex.up}, ${adjacencyIndex.right}, ${adjacencyIndex.down}, ${adjacencyIndex.left}]")
         }
     }

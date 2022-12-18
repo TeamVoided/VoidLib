@@ -26,7 +26,7 @@ import org.team.voided.voidlib.wfc.wave.rule.TileGenerationRuleType
 class WFC: LibModule("wfc") {
     companion object {
         val LOGGER: Logger = LoggerFactory.getLogger("VoidLib: WFC")
-        val LIMITED_PLACEMENT_TYPE: TileGenerationRuleType<LimitedPlacementRule> = TileGenerationRuleType(listOf(Pair("tile", JsonType.IDENTIFIER), Pair("max_placements", JsonType.INT))) { json ->
+        val LIMITED_PLACEMENT_TYPE: TileGenerationRuleType<LimitedPlacementRule> = TileGenerationRuleType(listOf(Pair("tile", JsonType.STRING), Pair("max_placements", JsonType.NUMBER))) { json ->
             val id = idFromString(json.get("tile").asString)
             val maxPlacements = json.get("maxPlacements").asInt
 

@@ -5,7 +5,6 @@ import net.minecraft.util.BlockMirror
 import net.minecraft.util.BlockRotation
 import net.minecraft.util.math.BlockPos
 import org.team.voided.voidlib.core.datastructures.Vec2i
-import org.team.voided.voidlib.wfc.WFC
 import org.team.voided.voidlib.wfc.wave.rule.ITileGenerationRule
 import java.util.*
 import kotlin.random.Random
@@ -81,7 +80,16 @@ data class WaveFunction(
         var entropies: MutableMap<PositionalTile, Pair<List<Tile>, PositionalTile>> = LinkedHashMap()
         grid.forEachPositionalTile {
             if (!it.isComplete()) {
-                val options = it.calculateOptions(grid, tiles)
+                val options = LinkedList<Tile>()
+
+                if (it.isRotatable()) {
+                    for (rotation in BlockRotation.values()) {
+                        options.addAll(it.rotated(rotation).calculateOptions(grid, tiles))
+                    }
+                } else {
+                    options.addAll(it.calculateOptions(grid, tiles))
+                }
+
                 entropies[it] = Pair(options, it)
             }
         }

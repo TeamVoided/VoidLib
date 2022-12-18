@@ -1,9 +1,23 @@
 package org.team.voided.voidlib.wfc.wave
 
+import net.minecraft.util.BlockRotation
 import org.team.voided.voidlib.core.datastructures.Vec2i
 import java.util.*
 
 data class PositionalTile(val position: Vec2i, var tile: Tile?) {
+    private var rotation = BlockRotation.NONE
+
+    fun rotated(rotation: BlockRotation): PositionalTile = PositionalTile(position, tile?.rotated(rotation)).setRotation(rotation)
+
+    private fun setRotation(rotation: BlockRotation): PositionalTile {
+        this.rotation = rotation
+        return this
+    }
+
+    fun getRotation() = rotation
+
+    fun isRotatable() = if (tile == null) false else tile!!.rotatable
+
     fun isComplete(): Boolean = tile != null
 
     fun calculateEntropy(grid: TileGrid, uniqueTiles: List<Tile>): Int {

@@ -36,7 +36,7 @@ class StructureGenerator(val tileGrid: Array<Array<Tile?>>) {
 
                 optionalTemplate.ifPresent { template ->
                     throwOnUnloadedPos(world, ChunkPos(shiftedPos), ChunkPos(shiftedPos.add(template.size)))
-                    val placementData = StructurePlacementData().setMirror(mirror).setRotation(rotation)
+                    val placementData = StructurePlacementData().setMirror(mirror).setRotation(tile.getRotation().rotate(rotation))
                     if (integrity < 1.0) {
                         placementData.clearProcessors().addProcessor(BlockRotStructureProcessor(integrity)).setRandom(StructureBlockBlockEntity.createRandom(seed))
                     }
