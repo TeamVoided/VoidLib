@@ -1,12 +1,8 @@
 package org.team.voided.voidlib.config
 
-import net.minecraft.util.Identifier
+import com.google.gson.JsonElement
 
-abstract class Config<E: Config<E>> constructor(val id: Identifier) {
-    protected val values: MutableMap<String, ConfigValue> = LinkedHashMap()
-
-    abstract fun setValue(id: String, value: ConfigValue): E
-    abstract fun removeValue(id: String): E
-    abstract fun save(): E
-    abstract fun load(): E
+interface Config<E: Config<E>>: ImmutableConfig {
+    fun setValue(id: String, value: JsonElement): E
+    fun removeValue(id: String): E
 }

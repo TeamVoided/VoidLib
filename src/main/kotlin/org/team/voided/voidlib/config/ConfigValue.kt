@@ -3,7 +3,7 @@ package org.team.voided.voidlib.config
 import com.google.gson.JsonObject
 import net.minecraft.text.Text
 
-class ConfigValue private constructor() {
+open class ConfigValue private constructor() {
     private var numberVal: Number = 0
     private var stringVal: String = ""
     private var booleanVal: Boolean = false

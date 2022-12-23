@@ -1,6 +1,8 @@
 package org.team.voided.voidlib.config
 
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
 import net.minecraft.util.Identifier
@@ -10,7 +12,9 @@ import java.io.FileWriter
 import java.nio.file.Files
 import kotlin.io.path.Path
 
-class ServerConfig(id: Identifier) : Config<ServerConfig>(id) {
+open class ServerConfig(val id: Identifier) : SavableConfig<ServerConfig> {
+    private val values: MutableMap<String, JsonElement> = LinkedHashMap()
+
     companion object {
         fun fromJson(id: Identifier): ServerConfig? {
             val config = ServerConfig(id)
@@ -25,7 +29,7 @@ class ServerConfig(id: Identifier) : Config<ServerConfig>(id) {
                 }
 
                 json.entrySet().forEach { entry ->
-                    config.setValue(entry.key, ConfigValue.fromJson(entry.value.asJsonObject)!!)
+                    config.setValue(entry.key, entry.value)
                 }
 
                 return config
@@ -35,14 +39,26 @@ class ServerConfig(id: Identifier) : Config<ServerConfig>(id) {
         }
     }
 
-    override fun setValue(id: String, value: ConfigValue): ServerConfig {
+    override fun setValue(id: String, value: JsonElement): ServerConfig {
         values[id] = value
         return this
+    }
+
+    override fun getValue(id: String): JsonElement? {
+        return values[id]
     }
 
     override fun removeValue(id: String): ServerConfig {
         values.remove(id)
         return this
+    }
+
+    operator fun set(id: String, value: JsonElement) {
+        setValue(id, value)
+    }
+
+    operator fun get(id: String): JsonElement? {
+        return getValue(id)
     }
 
     override fun save(): ServerConfig {
@@ -55,11 +71,14 @@ class ServerConfig(id: Identifier) : Config<ServerConfig>(id) {
         }
 
         values.forEach { (id, value) ->
-            json.add(id, value.toJson())
+            json.add(id, value)
         }
 
         FileWriter(file).use {
-            it.write(Gson().toJson(json))
+            it.write(GsonBuilder()
+                .setPrettyPrinting().create()
+                .toJson(json)
+            )
         }
 
         return this

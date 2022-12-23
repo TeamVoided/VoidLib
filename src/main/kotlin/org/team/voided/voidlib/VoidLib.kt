@@ -5,6 +5,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.team.voided.voidlib.core.LibModule
 import org.team.voided.voidlib.cresm.CResM
+import org.team.voided.voidlib.mload.MLoadImpl
 import org.team.voided.voidlib.wfc.WFC
 import java.util.*
 import java.util.List.copyOf
@@ -18,6 +19,7 @@ private val modules: MutableList<LibModule> = LinkedList()
 fun onInitialize() {
     addModule(WFC())
     addModule(CResM())
+    addModule(MLoadImpl())
     modules.forEach(LibModule::commonSetup)
 }
 
