@@ -1,7 +1,0 @@
-{
-  "package": "org.team.voided.voidlib.mload.impl.mixin",
-  "client": [
-    "BakedModelManagerAccessor",
-    "MixinModelLoader"
-  ]
-}

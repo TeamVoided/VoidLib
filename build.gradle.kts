@@ -27,8 +27,6 @@ dependencies {
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${project.properties["fabric_version"]}")
 	modImplementation("net.fabricmc:fabric-language-kotlin:${project.properties["fabric_kotlin_version"]}")
 
-	implementation(shadow("de.javagl:obj:0.3.0")!!)
-
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
 	// modImplementation("net.fabricmc.fabric-api:fabric-api-deprecated:${project.properties["fabric_version"]}")
@@ -42,23 +40,6 @@ tasks {
 		filesMatching("fabric.mod.json") {
 			expand(mapOf("version" to project.version))
 		}
-	}
-
-	shadowJar {
-		val collections: Array<FileCollection> = arrayOf(project.configurations.getByName("shadow"))
-		configurations = collections.asList()
-		relocate("de.javagl.obj", "org.team.voided.voidlib.mload.shaded.de.javagl.obj")
-		archiveClassifier.set("shadow")
-	}
-
-	prepareRemapJar {
-		dependsOn("shadowJar")
-	}
-
-	remapJar {
-		dependsOn("shadowJar")
-
-		inputFile.set(shadowJar.get().archiveFile)
 	}
 
 	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
