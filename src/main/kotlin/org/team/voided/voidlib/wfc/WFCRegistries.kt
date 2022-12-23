@@ -19,7 +19,7 @@ class WFCRegistries {
             return tile
         }
 
-        fun <T: ITileGenerationRule<T>> registerTileGenerationRuleType(id: Identifier, type: TileGenerationRuleType<T>): TileGenerationRuleType<T> {
+        fun <A: ITileGenerationRule<A>, T: TileGenerationRuleType<A>> registerTileGenerationRuleType(id: Identifier, type: T): T {
             TILE_GENERATION_RULE_TYPE[id] = type
             return type
         }
