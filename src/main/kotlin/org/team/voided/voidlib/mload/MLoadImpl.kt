@@ -311,7 +311,7 @@ class MLoadImpl: LibModule("MLoad") {
             }
         }
 
-        LOGGER.info("Myron Initialized!")
+        LOGGER.info("Loaded VoidLib: MLoad")
     }
 
     private data class Vertex constructor(val pos: Vec3f, val normal: Vec3f, val u: Float, val v: Float)
