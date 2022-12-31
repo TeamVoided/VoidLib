@@ -2,7 +2,6 @@ plugins {
 	id("fabric-loom") version "1.0-SNAPSHOT"
 	kotlin("jvm") version "1.7.20"
 	id("maven-publish")
-	id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
 base.archivesName.set(project.properties["archives_base_name"] as String)
