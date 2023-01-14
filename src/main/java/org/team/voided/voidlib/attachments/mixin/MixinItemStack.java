@@ -89,7 +89,7 @@ public abstract class MixinItemStack implements ItemStackAttachmentData {
     }
 
     @Inject(method = "inventoryTick", at = @At("HEAD"))
-    private void tick(World world, Entity entity, int slot, boolean selected, CallbackInfo ci) {
+    private void tickAttachments(World world, Entity entity, int slot, boolean selected, CallbackInfo ci) {
         if (attachments == null)
             attachments = new HashMap<>();
 
