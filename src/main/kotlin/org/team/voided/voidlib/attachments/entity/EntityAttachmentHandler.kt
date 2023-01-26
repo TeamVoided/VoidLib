@@ -16,7 +16,7 @@ object EntityAttachmentHandler {
         list.add(Pair(type, Pair(id, attachment)))
     }
 
-    inline fun <reified T: EntityAttachment> getAttachment(id: Identifier, entity: Entity): T? {
+    inline fun <reified T : EntityAttachment> getAttachment(id: Identifier, entity: Entity): T? {
         entity as EntityAttachmentData
         val attachment = entity.getAttachment(id)
 

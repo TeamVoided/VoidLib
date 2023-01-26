@@ -23,7 +23,7 @@ import org.team.voided.voidlib.wfc.wave.WaveFunction
 import org.team.voided.voidlib.wfc.wave.rule.LimitedPlacementRule
 import org.team.voided.voidlib.wfc.wave.rule.TileGenerationRuleType
 
-class WFC: LibModule("wfc") {
+class WFC : LibModule("wfc") {
     companion object {
         val LOGGER: Logger = LoggerFactory.getLogger("VoidLib: WFC")
         val LIMITED_PLACEMENT_TYPE: TileGenerationRuleType<LimitedPlacementRule> = TileGenerationRuleType(listOf(Pair("tile", JsonType.STRING), Pair("max_placements", JsonType.NUMBER))) { json ->
@@ -76,7 +76,7 @@ class WFC: LibModule("wfc") {
                                                 tiles = listOf(
                                                     Tiles.BLANK, Tiles.UP, Tiles.DOWN, Tiles.LEFT, Tiles.RIGHT
                                                 ), generationRules = listOf()
-                                            ).collapse().generateStructure(it.source.world, it.source.entity!!.blockPos.add(0,-1,0), BlockRotation.NONE, BlockMirror.NONE, 1.0f)
+                                            ).collapse().generateStructure(it.source.world, it.source.entity!!.blockPos.add(0, -1, 0), BlockRotation.NONE, BlockMirror.NONE, 1.0f)
                                         }.start()
                                         return@executes 1
                                     } else return@executes 0
@@ -93,7 +93,13 @@ class WFC: LibModule("wfc") {
                         if (it.source.entity?.hasPermissionLevel(4) == true) {
                             Thread {
                                 WaveFunctionArgumentType.getWaveFunction(it, "wave")
-                                    .collapse().generateStructure(it.source.world, it.source.entity!!.blockPos.add(0,-1,0), BlockRotation.NONE, BlockMirror.NONE, 1.0f)
+                                    .collapse().generateStructure(
+                                        it.source.world,
+                                        it.source.entity!!.blockPos.add(0, -1, 0),
+                                        BlockRotation.NONE,
+                                        BlockMirror.NONE,
+                                        1.0f
+                                    )
                             }.start()
                         }
                         return@executes 1
@@ -105,6 +111,6 @@ class WFC: LibModule("wfc") {
         LOGGER.info("Loaded VoidLib: WFC")
     }
 
-    override fun clientSetup() { }
+    override fun clientSetup() {}
 }
 

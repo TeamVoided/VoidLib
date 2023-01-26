@@ -5,7 +5,7 @@ import org.team.voided.voidlib.wfc.wave.PositionalTile
 import org.team.voided.voidlib.wfc.wave.Tile
 import org.team.voided.voidlib.wfc.wave.TileGrid
 
-class LimitedPlacementRule(val tile: Tile, val maxPlacements: Int): ITileGenerationRule<LimitedPlacementRule> {
+class LimitedPlacementRule(val tile: Tile, val maxPlacements: Int) : ITileGenerationRule<LimitedPlacementRule> {
     private var placements = 0
 
     override fun computeRule(grid: TileGrid, tile: PositionalTile): Boolean = (placements < maxPlacements)

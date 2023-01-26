@@ -75,9 +75,10 @@ open class ServerConfig(val id: Identifier) : SavableConfig<ServerConfig> {
         }
 
         FileWriter(file).use {
-            it.write(GsonBuilder()
-                .setPrettyPrinting().create()
-                .toJson(json)
+            it.write(
+                GsonBuilder()
+                    .setPrettyPrinting().create()
+                    .toJson(json)
             )
         }
 

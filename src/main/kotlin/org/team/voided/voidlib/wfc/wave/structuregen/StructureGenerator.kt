@@ -17,7 +17,14 @@ import org.team.voided.voidlib.wfc.wave.Tile
 import java.util.*
 
 class StructureGenerator(val tileGrid: Array<Array<Tile?>>) {
-    fun generate(world: ServerWorld, pos: BlockPos, rotation: BlockRotation, mirror: BlockMirror, integrity: Float, seed: Long = System.currentTimeMillis()) {
+    fun generate(
+        world: ServerWorld,
+        pos: BlockPos,
+        rotation: BlockRotation,
+        mirror: BlockMirror,
+        integrity: Float,
+        seed: Long = System.currentTimeMillis()
+    ) {
         var zShift = 0
         var xShift = 0
 
@@ -25,7 +32,7 @@ class StructureGenerator(val tileGrid: Array<Array<Tile?>>) {
             var lastTemplateZSize = 0
             it.forEach { tile ->
                 if (tile == null) return
-                val shiftedPos = pos.add(Vec3i(-xShift, 0,-zShift))
+                val shiftedPos = pos.add(Vec3i(-xShift, 0, -zShift))
                 val optionalTemplate: Optional<StructureTemplate>?
                 try {
                     optionalTemplate = world.structureTemplateManager.getTemplate(tile.id)
@@ -36,11 +43,20 @@ class StructureGenerator(val tileGrid: Array<Array<Tile?>>) {
 
                 optionalTemplate.ifPresent { template ->
                     throwOnUnloadedPos(world, ChunkPos(shiftedPos), ChunkPos(shiftedPos.add(template.size)))
-                    val placementData = StructurePlacementData().setMirror(mirror).setRotation(tile.getRotation().rotate(rotation))
+                    val placementData =
+                        StructurePlacementData().setMirror(mirror).setRotation(tile.getRotation().rotate(rotation))
                     if (integrity < 1.0) {
-                        placementData.clearProcessors().addProcessor(BlockRotStructureProcessor(integrity)).setRandom(StructureBlockBlockEntity.createRandom(seed))
+                        placementData.clearProcessors().addProcessor(BlockRotStructureProcessor(integrity))
+                            .setRandom(StructureBlockBlockEntity.createRandom(seed))
                     }
-                    template.place(world, shiftedPos, shiftedPos, placementData, StructureBlockBlockEntity.createRandom(seed), 2)
+                    template.place(
+                        world,
+                        shiftedPos,
+                        shiftedPos,
+                        placementData,
+                        StructureBlockBlockEntity.createRandom(seed),
+                        2
+                    )
                     lastTemplateZSize = template.size.z
                     xShift += template.size.x
                 }

@@ -9,7 +9,7 @@ import org.team.voided.voidlib.wfc.data.WaveFunctionProperties
 import org.team.voided.voidlib.wfc.wave.rule.ITileGenerationRule
 import java.util.*
 
-class WaveFunctionLoader: CResMSingleLoader {
+class WaveFunctionLoader : CResMSingleLoader {
     override fun loadResource(id: Identifier, manager: ResourceManager) {
         val json = parseJson(Identifier(id.namespace, "functions/${id.path}"), manager)
 
@@ -27,6 +27,9 @@ class WaveFunctionLoader: CResMSingleLoader {
             generationRules.add(type.construct(it.asJsonObject))
         }
 
-        WFCRegistries.registerWaveFunction(fId, WaveFunctionProperties(width, height, startingTiles, discardSaveAfter, tiles, generationRules))
+        WFCRegistries.registerWaveFunction(
+            fId,
+            WaveFunctionProperties(width, height, startingTiles, discardSaveAfter, tiles, generationRules)
+        )
     }
 }

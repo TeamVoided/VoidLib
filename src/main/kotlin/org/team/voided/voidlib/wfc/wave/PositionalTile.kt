@@ -7,7 +7,8 @@ import java.util.*
 data class PositionalTile(val position: Vec2i, var tile: Tile?) {
     private var rotation = BlockRotation.NONE
 
-    fun rotated(rotation: BlockRotation): PositionalTile = PositionalTile(position, tile?.rotated(rotation)).setRotation(rotation)
+    fun rotated(rotation: BlockRotation): PositionalTile =
+        PositionalTile(position, tile?.rotated(rotation)).setRotation(rotation)
 
     private fun setRotation(rotation: BlockRotation): PositionalTile {
         this.rotation = rotation
@@ -35,21 +36,13 @@ data class PositionalTile(val position: Vec2i, var tile: Tile?) {
         uniqueTiles.forEach {
             var accept = true
 
-            if (up?.tile != null) {
-                if (!(it.acceptAbove(up.tile!!) && up.tile!!.acceptBelow(it))) accept = false
-            }
+            if (up?.tile != null && !(it.acceptAbove(up.tile!!) && up.tile!!.acceptBelow(it))) accept = false
 
-            if (down?.tile != null) {
-                if (!(it.acceptBelow(down.tile!!) && down.tile!!.acceptAbove(it))) accept = false
-            }
+            if (down?.tile != null && !(it.acceptBelow(down.tile!!) && down.tile!!.acceptAbove(it))) accept = false
 
-            if (left?.tile != null) {
-                if (!(it.acceptLeft(left.tile!!) && left.tile!!.acceptRight(it))) accept = false
-            }
+            if (left?.tile != null && !(it.acceptLeft(left.tile!!) && left.tile!!.acceptRight(it))) accept = false
 
-            if (right?.tile != null) {
-                if (!(it.acceptRight(right.tile!!) && right.tile!!.acceptLeft(it))) accept = false
-            }
+            if (right?.tile != null && !(it.acceptRight(right.tile!!) && right.tile!!.acceptLeft(it))) accept = false
 
             if (accept) options.add(it)
         }

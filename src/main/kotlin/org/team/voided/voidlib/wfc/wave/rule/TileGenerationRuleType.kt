@@ -4,7 +4,10 @@ import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import org.team.voided.voidlib.wfc.data.JsonType
 
-class TileGenerationRuleType<T: ITileGenerationRule<T>>(private val jsonParameters: List<Pair<String, JsonType>>, private val constructor: (json: JsonObject) -> T) {
+class TileGenerationRuleType<T : ITileGenerationRule<T>>(
+    private val jsonParameters: List<Pair<String, JsonType>>,
+    private val constructor: (json: JsonObject) -> T
+) {
     fun construct(json: JsonObject): T {
         jsonParameters.forEach {
             if (json.has(it.first)) {
@@ -19,7 +22,7 @@ class TileGenerationRuleType<T: ITileGenerationRule<T>>(private val jsonParamete
         return constructor(json)
     }
 
-    private fun <T: JsonElement> T.getType(): JsonType {
+    private fun <T : JsonElement> T.getType(): JsonType {
         if (isJsonArray) return JsonType.JSON_ARRAY
         if (isJsonObject) return JsonType.JSON_OBJECT
         if (isJsonNull) return JsonType.JSON_NULL

@@ -10,7 +10,7 @@ open class CResMSingleFileLoader(
     private val resourceType: ResourceType,
     private val fabricId: Identifier,
     protected val singleLoader: CResMSingleLoader
-): ICResMLoader {
+) : ICResMLoader {
     override fun reload(manager: ResourceManager) {
         manager.findResources(folder) { it.path == "$folder/$fullFileName" }.forEach { (id, _) ->
             singleLoader.loadResource(id, manager)

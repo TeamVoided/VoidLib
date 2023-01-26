@@ -6,14 +6,14 @@ import org.team.voided.voidlib.core.LibModule
 import org.team.voided.voidlib.cresm.loader.ICResMLoader
 import java.util.*
 
-class CResM: LibModule("Custom Resource Manager") {
+class CResM : LibModule("Custom Resource Manager") {
     companion object {
         val LOGGER = LoggerFactory.getLogger("VoidLib: CResM")
 
         private val loaders: MutableList<ICResMLoader> = LinkedList()
         private val loaded: MutableList<ICResMLoader> = LinkedList()
 
-        fun <T: ICResMLoader> registerLoader(loader: T): T {
+        fun <T : ICResMLoader> registerLoader(loader: T): T {
             loaders.add(loader)
             return loader
         }
@@ -32,5 +32,5 @@ class CResM: LibModule("Custom Resource Manager") {
         LOGGER.info("Finished loading VoidLib: CResM")
     }
 
-    override fun clientSetup() { }
+    override fun clientSetup() {}
 }

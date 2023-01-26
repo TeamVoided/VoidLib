@@ -127,7 +127,7 @@ data class WaveFunction(
     }
 
     private fun start(startCount: Int = 1) {
-        for (i in 0 until startCount+1) {
+        for (i in 0 until startCount + 1) {
             grid.randomPositionalTile(random).tile = tiles.random(random)
             tilesPlacedSinceLastSave += 1
         }

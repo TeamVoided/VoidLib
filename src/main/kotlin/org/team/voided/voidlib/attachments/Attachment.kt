@@ -11,7 +11,7 @@ interface Attachment {
     override fun equals(other: Any?): Boolean
 }
 
-interface AttachmentType<T: Attachment> {
+interface AttachmentType<T : Attachment> {
     val defaultId: Identifier
 
     fun create(id: Identifier): T

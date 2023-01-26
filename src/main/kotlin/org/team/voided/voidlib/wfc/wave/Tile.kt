@@ -8,7 +8,7 @@ data class Tile(val id: Identifier, val adjacencyIndex: AdjacencyIndex, val rota
     private var rotation = BlockRotation.NONE
 
     companion object {
-        val EMPTY = Tile(id("empty"), AdjacencyIndex(0 ,0, 0, 0), false)
+        val EMPTY = Tile(id("empty"), AdjacencyIndex(0, 0, 0, 0), false)
     }
 
     fun acceptAbove(other: Tile): Boolean {

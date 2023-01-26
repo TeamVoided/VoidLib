@@ -5,7 +5,7 @@ import net.minecraft.util.Identifier
 import org.team.voided.voidlib.cresm.loader.CResMSingleLoader
 import org.team.voided.voidlib.wfc.WFC
 
-class WaveFunctionDefinitionLoader: CResMSingleLoader {
+class WaveFunctionDefinitionLoader : CResMSingleLoader {
     override fun loadResource(id: Identifier, manager: ResourceManager) {
         val functions = parseJson(id, manager).get("functions").asJsonArray
         val loader = WaveFunctionLoader()

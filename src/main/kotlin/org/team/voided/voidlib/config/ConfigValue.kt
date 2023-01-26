@@ -16,28 +16,28 @@ open class ConfigValue private constructor() {
     private var name: Text? = null
     private var toolTip: Text? = null
 
-    constructor(toolTip: Text, number: Number): this() {
+    constructor(toolTip: Text, number: Number) : this() {
         this.toolTip = toolTip
         numberVal = number
         defNumberVal = number
         configType = ConfigType.NUMBER
     }
 
-    constructor(toolTip: Text, string: String): this() {
+    constructor(toolTip: Text, string: String) : this() {
         this.toolTip = toolTip
         stringVal = string
         defStringVal = string
         configType = ConfigType.STRING
     }
 
-    constructor(toolTip: Text, boolean: Boolean): this() {
+    constructor(toolTip: Text, boolean: Boolean) : this() {
         this.toolTip = toolTip
         booleanVal = boolean
         defBooleanVal = boolean
         configType = ConfigType.BOOLEAN
     }
 
-    constructor(toolTip: Text, char: Char): this() {
+    constructor(toolTip: Text, char: Char) : this() {
         this.toolTip = toolTip
         charVal = char
         defCharVal = char
@@ -47,6 +47,7 @@ open class ConfigValue private constructor() {
     fun withName(name: Text) {
         this.name = name
     }
+
     fun withTooltip(toolTip: Text) {
         this.toolTip = toolTip
     }
@@ -92,7 +93,7 @@ open class ConfigValue private constructor() {
     fun toJson(): JsonObject {
         val json = JsonObject()
         json.addProperty("type", configType.getNumericalType())
-        when(configType) {
+        when (configType) {
             ConfigType.NUMBER -> json.addProperty("val", getNumberVal())
             ConfigType.STRING -> json.addProperty("val", getStringVal())
             ConfigType.BOOLEAN -> json.addProperty("val", getBooleanVal())
@@ -109,7 +110,7 @@ open class ConfigValue private constructor() {
             val type: ConfigType = ConfigType.getFromNumericalType(json.get("type").asInt)
             val toolTip: Text = Text.Serializer.fromJson(json.get("tooltip").asString) ?: Text.empty()
 
-            return when(type) {
+            return when (type) {
                 ConfigType.NUMBER -> ConfigValue(toolTip, json.get("val").asInt)
                 ConfigType.STRING -> ConfigValue(toolTip, json.get("val").asString)
                 ConfigType.BOOLEAN -> ConfigValue(toolTip, json.get("val").asBoolean)
@@ -123,7 +124,7 @@ open class ConfigValue private constructor() {
         NUMBER, STRING, BOOLEAN, CHAR, NULL;
 
         fun getNumericalType(): Int {
-            return when(this) {
+            return when (this) {
                 NUMBER -> 0
                 STRING -> 1
                 BOOLEAN -> 2
@@ -134,7 +135,7 @@ open class ConfigValue private constructor() {
 
         companion object {
             fun getFromNumericalType(numericalType: Int): ConfigType {
-                return when(numericalType) {
+                return when (numericalType) {
                     0 -> NUMBER
                     1 -> STRING
                     2 -> BOOLEAN

@@ -29,13 +29,14 @@
     ]
   },
   "mixins": [
-    "attachments.mixins.json"
+    "attachments.mixins.json",
+    "pow.mixins.json"
   ],
 
   "depends": {
-    "fabricloader": ">=0.14.9",
+    "fabricloader": ">=0.14.13",
     "fabric-api": "*",
-    "fabric-language-kotlin": ">=1.8.5+kotlin.1.7.20",
+    "fabric-language-kotlin": ">=1.9.0+kotlin.1.8.0",
     "minecraft": "~1.19",
     "java": ">=17"
   },

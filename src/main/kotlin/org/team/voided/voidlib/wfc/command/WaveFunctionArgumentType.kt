@@ -10,7 +10,7 @@ import org.team.voided.voidlib.wfc.WFCRegistries
 import org.team.voided.voidlib.wfc.wave.WaveFunction
 import java.util.concurrent.CompletableFuture
 
-class WaveFunctionArgumentType: IdentifierArgumentType() {
+class WaveFunctionArgumentType : IdentifierArgumentType() {
     companion object {
         fun waveFunction(): WaveFunctionArgumentType {
             return WaveFunctionArgumentType()

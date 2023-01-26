@@ -22,6 +22,7 @@ data class TileGrid(val dimensions: Vec2i, val init: (Vec2i) -> PositionalTile =
             null
         }
     }
+
     fun setTileAt(position: Vec2i, tile: Tile) {
         if (position.y >= dimensions.y || position.x >= dimensions.x) return
         underlyingArray[position.y][position.x].tile = tile
@@ -34,6 +35,7 @@ data class TileGrid(val dimensions: Vec2i, val init: (Vec2i) -> PositionalTile =
             null
         }
     }
+
     fun setPositionalTile(tile: PositionalTile) {
         if (tile.position.y >= dimensions.y || tile.position.x >= dimensions.x) return
         underlyingArray[tile.position.y][tile.position.x].tile = tile.tile
@@ -84,6 +86,6 @@ data class TileGrid(val dimensions: Vec2i, val init: (Vec2i) -> PositionalTile =
     }
 
     fun toTileTwoDimArray(): Array<Array<Tile?>> {
-        return Array(dimensions.y) { y -> Array(dimensions.x) { x-> underlyingArray[y][x].tile } }
+        return Array(dimensions.y) { y -> Array(dimensions.x) { x -> underlyingArray[y][x].tile } }
     }
 }

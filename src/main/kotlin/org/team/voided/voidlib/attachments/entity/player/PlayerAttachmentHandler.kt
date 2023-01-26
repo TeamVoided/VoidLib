@@ -15,7 +15,7 @@ object PlayerAttachmentHandler {
         attachments.add(Pair(uuid, type.create(id)))
     }
 
-    inline fun <reified T: PlayerAttachment> getAttachment(player: PlayerEntity): T? {
+    inline fun <reified T : PlayerAttachment> getAttachment(player: PlayerEntity): T? {
         val uuids = getAttachments().stream().map { it.first }.toList()
         var attachment: PlayerAttachment? = null
 

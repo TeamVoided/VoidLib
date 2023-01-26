@@ -1,0 +1,6 @@
+{
+  "package": "org.team.voided.voidlib.pow.mixin",
+  "mixins": [
+    "MixinScreen"
+  ]
+}
