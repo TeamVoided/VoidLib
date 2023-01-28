@@ -22,6 +22,9 @@ dependencies {
 }
 ```
 
+<h3>For usage details goto the wiki!!</h3>
+</details>
+
 <details>
 <summary>Versioning</summary>
 
@@ -42,7 +45,4 @@ The version of minecraft the mod is built against
 <br>
 (THIS IS MY PREFERENCE AND NOT ADVICE ON HOW TO VERSION THINGS)
 
-</details>
-
-<h3>For usage details goto the wiki!!</h3>
 </details>
