@@ -1,0 +1,7 @@
+{
+  "package": "org.team.voided.voidlib.dimutil.mixin",
+  "mixins": [
+    "ImmutableDynamicRegistryManagerImplAccessor",
+    "MinecraftServerAccessor"
+  ]
+}

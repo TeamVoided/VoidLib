@@ -30,7 +30,8 @@
   },
   "mixins": [
     "attachments.mixins.json",
-    "pow.mixins.json"
+    "pow.mixins.json",
+    "dimutils.mixins.json"
   ],
 
   "depends": {

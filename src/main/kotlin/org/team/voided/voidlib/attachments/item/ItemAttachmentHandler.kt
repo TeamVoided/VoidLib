@@ -30,4 +30,18 @@ object ItemAttachmentHandler {
     fun getList(): LinkedList<Pair<Item, Pair<Identifier, ItemAttachmentType>>> {
         return LinkedList(list)
     }
+
+    fun Item.attach(attachment: ItemAttachmentType, id: Identifier): Item {
+        attach(attachment, id, this)
+        return this
+    }
+
+    fun Item.attach(attachment: ItemAttachmentType): Item {
+        attach(attachment, this)
+        return this
+    }
+
+    fun Item.getAttachment(id: Identifier, stack: ItemStack): ItemAttachment? {
+        return ItemAttachmentHandler.getAttachment(id, stack)
+    }
 }

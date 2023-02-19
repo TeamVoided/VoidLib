@@ -5,6 +5,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.team.voided.voidlib.core.LibModule
 import org.team.voided.voidlib.cresm.CResM
+import org.team.voided.voidlib.dimutil.DimUtil
 import org.team.voided.voidlib.pow.Pow
 import org.team.voided.voidlib.wfc.WFC
 import java.util.*
@@ -21,6 +22,7 @@ fun onInitialize() {
     addModule(WFC())
     addModule(CResM())
     addModule(Pow())
+    addModule(DimUtil())
     modules.forEach(LibModule::commonSetup)
 }
 
