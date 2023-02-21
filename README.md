@@ -37,7 +37,7 @@ Increment in patch: Same content, external apis & networking protocol, (server &
 Increment in minor: Gameplay/Content changes & api methods added but none removed (Deprecation allowed) (server & client must have the same minor version)
 
 ## Major
-Increment in minor: World may corrupt on mod update, Gameplay/Content changes & api methods added and removed (server & client must have the same major version)
+Increment in major: World may corrupt on mod update, Gameplay/Content changes & api methods added and removed (server & client must have the same major version)
 
 ## Mc Version
 The version of minecraft the mod is built against
