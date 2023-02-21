@@ -17,7 +17,7 @@ repositiories {
 
 ```kotlin
 dependencies {
-    modImplementation("org.teamvoided.voided:voidlib:${project.properties["voidlib_version"]}")
+    modImplementation("org.teamvoided:voidlib:${project.properties["voidlib_version"]}")
     //latest 1.3.0+1.19.3
 }
 ```
