@@ -1,5 +1,5 @@
 {
-  "package": "org.team.voided.voidlib.pow.mixin",
+  "package": "org.teamvoided.voidlib.pow.mixin",
   "mixins": [
     "MixinScreen"
   ]

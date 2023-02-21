@@ -1,5 +1,5 @@
 {
-  "package": "org.team.voided.voidlib.attachments.mixin",
+  "package": "org.teamvoided.voidlib.attachments.mixin",
   "mixins": [
     "MixinEntity",
     "MixinItemStack",
