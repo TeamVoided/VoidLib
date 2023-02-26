@@ -12,13 +12,20 @@
 ```kotlin
 repositiories {
     maven("https://maven.brokenfuse.me/releases")
+    //projects will eventually be migrated to https://maven.teamvoided.org
+    //as of right now https://maven.teamvoided.org just points to https://maven.brokenfuse.me
 }
 ```
 
 ```kotlin
 dependencies {
     modImplementation("org.teamvoided:voidlib:${project.properties["voidlib_version"]}")
-    //latest 1.3.0+1.19.3
+    //latest 1.4.0+1.19.3
+    
+    /*
+    * For versions older than 1.4.0+1.19.3 use the following
+    * modImplementation("org.team.voided:voidlib:${project.properties["voidlib_version"]}")
+    */
 }
 ```
 
