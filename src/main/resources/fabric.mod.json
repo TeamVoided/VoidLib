@@ -9,10 +9,8 @@
     "Team Voided"
   ],
   "contact": { },
-
   "license": "MIT",
   "icon": "assets/voidlib/icon.png",
-
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -33,7 +31,6 @@
     "pow.mixins.json",
     "dimutils.mixins.json"
   ],
-
   "depends": {
     "fabricloader": ">=0.14.13",
     "fabric-api": "*",

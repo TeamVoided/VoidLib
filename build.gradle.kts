@@ -16,6 +16,16 @@ repositories {
 	// for more information about repositories.
 }
 
+loom {
+	runs {
+		create("vuiVisualEditor") {
+			client()
+			vmArg("-Dvuieditor")
+			vmArg("-Dvuistopmusic")
+		}
+	}
+}
+
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft("com.mojang:minecraft:${project.properties["minecraft_version"]}")

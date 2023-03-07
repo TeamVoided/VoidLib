@@ -2,7 +2,7 @@ package org.teamvoided.voidlib.pow.energy
 
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
-import org.teamvoided.voidlib.pow.RGB
+import org.teamvoided.voidlib.core.RGB
 import java.math.BigDecimal
 import java.util.*
 
@@ -33,10 +33,10 @@ class EnergyUnit(private val value: BigDecimal, private val id: Identifier, priv
         return energyBarColor
     }
 
-    override fun equals(o: Any?): Boolean {
-        if (this === o) return true
-        if (o == null || javaClass != o.javaClass) return false
-        val that = o as EnergyUnit
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || javaClass != other.javaClass) return false
+        val that = other as EnergyUnit
         return value == that.value && id == that.id
     }
 

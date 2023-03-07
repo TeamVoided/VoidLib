@@ -1,6 +1,14 @@
 package org.teamvoided.voidlib.core.datastructures
 
+import net.minecraft.nbt.NbtCompound
+
 data class Vec2i(var x: Int, var y: Int) {
+    companion object {
+        fun fromNbt(compound: NbtCompound): Vec2i {
+            return Vec2i(compound.getInt("x"), compound.getInt("y"))
+        }
+    }
+
     operator fun unaryPlus() = Vec2i(+x, +y)
     operator fun unaryMinus() = Vec2i(-x, -y)
 
@@ -17,34 +25,14 @@ data class Vec2i(var x: Int, var y: Int) {
     }
 
     operator fun plus(toAdd: Vec2i): Vec2i = Vec2i(x = (this.x + toAdd.x), y = (this.y + toAdd.y))
-    operator fun plusAssign(toAdd: Vec2i) {
-        this.x += toAdd.x
-        this.y += toAdd.y
-    }
 
-    operator fun minus(toSubtract: Vec2i): Vec2i = Vec2i(x = (this.x + toSubtract.x), y = (this.y - toSubtract.y))
-    operator fun minusAssign(toSubtract: Vec2i) {
-        this.x -= toSubtract.x
-        this.y -= toSubtract.y
-    }
+    operator fun minus(toSubtract: Vec2i): Vec2i = Vec2i(x = (this.x - toSubtract.x), y = (this.y - toSubtract.y))
 
     operator fun times(toMultiply: Vec2i): Vec2i = Vec2i(x = (this.x * toMultiply.x), y = (this.y * toMultiply.y))
-    operator fun timesAssign(toMultiply: Vec2i) {
-        this.x *= toMultiply.x
-        this.y *= toMultiply.y
-    }
 
     operator fun div(toDivide: Vec2i): Vec2i = Vec2i(x = (this.x / toDivide.x), y = (this.y / toDivide.y))
-    operator fun divAssign(toDivide: Vec2i) {
-        this.x /= toDivide.x
-        this.y /= toDivide.y
-    }
 
     operator fun rem(toRem: Vec2i): Vec2i = Vec2i(x = (this.x % toRem.x), y = (this.y % toRem.y))
-    operator fun remAssign(toRem: Vec2i) {
-        this.x %= toRem.x
-        this.y %= toRem.y
-    }
 
     operator fun contains(int: Int): Boolean = this.x == int || this.y == int
 
@@ -63,5 +51,13 @@ data class Vec2i(var x: Int, var y: Int) {
 
     fun copy(): Vec2i {
         return Vec2i(this.x, this.y)
+    }
+
+    fun toNbt(): NbtCompound {
+        val compound = NbtCompound()
+        compound.putInt("x", x)
+        compound.putInt("y", y)
+
+        return compound
     }
 }

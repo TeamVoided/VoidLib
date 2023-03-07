@@ -7,6 +7,7 @@ import org.teamvoided.voidlib.core.LibModule
 import org.teamvoided.voidlib.cresm.CResM
 import org.teamvoided.voidlib.dimutil.DimUtil
 import org.teamvoided.voidlib.pow.Pow
+import org.teamvoided.voidlib.vui.impl.VuiEditor
 import org.teamvoided.voidlib.wfc.WFC
 import java.util.*
 import java.util.List.copyOf
@@ -23,6 +24,7 @@ fun onInitialize() {
     addModule(CResM())
     addModule(Pow())
     addModule(DimUtil())
+    addModule(VuiEditor())
     modules.forEach(LibModule::commonSetup)
 }
 

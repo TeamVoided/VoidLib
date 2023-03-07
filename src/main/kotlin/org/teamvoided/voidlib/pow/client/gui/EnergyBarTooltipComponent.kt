@@ -35,8 +35,7 @@ class EnergyBarTooltipComponent(component: EnergyBarTooltipData) : TooltipCompon
         matrices.push()
         matrices.translate(0.0, 0.0, z.toDouble())
         val barWidth = ceil((totalWidth * percentFull).toDouble()).toInt()
-        val color = unit.getEnergyBarColor()
-        val colorCode: Int = color.red and 0x0ff shl 16 or (color.green and 0x0ff shl 8) or (color.blue and 0x0ff)
+        val color: Int = unit.getEnergyBarColor().toInt()
         DrawableHelper.fill(
             matrices,
             mouseX - 1,
@@ -51,7 +50,7 @@ class EnergyBarTooltipComponent(component: EnergyBarTooltipData) : TooltipCompon
             mouseY - height - offsetFromBox,
             mouseX + barWidth,
             mouseY - offsetFromBox,
-            -0x1000000 or colorCode
+            -0x1000000 or color
         )
         DrawableHelper.fill(
             matrices,
