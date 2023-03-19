@@ -15,8 +15,8 @@ abstract class Node protected constructor(): Named {
     private val children = LinkedList<Node>()
 
     var globalPos: Vec2i
-        get() = if (parent != null) (parent!!.globalPos + pos).copy() else pos.copy()
-        set(value) = if (parent != null) pos = (value - parent!!.pos).copy()  else pos = value.copy()
+        get() = if (parent != null) (parent!!.globalPos + pos) else pos
+        set(value) = if (parent != null) pos = (value - parent!!.pos)  else pos = value
     var pos = Vec2i(0, 0)
     var size = Vec2i(0, 0)
 
@@ -32,12 +32,20 @@ abstract class Node protected constructor(): Named {
 
     fun addChild(child: Node) {
         children.add(child)
+
+        val oldGlobal = child.globalPos
+
         child.parent = this
+        child.globalPos = oldGlobal
     }
 
     fun removeChild(child: Node) {
         children.remove(child)
-        child.parent = this.parent
+
+        val oldGlobal = child.globalPos
+
+        child.parent = this
+        child.globalPos = oldGlobal
     }
 
     open fun isTouching(point: Vec2i): Boolean {
@@ -77,6 +85,8 @@ abstract class Node protected constructor(): Named {
         VuiRegistries.NODE_TYPE.get(typeId())!!
 
     fun children(): List<Node> = children
+
+    fun parent() = parent
 
     data class Type<T: Node>(val serialize: (T, NbtCompound) -> Unit, val deserialize: (NbtCompound) -> T)
 }

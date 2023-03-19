@@ -11,7 +11,7 @@ import org.teamvoided.voidlib.vui.UpdateContext
 import org.teamvoided.voidlib.vui.VuiSpriteManager
 import org.teamvoided.voidlib.vui.node.NodeIds.EXPANDABLE
 
-open class ExpandableNode(override var name: String): Node() {
+open class ExpandableNode(override var name: String, val arrowScale: Double): Node() {
     var expanded = false
     protected var arrowPos = Vec2i(0, 0)
     protected var arrowSize = Vec2i(0, 0)
@@ -29,8 +29,8 @@ open class ExpandableNode(override var name: String): Node() {
     }
 
     override var updateCallback: ((UpdateContext) -> Unit)? = {
-        arrowPos.x = ((pos.x + size.x) * 0.2).toInt()
-        arrowPos.y = (arrowPos.x + pos.y) / 2
+        arrowPos.x = (((globalPos.x + size.x) * 0.05) * arrowScale).toInt()
+        arrowPos.y = ((globalPos.y + arrowPos.x) * arrowScale).toInt()
         arrowSize = globalPos - arrowPos
 
         if (interval != 0.0) interval -= it.delta
@@ -46,11 +46,11 @@ open class ExpandableNode(override var name: String): Node() {
         }
     }
 
-    constructor(pos: Vec2i, name: String): this(name) {
+    constructor(pos: Vec2i, arrowScale: Double, name: String): this(name, arrowScale) {
         this.pos = pos
     }
 
-    constructor(pos: Vec2i, size: Vec2i, name: String): this(name) {
+    constructor(pos: Vec2i, size: Vec2i, arrowScale: Double, name: String): this(name, arrowScale) {
         this.pos = pos
         this.size = size
     }

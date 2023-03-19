@@ -45,7 +45,7 @@ open class ScrollableNode(val scrollAxis: ScrollAxis = ScrollAxis.AXIS_Y, overri
     override fun draw(context: DrawContext) {
         this.drawCallback?.invoke(context)
 
-        DrawableHelper.enableScissor(globalPos.x, globalPos.x + size.x, globalPos.y, globalPos.y + size.y)
+        DrawableHelper.enableScissor(globalPos.x, globalPos.y, globalPos.x + size.x, globalPos.y + size.y)
         children().forEach {
             val originalPos = it.pos.copy()
             when (scrollAxis) {
