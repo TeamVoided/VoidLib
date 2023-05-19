@@ -9,7 +9,7 @@ import org.teamvoided.voidlib.wfc.wave.AdjacencyIndex
 import org.teamvoided.voidlib.wfc.wave.Tile
 
 class TileDefinitionLoader : CResMSingleLoader {
-    override fun loadResource(id: Identifier, manager: ResourceManager) {
+    override suspend fun loadResource(id: Identifier, manager: ResourceManager) {
         val json = parseJson(id, manager)
         val tiles = json.get("tiles").asJsonArray
         tiles.forEach { element ->

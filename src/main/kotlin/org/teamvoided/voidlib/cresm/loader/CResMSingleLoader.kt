@@ -10,7 +10,7 @@ import java.io.BufferedReader
 import java.io.InputStream
 
 interface CResMSingleLoader {
-    fun loadResource(id: Identifier, manager: ResourceManager)
+    suspend fun loadResource(id: Identifier, manager: ResourceManager)
 
     fun parseJson(id: Identifier, manager: ResourceManager): JsonObject {
         return getGson().fromJson(getResourceFileReader(id, manager), JsonObject::class.java)

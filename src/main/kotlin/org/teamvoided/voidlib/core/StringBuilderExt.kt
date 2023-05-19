@@ -1,7 +1,5 @@
 package org.teamvoided.voidlib.core
 
-import kotlin.text.StringBuilder
-
 operator fun <T> StringBuilder.plusAssign(t: T) {
     append(t)
 }

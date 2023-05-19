@@ -6,7 +6,7 @@ import org.teamvoided.voidlib.cresm.loader.CResMSingleLoader
 import org.teamvoided.voidlib.wfc.WFC
 
 class WaveFunctionDefinitionLoader : CResMSingleLoader {
-    override fun loadResource(id: Identifier, manager: ResourceManager) {
+    override suspend fun loadResource(id: Identifier, manager: ResourceManager) {
         val functions = parseJson(id, manager).get("functions").asJsonArray
         val loader = WaveFunctionLoader()
         functions.forEach { functionIdEl ->

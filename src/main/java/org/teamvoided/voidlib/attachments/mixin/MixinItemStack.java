@@ -17,8 +17,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.teamvoided.voidlib.attachments.item.ItemAttachment;
-import org.teamvoided.voidlib.attachments.item.ItemAttachmentType;
 import org.teamvoided.voidlib.attachments.item.ItemAttachmentHandler;
+import org.teamvoided.voidlib.attachments.item.ItemAttachmentType;
 import org.teamvoided.voidlib.attachments.item.ItemStackAttachmentData;
 
 import java.util.HashMap;

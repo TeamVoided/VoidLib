@@ -7,7 +7,7 @@ import org.teamvoided.voidlib.core.LibModule
 import org.teamvoided.voidlib.cresm.CResM
 import org.teamvoided.voidlib.dimutil.DimUtil
 import org.teamvoided.voidlib.pow.Pow
-import org.teamvoided.voidlib.vui.impl.VuiEditor
+import org.teamvoided.voidlib.vui.impl.Vui
 import org.teamvoided.voidlib.wfc.WFC
 import java.util.*
 import java.util.List.copyOf
@@ -20,11 +20,11 @@ val LOGGER: Logger = LoggerFactory.getLogger(MODID)
 
 @Suppress("unused")
 fun onInitialize() {
-    addModule(WFC())
     addModule(CResM())
-    addModule(Pow())
     addModule(DimUtil())
-    addModule(VuiEditor())
+    addModule(Pow())
+    addModule(Vui())
+    addModule(WFC())
     modules.forEach(LibModule::commonSetup)
 }
 

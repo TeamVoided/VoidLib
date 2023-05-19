@@ -1,6 +1,9 @@
+//import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 plugins {
 	id("fabric-loom") version "1.0-SNAPSHOT"
-	kotlin("jvm") version "1.8.0"
+	kotlin("jvm") version "1.8.21"
+	kotlin("plugin.serialization") version "1.8.21"
 	id("maven-publish")
 }
 
@@ -8,12 +11,15 @@ base.archivesName.set(project.properties["archives_base_name"] as String)
 version = project.properties["mod_version"] as String
 group = project.properties["maven_group"] as String
 
+val sjar: Configuration = configurations.create("sjar")
+
 repositories {
 	// Add repositories to retrieve artifacts from in here.
 	// You should only use this when depending on other mods because
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
+    mavenCentral()
 }
 
 loom {
@@ -36,6 +42,12 @@ dependencies {
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${project.properties["fabric_version"]}")
 	modImplementation("net.fabricmc:fabric-language-kotlin:${project.properties["fabric_kotlin_version"]}")
 
+	implementation("org.jetbrains.kotlin:kotlin-scripting-common")
+	implementation("org.jetbrains.kotlin:kotlin-scripting-jvm")
+	implementation("org.jetbrains.kotlin:kotlin-scripting-dependencies")
+	implementation("org.jetbrains.kotlin:kotlin-scripting-dependencies-maven")
+	implementation("org.jetbrains.kotlin:kotlin-scripting-jvm-host")
+
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
 	// modImplementation("net.fabricmc.fabric-api:fabric-api-deprecated:${project.properties["fabric_version"]}")
@@ -50,6 +62,14 @@ tasks {
 			expand(mapOf("version" to project.version))
 		}
 	}
+
+	remapJar {
+		//dependsOn(shadowJar)
+	}
+
+	//withType<ShadowJar> {
+	//	configurations = listOf(sjar)
+	//}
 
 	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
 	val targetJavaVersion = 17

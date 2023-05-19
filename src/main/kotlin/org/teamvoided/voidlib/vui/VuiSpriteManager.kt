@@ -36,7 +36,7 @@ object VuiSpriteManager: SimpleSynchronousResourceReloadListener {
         if (loader == null)
             loader = fromAtlas(atlas!!)
 
-        val result = loader!!.method_47661(manager, id("vres"), 0, prepareExecutor).thenCompose { it.whenComplete() }
+        val result = loader!!.load(manager, id("vres"), 0, prepareExecutor).thenCompose { it.whenComplete() }
 
         return result.thenCompose { preparedObject -> synchronizer!!.whenPrepared(preparedObject) }
             .thenAcceptAsync({ afterReload(it, applyProfiler) }, applyExecutor)
@@ -59,6 +59,8 @@ object VuiSpriteManager: SimpleSynchronousResourceReloadListener {
     override fun reload(manager: ResourceManager?) { }
 
     override fun getFabricId(): Identifier = id("vres")
+
+    fun atlas() = atlas
 
     fun getSprite(id: Identifier): Sprite? = atlas?.getSprite(id)
 }

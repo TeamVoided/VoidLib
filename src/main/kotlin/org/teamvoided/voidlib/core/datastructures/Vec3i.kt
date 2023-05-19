@@ -1,7 +1,9 @@
 package org.teamvoided.voidlib.core.datastructures
 
+import kotlinx.serialization.Serializable
 import net.minecraft.nbt.NbtCompound
 
+@Serializable
 data class Vec3i(var x: Int, var y: Int, var z: Int) {
     companion object {
         fun fromNbt(compound: NbtCompound): Vec3i {

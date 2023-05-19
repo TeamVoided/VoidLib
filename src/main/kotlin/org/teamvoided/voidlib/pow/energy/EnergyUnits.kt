@@ -1,8 +1,8 @@
 package org.teamvoided.voidlib.pow.energy
 
 import net.minecraft.registry.Registry
-import org.teamvoided.voidlib.id
 import org.teamvoided.voidlib.core.RGB
+import org.teamvoided.voidlib.id
 import org.teamvoided.voidlib.pow.registry.EnergyRegistries
 import java.math.BigDecimal
 

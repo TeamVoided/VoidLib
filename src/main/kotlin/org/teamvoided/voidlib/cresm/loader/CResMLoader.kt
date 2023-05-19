@@ -1,5 +1,6 @@
 package org.teamvoided.voidlib.cresm.loader
 
+import kotlinx.coroutines.runBlocking
 import net.minecraft.resource.ResourceManager
 import net.minecraft.resource.ResourceType
 import net.minecraft.util.Identifier
@@ -13,7 +14,9 @@ open class CResMLoader(
 ) : ICResMLoader {
     override fun reload(manager: ResourceManager) {
         manager.findResources(folder) { it.path.endsWith(".$fileType") }.forEach { (id, _) ->
-            singleLoader.loadResource(id, manager)
+            runBlocking {
+                singleLoader.loadResource(id, manager)
+            }
         }
     }
 

@@ -10,7 +10,7 @@ import org.teamvoided.voidlib.wfc.wave.rule.ITileGenerationRule
 import java.util.*
 
 class WaveFunctionLoader : CResMSingleLoader {
-    override fun loadResource(id: Identifier, manager: ResourceManager) {
+    override suspend fun loadResource(id: Identifier, manager: ResourceManager) {
         val json = parseJson(Identifier(id.namespace, "functions/${id.path}"), manager)
 
         val fId = WFC.idFromString(json.get("id").asString)

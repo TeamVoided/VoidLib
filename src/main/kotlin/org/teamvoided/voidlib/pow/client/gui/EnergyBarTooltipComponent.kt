@@ -29,11 +29,11 @@ class EnergyBarTooltipComponent(component: EnergyBarTooltipData) : TooltipCompon
         this.totalWidth = totalWidth
     }
 
-    override fun drawItems(renderer: TextRenderer?, x: Int, y: Int, matrices: MatrixStack, itemRenderer: ItemRenderer?, z: Int) {
+    override fun drawItems(renderer: TextRenderer?, x: Int, y: Int, matrices: MatrixStack, itemRenderer: ItemRenderer) {
         val height = 3
         val offsetFromBox = 4
         matrices.push()
-        matrices.translate(0.0, 0.0, z.toDouble())
+        matrices.translate(0.0, 0.0, 0.0)
         val barWidth = ceil((totalWidth * percentFull).toDouble()).toInt()
         val color: Int = unit.getEnergyBarColor().toInt()
         DrawableHelper.fill(
