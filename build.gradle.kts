@@ -42,12 +42,6 @@ dependencies {
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${project.properties["fabric_version"]}")
 	modImplementation("net.fabricmc:fabric-language-kotlin:${project.properties["fabric_kotlin_version"]}")
 
-	implementation("org.jetbrains.kotlin:kotlin-scripting-common")
-	implementation("org.jetbrains.kotlin:kotlin-scripting-jvm")
-	implementation("org.jetbrains.kotlin:kotlin-scripting-dependencies")
-	implementation("org.jetbrains.kotlin:kotlin-scripting-dependencies-maven")
-	implementation("org.jetbrains.kotlin:kotlin-scripting-jvm-host")
-
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
 	// modImplementation("net.fabricmc.fabric-api:fabric-api-deprecated:${project.properties["fabric_version"]}")
