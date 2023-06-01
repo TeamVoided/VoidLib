@@ -1,7 +1,7 @@
 //import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
-	id("fabric-loom") version "1.0-SNAPSHOT"
+	id("fabric-loom") version "1.2-SNAPSHOT"
 	kotlin("jvm") version "1.8.21"
 	kotlin("plugin.serialization") version "1.8.21"
 	id("maven-publish")
@@ -56,14 +56,6 @@ tasks {
 			expand(mapOf("version" to project.version))
 		}
 	}
-
-	remapJar {
-		//dependsOn(shadowJar)
-	}
-
-	//withType<ShadowJar> {
-	//	configurations = listOf(sjar)
-	//}
 
 	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
 	val targetJavaVersion = 17

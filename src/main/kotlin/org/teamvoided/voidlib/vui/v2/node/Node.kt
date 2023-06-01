@@ -10,7 +10,7 @@ import org.teamvoided.voidlib.vui.v2.event.Event.LogicalEventContext.DrawContext
 import org.teamvoided.voidlib.vui.v2.event.Event.LogicalEventContext.UpdateContext
 import java.util.*
 
-abstract class Node {
+abstract class Node() {
     private var parent: Node? = null
     private val children: MutableList<Node> = LinkedList<Node>()
 
@@ -20,7 +20,14 @@ abstract class Node {
     var pos = Vec2i(0, 0)
     var size = Vec2i(0, 0)
 
-    protected open fun setup() {}
+    protected constructor(pos: Vec2i): this() {
+        this.pos = pos
+    }
+
+    protected constructor(pos: Vec2i, size: Vec2i): this() {
+        this.pos = pos
+        this.size = size
+    }
 
     protected open fun onMousePress(event: MousePressEvent) {}
     protected open fun onMouseRelease(event: MouseReleaseEvent) {}
