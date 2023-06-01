@@ -19,11 +19,21 @@ sealed interface Event {
         data class UpdateContext(val delta: Float, val mousePos: Vec2i): LogicalEventContext
     }
 
-    sealed interface LogicalEvent: Event {
+    sealed class LogicalEvent(val state: State): Event {
         enum class State { PreChild, PostChild }
 
-        data class DrawEvent(val drawContext: LogicalEventContext.DrawContext, val state: State): LogicalEvent
+        class DrawEvent(val drawContext: LogicalEventContext.DrawContext, state: State): LogicalEvent(state)
 
-        data class UpdateEvent(val updateContext: LogicalEventContext.UpdateContext, val state: State): LogicalEvent
+        class UpdateEvent(val updateContext: LogicalEventContext.UpdateContext, state: State): LogicalEvent(state)
+
+        fun ensurePreChild(action: () -> Unit) {
+            if (state == State.PreChild)
+                action()
+        }
+
+        fun ensurePostChild(action: () -> Unit) {
+            if (state == State.PostChild)
+                action()
+        }
     }
 }
