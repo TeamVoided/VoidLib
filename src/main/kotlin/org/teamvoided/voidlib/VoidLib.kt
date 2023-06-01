@@ -34,6 +34,4 @@ fun addModule(module: LibModule) {
 
 fun getModules(): List<LibModule> = copyOf(modules)
 
-fun id(path: String): Identifier {
-    return Identifier(MODID, path)
-}
+fun id(path: String): Identifier = Identifier(MODID, path)
