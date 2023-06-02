@@ -33,5 +33,4 @@ open class MovableNode(val node: Node): Node() {
             node.globalPos = nPos.copy()
         }
     }
-
 }

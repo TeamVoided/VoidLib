@@ -59,7 +59,7 @@ abstract class Node() {
 
     fun isTouching(point: Vec2i): Boolean {
         return point.x >= this.globalPos.x && point.x <= this.globalPos.x + size.x &&
-                point.y <= this.globalPos.y && point.y >= this.globalPos.y + size.y
+                point.y >= this.globalPos.y && point.y <= this.globalPos.y + size.y
     }
 
     fun dispatchInputEvent(event: InputEvent) {

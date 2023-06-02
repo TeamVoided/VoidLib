@@ -6,6 +6,6 @@ operator fun <T> StringBuilder.plusAssign(t: T) {
 
 
 fun StringBuilder.safeSubstring(start: Int): String {
-    return if (start == count() - 1) ""
+    return if (start >= count() - 1) ""
     else substring(start)
 }

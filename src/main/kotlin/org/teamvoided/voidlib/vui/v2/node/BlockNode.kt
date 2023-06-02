@@ -31,7 +31,7 @@ class BlockNode(val state: BlockState, val entity: BlockEntity? = null): Node() 
             val matrices = event.drawContext.matrices
 
             matrices.push()
-            matrices.translate(pos.x + size.x / 2.0, pos.y + size.y / 2.0, 100.0)
+            matrices.translate(globalPos.x + size.x / 2.0, globalPos.y + size.y / 2.0, 100.0)
             matrices.scale(40 * size.x / 64f, -40 * size.y / 64f, 40f)
 
             matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(30f))
