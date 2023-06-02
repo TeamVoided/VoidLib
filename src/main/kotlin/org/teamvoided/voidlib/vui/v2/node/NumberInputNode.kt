@@ -2,7 +2,7 @@ package org.teamvoided.voidlib.vui.v2.node
 
 import net.minecraft.client.MinecraftClient
 import org.lwjgl.glfw.GLFW
-import org.teamvoided.voidlib.core.RGB
+import org.teamvoided.voidlib.core.ARGB
 import org.teamvoided.voidlib.core.datastructures.Vec2i
 import org.teamvoided.voidlib.core.isNumeric
 import org.teamvoided.voidlib.core.safeSubstring
@@ -73,7 +73,7 @@ open class NumberInputNode() : Node() {
                     "${text.substring(0, textPosition)}|${text.safeSubstring(textPosition + 1)}",
                     globalPos.x.toFloat(),
                     (globalPos.y + size.y - 9) / 2f,
-                    RGB(255, 255, 255).toInt()
+                    ARGB(255, 255, 255, 255).toInt()
                 )
                 tick = 0f
             } else {
@@ -82,7 +82,7 @@ open class NumberInputNode() : Node() {
                     text.toString(),
                     globalPos.x.toFloat(),
                     (globalPos.y + size.y - 9) / 2f,
-                    RGB(255, 255, 255).toInt()
+                    ARGB(255, 255, 255, 255).toInt()
                 )
             }
         }

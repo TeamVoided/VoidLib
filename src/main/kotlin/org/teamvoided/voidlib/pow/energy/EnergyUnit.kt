@@ -2,11 +2,11 @@ package org.teamvoided.voidlib.pow.energy
 
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
-import org.teamvoided.voidlib.core.RGB
+import org.teamvoided.voidlib.core.ARGB
 import java.math.BigDecimal
 import java.util.*
 
-class EnergyUnit(private val value: BigDecimal, private val id: Identifier, private val energyBarColor: RGB) {
+class EnergyUnit(private val value: BigDecimal, private val id: Identifier, private val energyBarColor: ARGB) {
     private val name = Text.translatable(id.namespace + ".unit." + id.path)
 
     fun convertTo(other: EnergyUnit, amount: BigDecimal): BigDecimal {
@@ -29,7 +29,7 @@ class EnergyUnit(private val value: BigDecimal, private val id: Identifier, priv
         return name
     }
 
-    fun getEnergyBarColor(): RGB {
+    fun getEnergyBarColor(): ARGB {
         return energyBarColor
     }
 
