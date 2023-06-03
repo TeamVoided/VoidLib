@@ -5,7 +5,7 @@ import com.google.gson.JsonObject
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ARGB(val alpha: Int, val red: Int, val green: Int, val blue: Int) {
+data class ARGB(var alpha: Int, var red: Int, var green: Int, var blue: Int) {
     companion object Serializer {
         fun toJson(rgba: ARGB): JsonObject {
             val json = JsonObject()

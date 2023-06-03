@@ -16,6 +16,10 @@ object ListExtAny {
     fun <T: List<Animation<*>>> T.loop(looping: Boolean) {
         forEach { it.loop(looping) }
     }
+
+    fun <T: List<Animation<*>>> T.update(delta: Float) {
+        forEach { it.update(delta) }
+    }
 }
 
 object ListExtSpecific {
@@ -33,5 +37,9 @@ object ListExtSpecific {
 
     fun <T: List<Animation<A>>, A> T.loop(looping: Boolean) {
         forEach { it.loop(looping) }
+    }
+
+    fun <T: List<Animation<A>>, A> T.update(delta: Float) {
+        forEach { it.update(delta) }
     }
 }

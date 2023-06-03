@@ -18,7 +18,7 @@ class Animation<T>(
             else return
         }
 
-        this.delta = MathHelper.clamp(this.delta + (delta * 50 / duration) * direction.multiplier, 0f, 1f)
+        this.delta = MathHelper.clamp(this.delta + (delta / duration) * direction.multiplier, 0f, 1f)
         property.interpolate(destination, this.delta, easing)
     }
 
@@ -42,6 +42,7 @@ class Animation<T>(
         return this
     }
 
+    fun property() = property
     fun looping() = looping
     fun direction() = direction
     fun isComplete() = !looping && delta == direction.target

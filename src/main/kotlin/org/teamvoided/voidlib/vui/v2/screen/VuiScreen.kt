@@ -27,7 +27,6 @@ abstract class VuiScreen(title: Text): Screen(title) {
     override fun render(matrices: MatrixStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
         val delta = MinecraftClient.getInstance().lastFrameDuration
         parent.dispatchLogicalEvent(UpdateContext(delta, Vec2i(mouseX, mouseY)))
-        parent.dispatchLogicalEvent(DrawContext(matrices, Vec2i(mouseX, mouseY), partialTicks, delta, false))
         parent.dispatchLogicalEvent(DrawContext(matrices, Vec2i(mouseX, mouseY), partialTicks, delta, true))
         super.render(matrices, mouseX, mouseY, partialTicks)
     }

@@ -15,7 +15,16 @@ sealed interface Event {
     }
 
     sealed interface LogicalEventContext {
-        data class DrawContext(val matrices: MatrixStack, val mousePos: Vec2i, val partialTicks: Float, val delta: Float, val drawTooltip: Boolean): LogicalEventContext
+        data class DrawContext(
+            val matrices: MatrixStack,
+            val mousePos: Vec2i,
+            val partialTicks: Float,
+            val delta: Float,
+            @Deprecated(
+                message = "Kind of useless will be removed next version, always true.",
+                replaceWith = ReplaceWith("Draw the tooltip if the mouse is colliding with the node.")
+            ) val drawTooltip: Boolean
+        ): LogicalEventContext
         data class UpdateContext(val delta: Float, val mousePos: Vec2i): LogicalEventContext
     }
 
