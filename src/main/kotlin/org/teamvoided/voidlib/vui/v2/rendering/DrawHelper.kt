@@ -1,4 +1,4 @@
-package org.teamvoided.voidlib.vui.v2
+package org.teamvoided.voidlib.vui.v2.rendering
 
 import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.client.gui.DrawableHelper
@@ -11,6 +11,15 @@ import org.teamvoided.voidlib.core.ARGB
 import org.teamvoided.voidlib.core.datastructures.Vec2i
 
 object DrawHelper: DrawableHelper() {
+    fun drawRectOutline(matrices: MatrixStack, pos: Vec2i, size: Vec2i, color: ARGB) {
+        val cInt = color.toInt()
+        fill(matrices, pos.x, pos.y, pos.x + size.x, pos.y + 1, cInt)
+        fill(matrices, pos.x, pos.y + size.y - 1, pos.x + size.x, pos.y + size.y, cInt)
+
+        fill(matrices, pos.x, pos.y + 1, pos.x + 1, pos.y + size.y - 1, cInt)
+        fill(matrices, pos.x + size.x - 1, pos.y + 1, pos.x + size.x, pos.y + size.y - 1, cInt)
+    }
+
     fun drawRect(matrices: MatrixStack, pos: Vec2i, size: Vec2i, color: ARGB) = drawGradientRect(matrices, pos, size, color, color, color, color)
 
     fun drawGradientRect(matrices: MatrixStack, pos: Vec2i, size: Vec2i, topLeftColor: ARGB, topRightColor: ARGB, bottomLeftColor: ARGB, bottomRightColor: ARGB) {

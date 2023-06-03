@@ -10,7 +10,7 @@ import kotlin.math.sin
 
 fun interface EasingFunction {
     companion object Functions {
-        val registry: Registry<EasingFunction> = FabricRegistryBuilder.createSimple<EasingFunction>(RegistryKey.ofRegistry(id("easing_fx_reg"))).buildAndRegister()
+        val functions: Registry<EasingFunction> = FabricRegistryBuilder.createSimple<EasingFunction>(RegistryKey.ofRegistry(id("easing_fx_reg"))).buildAndRegister()
 
         val none = EasingFunction { _ -> 1f }
         val linear = EasingFunction { x -> x }
@@ -21,13 +21,13 @@ fun interface EasingFunction {
         val exponential = EasingFunction { x -> if (x == 0f) 0f else if (x == 1f) 1f else if (x < 0.5) (2f).pow(20 * x - 10) / 2 else (2 - (2f).pow(-20 * x + 10)) / 2 }
 
         fun init() {
-            Registry.register(registry, id("none_efx"), none)
-            Registry.register(registry, id("linear_efx"), linear)
-            Registry.register(registry, id("sine_efx"), sine)
-            Registry.register(registry, id("quadratic_efx"), quadratic)
-            Registry.register(registry, id("cubic_efx"), cubic)
-            Registry.register(registry, id("quartic_efx"), quartic)
-            Registry.register(registry, id("exponential_efx"), exponential)
+            Registry.register(functions, id("none"), none)
+            Registry.register(functions, id("linear"), linear)
+            Registry.register(functions, id("sine"), sine)
+            Registry.register(functions, id("quadratic"), quadratic)
+            Registry.register(functions, id("cubic"), cubic)
+            Registry.register(functions, id("quartic"), quartic)
+            Registry.register(functions, id("exponential"), exponential)
         }
     }
 

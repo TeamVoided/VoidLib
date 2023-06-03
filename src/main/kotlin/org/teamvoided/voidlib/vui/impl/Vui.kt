@@ -9,6 +9,7 @@ import org.teamvoided.voidlib.core.LibModule
 import org.teamvoided.voidlib.vui.VuiSpriteManager
 import org.teamvoided.voidlib.vui.impl.screen.EditorScreen
 import org.teamvoided.voidlib.vui.v2.animation.EasingFunction
+import org.teamvoided.voidlib.vui.v2.animation.Interpolator
 
 class Vui: LibModule("vui") {
     companion object {
@@ -18,6 +19,7 @@ class Vui: LibModule("vui") {
 
     override fun commonSetup() {
         EasingFunction.init()
+        Interpolator.init()
     }
 
     override fun clientSetup() {

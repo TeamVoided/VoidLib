@@ -8,7 +8,7 @@ import org.teamvoided.voidlib.vui.v2.event.Event
 import org.teamvoided.voidlib.vui.v2.event.Event.InputEvent.MousePressEvent
 import java.util.*
 
-open class SwitchNode(defaultValue: Boolean, private val onSprite: Sprite, private val offSprite: Sprite): Node() {
+open class CheckBoxNode(defaultValue: Boolean, private val onSprite: Sprite, private val offSprite: Sprite): Node() {
     private var value: Boolean = defaultValue
     private val listeners: MutableList<Listener> = LinkedList()
 

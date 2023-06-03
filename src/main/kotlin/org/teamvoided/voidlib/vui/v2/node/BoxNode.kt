@@ -2,7 +2,7 @@ package org.teamvoided.voidlib.vui.v2.node
 
 import org.teamvoided.voidlib.core.ARGB
 import org.teamvoided.voidlib.core.datastructures.Vec2i
-import org.teamvoided.voidlib.vui.v2.DrawHelper
+import org.teamvoided.voidlib.vui.v2.rendering.DrawHelper
 import org.teamvoided.voidlib.vui.v2.event.Event
 
 class BoxNode(var topLeftColor: ARGB, var topRightColor: ARGB, var bottomLeftColor: ARGB, var bottomRightColor: ARGB) : Node() {
