@@ -26,11 +26,14 @@ open class NumberInputNode() : Node() {
         this.size = size
     }
 
-    override fun onMousePress(event: MousePressEvent) {
-        captureText = isTouching(event.pos)
+    override fun onMousePress(event: MousePressEvent): Boolean {
+        val touching = isTouching(event.pos)
+        captureText = touching
+
+        return !touching
     }
 
-    override fun onKeyPress(event: KeyPressEvent) {
+    override fun onKeyPress(event: KeyPressEvent): Boolean {
         if (captureText) {
             if (event.keyCode == GLFW.GLFW_KEY_BACKSLASH) {
                 val t1 = text.substring(0, textPosition).dropLast(1)
@@ -51,13 +54,22 @@ open class NumberInputNode() : Node() {
             if (event.keyCode == GLFW.GLFW_KEY_RIGHT) {
                 if (textPosition < text.length - 1) textPosition += 1
             }
+
+            return false
         }
+
+        return true
     }
 
-    override fun onCharTyped(event: CharTypedEvent) {
+    override fun onCharTyped(event: CharTypedEvent): Boolean {
         val t1 = text.substring(0, textPosition)
         val t2 = text.safeSubstring(textPosition + 1)
-        if (captureText && "$t1${event.char}$t2".isNumeric()) text = StringBuilder("$t1${event.char}$t2")
+        if (captureText && "$t1${event.char}$t2".isNumeric()) {
+            text = StringBuilder("$t1${event.char}$t2")
+            return false
+        }
+
+        return true
     }
 
     override fun draw(event: Event.LogicalEvent.DrawEvent) {

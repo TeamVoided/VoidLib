@@ -24,7 +24,7 @@ open class ExpandableNode(val arrowScale: Double) : Node() {
         this.size = size
     }
 
-    override fun onMousePress(event: Event.InputEvent.MousePressEvent) {
+    override fun onMousePress(event: Event.InputEvent.MousePressEvent): Boolean {
         if (isDoubleClick()) {
             expanded = !expanded
         } else if (isTouchingArrow(event.pos)) {
@@ -32,6 +32,8 @@ open class ExpandableNode(val arrowScale: Double) : Node() {
         } else if (isTouching(event.pos)) {
             interval = clickInterval
         }
+
+        return true
     }
 
     override fun update(event: Event.LogicalEvent.UpdateEvent) {

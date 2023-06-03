@@ -29,13 +29,48 @@ abstract class Node() {
         this.size = size
     }
 
-    protected open fun onMousePress(event: MousePressEvent) {}
-    protected open fun onMouseRelease(event: MouseReleaseEvent) {}
-    protected open fun onMouseScroll(event: MouseScrollEvent) {}
-    protected open fun onMouseDrag(event: MouseDragEvent) {}
-    protected open fun onKeyPress(event: KeyPressEvent) {}
-    protected open fun onKeyRelease(event: KeyReleaseEvent) {}
-    protected open fun onCharTyped(event: CharTypedEvent) {}
+    /*
+    * Returns true if children should be notified of the event
+    * Returns False if they should not be notified
+    */
+    protected open fun onMousePress(event: MousePressEvent): Boolean { return true }
+
+    /*
+    * Returns true if children should be notified of the event
+    * Returns False if they should not be notified
+    */
+    protected open fun onMouseRelease(event: MouseReleaseEvent): Boolean { return true }
+
+    /*
+    * Returns true if children should be notified of the event
+    * Returns False if they should not be notified
+    */
+    protected open fun onMouseScroll(event: MouseScrollEvent): Boolean { return true }
+
+    /*
+    * Returns true if children should be notified of the event
+    * Returns False if they should not be notified
+    */
+    protected open fun onMouseDrag(event: MouseDragEvent): Boolean { return true }
+
+    /*
+    * Returns true if children should be notified of the event
+    * Returns False if they should not be notified
+    */
+    protected open fun onKeyPress(event: KeyPressEvent): Boolean { return true }
+
+    /*
+    * Returns true if children should be notified of the event
+    * Returns False if they should not be notified
+    */
+    protected open fun onKeyRelease(event: KeyReleaseEvent): Boolean { return true }
+
+    /*
+    * Returns true if children should be notified of the event
+    * Returns False if they should not be notified
+    */
+    protected open fun onCharTyped(event: CharTypedEvent): Boolean { return true }
+
     protected open fun update(event: UpdateEvent) {}
     protected open fun draw(event: DrawEvent) {}
 
@@ -63,7 +98,7 @@ abstract class Node() {
     }
 
     fun dispatchInputEvent(event: InputEvent) {
-        when (event) {
+        val updateChildren = when (event) {
             is MousePressEvent -> onMousePress(event)
             is MouseReleaseEvent -> onMouseRelease(event)
             is MouseScrollEvent -> onMouseScroll(event)
@@ -73,7 +108,7 @@ abstract class Node() {
             is CharTypedEvent -> onCharTyped(event)
         }
 
-        children.forEach { it.dispatchInputEvent(event) }
+        if (updateChildren) children.forEach { it.dispatchInputEvent(event) }
     }
 
     fun dispatchLogicalEvent(context: LogicalEventContext) {

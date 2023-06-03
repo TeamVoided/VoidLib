@@ -15,22 +15,31 @@ open class MovableNode(val node: Node): Node() {
         addChild(node)
     }
 
-    override fun onMousePress(event: MousePressEvent) {
+    override fun onMousePress(event: MousePressEvent): Boolean {
         if (isTouching(event.pos)) {
             selected = true
             offset = (event.pos - this.globalPos)
+
+            return false
         }
+
+        return true
     }
 
-    override fun onMouseRelease(event: MouseReleaseEvent) {
+    override fun onMouseRelease(event: MouseReleaseEvent): Boolean {
         if (selected) selected = false
+        return true
     }
 
-    override fun onMouseDrag(event: MouseDragEvent) {
+    override fun onMouseDrag(event: MouseDragEvent): Boolean {
         if (selected) {
             val nPos = (event.pos - offset + event.delta)
             this.globalPos = nPos.copy()
             node.globalPos = nPos.copy()
+
+            return false
         }
+
+        return true
     }
 }

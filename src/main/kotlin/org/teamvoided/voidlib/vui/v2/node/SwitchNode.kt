@@ -21,11 +21,14 @@ open class SwitchNode(defaultValue: Boolean, private val onSprite: Sprite, priva
         this.size = size
     }
 
-    override fun onMousePress(event: MousePressEvent) {
+    override fun onMousePress(event: MousePressEvent): Boolean {
         if (isTouching(event.pos)) {
             value = !value
             listeners(value)
+            return false
         }
+
+        return true
     }
 
     override fun draw(event: Event.LogicalEvent.DrawEvent) {

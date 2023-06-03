@@ -56,6 +56,5 @@ class EditorScreen : VuiScreen(Text.literal("Vui Editor")) {
 
         parent.addChild(bg)
         bg.addChild(mov2)
-
     }
 }
