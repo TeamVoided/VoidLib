@@ -1,6 +1,7 @@
 package org.teamvoided.voidlib.vui.v2.animation
 
 import net.minecraft.util.math.MathHelper
+import org.teamvoided.voidlib.core.ARGB
 import kotlin.math.floor
 
 fun interface Interpolator<T> {
@@ -11,6 +12,15 @@ fun interface Interpolator<T> {
         val longInterpolator = Interpolator<Long> { start, end, delta, easing -> lLerp(easing(delta), start, end) }
         val floatInterpolator = Interpolator<Float> { start, end, delta, easing -> MathHelper.lerp(easing(delta), start, end) }
         val doubleInterpolator = Interpolator<Double> { start, end, delta, easing -> MathHelper.lerp(easing(delta).toDouble(), start, end) }
+
+        val colorInterpolator = Interpolator<ARGB> { start, end, delta, easing ->
+            ARGB(
+                MathHelper.lerp(easing(delta), start.alpha, end.alpha),
+                MathHelper.lerp(easing(delta), start.red, end.red),
+                MathHelper.lerp(easing(delta), start.green, end.green),
+                MathHelper.lerp(easing(delta), start.blue, end.blue)
+            )
+        }
 
         fun bLerp(delta: Float, start: Byte, end: Byte): Byte {
             return (start + floor(delta * (end - start)).toInt()).toByte()

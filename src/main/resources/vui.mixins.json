@@ -1,6 +1,4 @@
 {
   "package": "org.teamvoided.voidlib.vui.mixin",
-  "client": [
-    "MixinProgressScreen"
-  ]
+  "client": [ ]
 }

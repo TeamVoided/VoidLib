@@ -28,7 +28,8 @@
   "mixins": [
     "attachments.mixins.json",
     "pow.mixins.json",
-    "dimutils.mixins.json"
+    "dimutils.mixins.json",
+    "vui.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.14.19",

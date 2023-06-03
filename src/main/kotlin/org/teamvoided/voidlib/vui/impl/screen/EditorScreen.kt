@@ -15,7 +15,7 @@ class EditorScreen : VuiScreen(Text.literal("Vui Editor")) {
 
     val bg = ColorNode(Vec2i(0,0), Vec2i(1000, 1000), ARGB(255, 0, 0, 0))
 
-    val colorNode = ColorNode(Vec2i(0,0), Vec2i(100, 100), ARGB(255, 0, 0, 0))
+    val colorNode = ColorNode(Vec2i(0,0), Vec2i(100, 100), ARGB(255, 0, 100, 200))
     val animatedNode = AnimatedNode(
         colorNode
     ) { node ->
@@ -25,25 +25,9 @@ class EditorScreen : VuiScreen(Text.literal("Vui Editor")) {
                 5,
                 Animation.Direction.Forwards,
                 true,
-                InterpolatedProperty(node.color.red, Interpolator.intInterpolator) { node.color.red = it },
-                EasingFunction.linear,
-                255
-            ),
-            Animation(
-                5,
-                Animation.Direction.Forwards,
-                true,
-                InterpolatedProperty(node.color.green, Interpolator.intInterpolator) { node.color.green = it },
+                InterpolatedProperty(node.color, Interpolator.colorInterpolator) { node.color = it },
                 EasingFunction.sine,
-                255
-            ),
-            Animation(
-                5,
-                Animation.Direction.Forwards,
-                true,
-                InterpolatedProperty(node.color.blue, Interpolator.intInterpolator) { node.color.blue = it },
-                EasingFunction.exponential,
-                255
+                ARGB(255, 200, 100, 0)
             )
         )
     }
@@ -57,4 +41,6 @@ class EditorScreen : VuiScreen(Text.literal("Vui Editor")) {
         parent.addChild(bg)
         bg.addChild(mov2)
     }
+
+    override fun shouldPause(): Boolean = false
 }

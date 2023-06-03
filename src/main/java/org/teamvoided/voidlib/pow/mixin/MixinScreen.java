@@ -13,7 +13,7 @@ import org.teamvoided.voidlib.client.ScreenEnergyBarRenderer;
 import java.util.List;
 
 @Mixin(Screen.class)
-public class MixinScreen {
+public abstract class MixinScreen {
     @Inject(method = "renderTooltipFromComponents", at = @At("HEAD"))
     public void renderEnergyBar(MatrixStack matrices, List<TooltipComponent> components, int x, int y, TooltipPositioner positioner, CallbackInfo ci) {
         ScreenEnergyBarRenderer.INSTANCE.renderEnergyBar((Screen) (Object) this, components, x, y);
