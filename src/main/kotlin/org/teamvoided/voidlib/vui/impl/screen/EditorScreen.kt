@@ -13,21 +13,45 @@ import org.teamvoided.voidlib.vui.v2.screen.VuiScreen
 class EditorScreen : VuiScreen(Text.literal("Vui Editor")) {
     override val parent = ParentNode()
 
-    val bg = ColorNode(Vec2i(0,0), Vec2i(1000, 1000), ARGB(255, 0, 0, 0))
+    val bg = BoxNode(Vec2i(0,0), Vec2i(1000, 1000), ARGB(255, 0, 0, 0))
 
-    val colorNode = ColorNode(Vec2i(0,0), Vec2i(100, 100), ARGB(255, 0, 100, 200))
+    val boxNode = BoxNode(Vec2i(0,0), Vec2i(100, 100), ARGB(255, 0, 100, 200))
     val animatedNode = AnimatedNode(
-        colorNode
+        boxNode
     ) { node ->
-        node as ColorNode
+        node as BoxNode
         listOf(
             Animation(
                 5,
                 Animation.Direction.Forwards,
                 true,
-                InterpolatedProperty(node.color, Interpolator.colorInterpolator) { node.color = it },
+                InterpolatedProperty(node.topLeftColor, Interpolator.colorInterpolator) { node.topLeftColor = it },
                 EasingFunction.sine,
-                ARGB(255, 200, 100, 0)
+                ARGB(255, 200, 200, 200)
+            ),
+            Animation(
+                5,
+                Animation.Direction.Forwards,
+                true,
+                InterpolatedProperty(node.topRightColor, Interpolator.colorInterpolator) { node.topRightColor = it },
+                EasingFunction.exponential,
+                ARGB(255, 240, 200, 200)
+            ),
+            Animation(
+                5,
+                Animation.Direction.Forwards,
+                true,
+                InterpolatedProperty(node.bottomLeftColor, Interpolator.colorInterpolator) { node.bottomLeftColor = it },
+                EasingFunction.quartic,
+                ARGB(255, 210, 180, 80)
+            ),
+            Animation(
+                5,
+                Animation.Direction.Forwards,
+                true,
+                InterpolatedProperty(node.bottomRightColor, Interpolator.colorInterpolator) { node.bottomRightColor = it },
+                EasingFunction.linear,
+                ARGB(255, 100, 200, 40)
             )
         )
     }
