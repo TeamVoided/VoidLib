@@ -34,13 +34,13 @@ loom {
 
 dependencies {
 	// To change the versions see the gradle.properties file
-	minecraft("com.mojang:minecraft:${project.properties["minecraft_version"]}")
-	mappings("net.fabricmc:yarn:${project.properties["yarn_mappings"]}:v2")
-	modImplementation("net.fabricmc:fabric-loader:${project.properties["loader_version"]}")
+	minecraft("com.mojang:minecraft:${property("minecraft_version")}")
+	mappings("net.fabricmc:yarn:${property("yarn_mappings")}:v2")
+	modImplementation("net.fabricmc:fabric-loader:${property("loader_version")}")
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
-	modImplementation("net.fabricmc.fabric-api:fabric-api:${project.properties["fabric_version"]}")
-	modImplementation("net.fabricmc:fabric-language-kotlin:${project.properties["fabric_kotlin_version"]}")
+	modImplementation("net.fabricmc.fabric-api:fabric-api:${property("fabric_version")}")
+	modImplementation("net.fabricmc:fabric-language-kotlin:${property("fabric_kotlin_version")}")
 
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
