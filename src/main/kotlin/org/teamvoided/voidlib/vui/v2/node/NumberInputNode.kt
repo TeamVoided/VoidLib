@@ -85,7 +85,7 @@ open class NumberInputNode() : Node() {
                     "${text.substring(0, textPosition)}|${text.safeSubstring(textPosition + 1)}",
                     globalPos.x.toFloat(),
                     (globalPos.y + size.y - 9) / 2f,
-                    ARGB(255u, 255u, 255u, 255u).toInt()
+                    ARGB(255, 255, 255, 255).toInt()
                 )
                 tick = 0f
             } else {
@@ -94,7 +94,7 @@ open class NumberInputNode() : Node() {
                     text.toString(),
                     globalPos.x.toFloat(),
                     (globalPos.y + size.y - 9) / 2f,
-                    ARGB(255u, 255u, 255u, 255u).toInt()
+                    ARGB(255, 255, 255, 255).toInt()
                 )
             }
         }

@@ -10,6 +10,7 @@ import org.teamvoided.voidlib.vui.v2.event.ui.Event.LogicalEvent.*
 import org.teamvoided.voidlib.vui.v2.event.ui.Event.LogicalEventContext
 import org.teamvoided.voidlib.vui.v2.event.ui.Event.LogicalEventContext.DrawContext
 import org.teamvoided.voidlib.vui.v2.event.ui.Event.LogicalEventContext.UpdateContext
+import org.teamvoided.voidlib.vui.v2.screen.cursor.CursorStyle
 import java.util.*
 
 abstract class Node() {
@@ -76,11 +77,50 @@ abstract class Node() {
     protected open fun update(event: UpdateEvent) {}
     protected open fun draw(event: DrawEvent) {}
 
+    open fun cursorStyle(): CursorStyle { return CursorStyle.NONE }
+
+    fun inflate(size: Vec2i) {
+        this.size = size
+    }
+
+    fun moveTo(pos: Vec2i) {
+        this.pos = pos
+    }
+
+    fun moveToGlobal(globalPos: Vec2i) {
+        this.globalPos = globalPos
+    }
+
+    fun childAt(x: Int, y: Int): Node? {
+        val iter: ListIterator<Node> = children().listIterator(children().size)
+        while (iter.hasPrevious()) {
+            val child: Node = iter.previous()
+            if (child.isTouching(Vec2i(x, y))) {
+                return if (child.hasChildren()) {
+                    child.childAt(x, y) ?: child
+                } else child
+            }
+        }
+        return if (this.isTouching(Vec2i(x, y))) this else null
+    }
+
+    fun hasChildren() = children.isNotEmpty()
+
+    fun mount(parent: Node?) {
+        dismount()
+        parent?.addChild(this)
+    }
+
+    fun dismount() {
+        this.parent?.removeChild(this)
+        this.parent = null
+    }
+
     fun addChild(child: Node) {
+        child.parent?.removeChild(child)
         children.add(child)
 
         val oldGlobal = child.globalPos
-
         child.parent = this
         child.globalPos = oldGlobal
     }
@@ -90,7 +130,7 @@ abstract class Node() {
 
         val oldGlobal = child.globalPos
 
-        child.parent = this
+        child.parent = null
         child.globalPos = oldGlobal
     }
 
@@ -109,7 +149,7 @@ abstract class Node() {
                 point.y >= this.globalPos.y && point.y <= this.globalPos.y + size.y
     }
 
-    fun dispatchInputEvent(event: InputEvent) {
+    fun dispatchInputEvent(event: InputEvent): Boolean {
         val updateChildren = when (event) {
             is MousePressEvent -> onMousePress(event)
             is MouseReleaseEvent -> onMouseRelease(event)
@@ -120,7 +160,7 @@ abstract class Node() {
             is CharTypedEvent -> onCharTyped(event)
         }
 
-        if (updateChildren) children.forEach { it.dispatchInputEvent(event) }
+        return if (updateChildren) { children.map { it.dispatchInputEvent(event) }.stream().noneMatch { !it } } else false
     }
 
     fun dispatchLogicalEvent(context: LogicalEventContext) {

@@ -16,6 +16,6 @@ class AnimatedNode(val node: Node, animations: (Node) -> List<Animation<*>>): No
     override fun update(event: Event.LogicalEvent.UpdateEvent) {
         this.globalPos = children()[0].globalPos
         this.size = children()[0].size
-        animations.update(event.updateContext.delta / 1000)
+        animations.update(event.updateContext.delta / 20)
     }
 }

@@ -5,20 +5,20 @@ import com.google.gson.JsonObject
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ARGB(var alpha: UByte, var red: UByte, var green: UByte, var blue: UByte) {
+data class ARGB(var alpha: Int, var red: Int, var green: Int, var blue: Int) {
     companion object Serializer {
         fun toJson(rgba: ARGB): JsonObject {
             val json = JsonObject()
-            json.addProperty("r", rgba.red.toInt())
-            json.addProperty("g", rgba.green.toInt())
-            json.addProperty("b", rgba.blue.toInt())
-            json.addProperty("a", rgba.alpha.toInt())
+            json.addProperty("r", rgba.red)
+            json.addProperty("g", rgba.green)
+            json.addProperty("b", rgba.blue)
+            json.addProperty("a", rgba.alpha)
 
             return json
         }
 
         fun fromJson(json: JsonObject): ARGB {
-            return ARGB(json.get("r").asInt.toUByte(), json.get("g").asInt.toUByte(), json.get("b").asInt.toUByte(), json.get("a").asInt.toUByte())
+            return ARGB(json.get("r").asInt, json.get("g").asInt, json.get("b").asInt, json.get("a").asInt)
         }
 
         fun fromJson(json: String): ARGB {
@@ -27,7 +27,5 @@ data class ARGB(var alpha: UByte, var red: UByte, var green: UByte, var blue: UB
         }
     }
 
-    private infix fun UByte.shl(bitCount: Int): UInt = toUInt() shl bitCount
-
-    fun toInt() = ((alpha shl 24) + (red shl 16) + (green shl 8) + (blue shl 0)).toInt()
+    fun toInt() = ((alpha shl 24) + (red shl 16) + (green shl 8) + (blue shl 0))
 }

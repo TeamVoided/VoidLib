@@ -109,7 +109,7 @@ data class Vec4d(var x: Double, var y: Double, var z: Double, var w: Double) {
         return Vec4d(this.x, this.y, this.z, this.w)
     }
 
-    fun toARGB() = ARGB((x * 255).toUInt().toUByte(), (y * 255).toUInt().toUByte(), (z * 255).toUInt().toUByte(), (w * 255).toUInt().toUByte())
+    fun toARGB() = ARGB((x * 255).toInt(), (y * 255).toInt(), (z * 255).toInt(), (w * 255).toInt())
 
     fun toNbt(): NbtCompound {
         val compound = NbtCompound()

@@ -170,7 +170,7 @@ object Pencil: DrawableHelper() {
     fun drawGeometry(matrices: MatrixStack, pos: Vec2f, scale: Float, geometry: Geometry) {
         val buffer = Tessellator.getInstance().buffer
         val matrix = matrices.peek().positionMatrix
-        val defCInt = ARGB(255u, 77u, 77u, 77u).toInt()
+        val defCInt = ARGB(255, 77, 77, 77).toInt()
 
         buffer.begin(geometry.type.drawMode, VertexFormats.POSITION_COLOR)
 
