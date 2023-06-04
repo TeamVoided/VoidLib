@@ -5,6 +5,8 @@ import net.minecraft.registry.Registry
 import net.minecraft.registry.RegistryKey
 import net.minecraft.util.math.MathHelper
 import org.teamvoided.voidlib.core.ARGB
+import org.teamvoided.voidlib.core.d
+import org.teamvoided.voidlib.core.datastructures.vector.*
 import org.teamvoided.voidlib.id
 import kotlin.math.floor
 
@@ -18,6 +20,60 @@ fun interface Interpolator<T> {
         val longInterpolator = Interpolator<Long> { start, end, delta, easing -> lLerp(easing(delta), start, end) }
         val floatInterpolator = Interpolator<Float> { start, end, delta, easing -> MathHelper.lerp(easing(delta), start, end) }
         val doubleInterpolator = Interpolator<Double> { start, end, delta, easing -> MathHelper.lerp(easing(delta).toDouble(), start, end) }
+
+        val vec2iInterpolator = Interpolator<Vec2i> { start, end, delta, easing ->
+            Vec2i(
+                MathHelper.lerp(easing(delta), start.x, end.x),
+                MathHelper.lerp(easing(delta), start.y, end.y)
+            )
+        }
+
+        val vec2fInterpolator = Interpolator<Vec2f> { start, end, delta, easing ->
+            Vec2f(
+                MathHelper.lerp(easing(delta), start.x, end.x),
+                MathHelper.lerp(easing(delta), start.y, end.y)
+            )
+        }
+
+        val vec2dInterpolator = Interpolator<Vec2d> { start, end, delta, easing ->
+            Vec2d(
+                MathHelper.lerp(easing(delta).d, start.x, end.x),
+                MathHelper.lerp(easing(delta).d, start.y, end.y)
+            )
+        }
+
+        val vec3iInterpolator = Interpolator<Vec3i> { start, end, delta, easing ->
+            Vec3i(
+                MathHelper.lerp(easing(delta), start.x, end.x),
+                MathHelper.lerp(easing(delta), start.y, end.y),
+                MathHelper.lerp(easing(delta), start.z, end.z)
+            )
+        }
+
+        val vec3fInterpolator = Interpolator<Vec3f> { start, end, delta, easing ->
+            Vec3f(
+                MathHelper.lerp(easing(delta), start.x, end.x),
+                MathHelper.lerp(easing(delta), start.y, end.y),
+                MathHelper.lerp(easing(delta), start.z, end.z)
+            )
+        }
+
+        val vec3dInterpolator = Interpolator<Vec3d> { start, end, delta, easing ->
+            Vec3d(
+                MathHelper.lerp(easing(delta).d, start.x, end.x),
+                MathHelper.lerp(easing(delta).d, start.y, end.y),
+                MathHelper.lerp(easing(delta).d, start.z, end.z)
+            )
+        }
+
+        val vec4dInterpolator = Interpolator<Vec4d> { start, end, delta, easing ->
+            Vec4d(
+                MathHelper.lerp(easing(delta).d, start.x, end.x),
+                MathHelper.lerp(easing(delta).d, start.y, end.y),
+                MathHelper.lerp(easing(delta).d, start.z, end.z),
+                MathHelper.lerp(easing(delta).d, start.w, end.w)
+            )
+        }
 
         val colorInterpolator = Interpolator<ARGB> { start, end, delta, easing ->
             ARGB(

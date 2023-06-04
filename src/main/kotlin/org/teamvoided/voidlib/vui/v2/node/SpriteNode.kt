@@ -6,6 +6,7 @@ import net.minecraft.client.texture.Sprite
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
 import org.teamvoided.voidlib.core.datastructures.vector.Vec3i
 import org.teamvoided.voidlib.vui.v2.event.ui.Event
+import org.teamvoided.voidlib.vui.v2.rendering.Pencil
 
 open class SpriteNode(val sprite: () -> Sprite) : Node() {
     private var z: Int = 0
@@ -25,9 +26,7 @@ open class SpriteNode(val sprite: () -> Sprite) : Node() {
         event.ensurePreChild {
             val sprite = this.sprite()
             RenderSystem.setShaderTexture(0, sprite.atlasId)
-            DrawableHelper.drawSprite(event.drawContext.matrices, globalPos.x, globalPos.y, z, size.x, size.y, sprite)
+            Pencil.drawSprite(event.drawContext.matrices, Vec3i(globalPos.x, globalPos.y, z), size, sprite)
         }
     }
-
-
 }

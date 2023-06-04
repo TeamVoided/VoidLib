@@ -34,43 +34,43 @@ abstract class Node() {
 
     /*
     * Returns true if children should be notified of the event
-    * Returns False if they should not be notified
+    * Returns false if they should not be notified, will also cancel children added after this child
     */
     protected open fun onMousePress(event: MousePressEvent): Boolean { return true }
 
     /*
     * Returns true if children should be notified of the event
-    * Returns False if they should not be notified
+    * Returns false if they should not be notified, will also cancel children added after this child
     */
     protected open fun onMouseRelease(event: MouseReleaseEvent): Boolean { return true }
 
     /*
     * Returns true if children should be notified of the event
-    * Returns False if they should not be notified
+    * Returns false if they should not be notified, will also cancel children added after this child
     */
     protected open fun onMouseScroll(event: MouseScrollEvent): Boolean { return true }
 
     /*
     * Returns true if children should be notified of the event
-    * Returns False if they should not be notified
+    * Returns false if they should not be notified, will also cancel children added after this child
     */
     protected open fun onMouseDrag(event: MouseDragEvent): Boolean { return true }
 
     /*
     * Returns true if children should be notified of the event
-    * Returns False if they should not be notified
+    * Returns false if they should not be notified, will also cancel children added after this child
     */
     protected open fun onKeyPress(event: KeyPressEvent): Boolean { return true }
 
     /*
     * Returns true if children should be notified of the event
-    * Returns False if they should not be notified
+    * Returns false if they should not be notified, will also cancel children added after this child
     */
     protected open fun onKeyRelease(event: KeyReleaseEvent): Boolean { return true }
 
     /*
     * Returns true if children should be notified of the event
-    * Returns False if they should not be notified
+    * Returns false if they should not be notified, will also cancel children added after this child
     */
     protected open fun onCharTyped(event: CharTypedEvent): Boolean { return true }
 
@@ -89,6 +89,10 @@ abstract class Node() {
 
     fun moveToGlobal(globalPos: Vec2i) {
         this.globalPos = globalPos
+    }
+
+    fun childAt(pos: Vec2i): Node? {
+        return childAt(pos.x, pos.y)
     }
 
     fun childAt(x: Int, y: Int): Node? {
@@ -160,7 +164,12 @@ abstract class Node() {
             is CharTypedEvent -> onCharTyped(event)
         }
 
-        return if (updateChildren) { children.map { it.dispatchInputEvent(event) }.stream().noneMatch { !it } } else false
+        return if (updateChildren) {
+            children.forEach {
+                val b = it.dispatchInputEvent(event)
+                if (!b) return false
+            }; return true
+        } else false
     }
 
     fun dispatchLogicalEvent(context: LogicalEventContext) {

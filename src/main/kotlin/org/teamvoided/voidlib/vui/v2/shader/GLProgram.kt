@@ -18,7 +18,7 @@ open class GlProgram(id: Identifier, vertexFormat: VertexFormat) {
     companion object {
         private val REGISTERED_PROGRAMS: MutableList<Pair<(ResourceFactory) -> ShaderProgram, (ShaderProgram) -> Unit>> = LinkedList()
 
-        @ApiStatus.Internal
+        @ApiStatus.Internal @JvmStatic
         fun forEachProgram(loader: (Pair<(ResourceFactory) -> ShaderProgram, (ShaderProgram) -> Unit>) -> Unit) {
             REGISTERED_PROGRAMS.forEach(loader)
         }

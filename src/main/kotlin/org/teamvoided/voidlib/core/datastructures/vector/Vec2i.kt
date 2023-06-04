@@ -3,6 +3,9 @@ package org.teamvoided.voidlib.core.datastructures.vector
 import kotlinx.serialization.Serializable
 import net.minecraft.nbt.NbtCompound
 import org.joml.Math
+import org.teamvoided.voidlib.core.d
+import org.teamvoided.voidlib.core.f
+import org.teamvoided.voidlib.core.i
 
 @Serializable
 data class Vec2i(var x: Int, var y: Int) {
@@ -66,15 +69,15 @@ data class Vec2i(var x: Int, var y: Int) {
 
     fun normalize(): Vec2i {
         val invLength = Math.invsqrt((x * x + y * y).toDouble())
-        x = (x * invLength).toInt()
-        y = (y * invLength).toInt()
+        x = (x * invLength).i
+        y = (y * invLength).i
         return this
     }
 
     fun normalize(dest: Vec2i): Vec2i {
         val invLength = Math.invsqrt((x * x + y * y).toDouble())
-        dest.x = (x * invLength).toInt()
-        dest.y = (y * invLength).toInt()
+        dest.x = (x * invLength).i
+        dest.y = (y * invLength).i
         return dest
     }
 
@@ -82,8 +85,8 @@ data class Vec2i(var x: Int, var y: Int) {
         return Vec2i(this.x, this.y)
     }
 
-    fun to2f() = Vec2f(x.toFloat(), y.toFloat())
-    fun to2d() = Vec2d(x.toDouble(), y.toDouble())
+    fun to2f() = Vec2f(x.f, y.f)
+    fun to2d() = Vec2d(x.d, y.d)
 
     fun toNbt(): NbtCompound {
         val compound = NbtCompound()

@@ -95,6 +95,7 @@ val Number.L get() = toLong()
 val Number.s get() = toShort()
 val Number.c get() = toChar()
 val Number.bool get() = i != 0
+val Number.str get() = toString()
 
 val String.f get() = toFloat()
 val String.b get() = toByte()

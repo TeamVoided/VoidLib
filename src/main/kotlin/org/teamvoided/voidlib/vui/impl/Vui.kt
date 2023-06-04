@@ -30,6 +30,7 @@ class Vui: LibModule("vui") {
     override fun clientSetup() {
         LOGGER.info("Open Editor = $openEditor")
         LOGGER.info("Stop Music = $stopMusic")
+
         ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(VuiSpriteManager)
 
         ClientLifecycleEvents.CLIENT_STARTED.register {

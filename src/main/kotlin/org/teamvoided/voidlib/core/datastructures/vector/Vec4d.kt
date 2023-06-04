@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 import net.minecraft.nbt.NbtCompound
 import org.joml.Math
 import org.teamvoided.voidlib.core.ARGB
+import org.teamvoided.voidlib.core.i
 import kotlin.math.ceil
 
 @Serializable
@@ -54,7 +55,7 @@ data class Vec4d(var x: Double, var y: Double, var z: Double, var w: Double) {
         val totalValThis = this.x + this.y + this.z + this.w
         val totalValCompare = toCompare.x + toCompare.y + toCompare.z + this.w
 
-        return ceil(totalValThis - totalValCompare).toInt()
+        return ceil(totalValThis - totalValCompare).i
     }
 
     fun add(x: Int, y: Int, z: Int, w: Int): Vec4d = Vec4d(x = this.x + x, y = this.y + y, this.z + z, this.w + w)
@@ -109,7 +110,7 @@ data class Vec4d(var x: Double, var y: Double, var z: Double, var w: Double) {
         return Vec4d(this.x, this.y, this.z, this.w)
     }
 
-    fun toARGB() = ARGB((x * 255).toInt(), (y * 255).toInt(), (z * 255).toInt(), (w * 255).toInt())
+    fun toARGB() = ARGB((x * 255).i, (y * 255).i, (z * 255).i, (w * 255).i)
 
     fun toNbt(): NbtCompound {
         val compound = NbtCompound()

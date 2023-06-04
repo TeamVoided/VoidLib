@@ -2,6 +2,7 @@ package org.teamvoided.voidlib.vui.v2.screen
 
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.Screen
+import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.Text
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
 import org.teamvoided.voidlib.vui.v2.event.fabric.WindowResizeCallback
@@ -11,9 +12,10 @@ abstract class VuiScreen<R: Node>(title: Text): Screen(title) {
     abstract val uiAdapter: VoidUIAdapter<R>
     val root get() = uiAdapter.rootNode
     protected open var scale = 1.0
-    protected var oldScaleFactor = 1.0
+    private var oldScaleFactor = 1.0
 
     open fun vuiInit() {}
+    open fun vuiUpdate() {}
 
     override fun init() {
         val window = MinecraftClient.getInstance().window
@@ -35,6 +37,11 @@ abstract class VuiScreen<R: Node>(title: Text): Screen(title) {
 
         vuiInit()
         super.init()
+    }
+
+    override fun render(matrices: MatrixStack?, mouseX: Int, mouseY: Int, delta: Float) {
+        vuiUpdate()
+        super.render(matrices, mouseX, mouseY, delta)
     }
 
     override fun mouseDragged(mouseX: Double, mouseY: Double, button: Int, deltaX: Double, deltaY: Double): Boolean {

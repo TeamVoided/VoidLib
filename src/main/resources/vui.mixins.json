@@ -1,6 +1,8 @@
 {
   "package": "org.teamvoided.voidlib.vui.mixin",
   "client": [
+    "DrawableHelperInvoker",
+    "MixinGameRenderer",
     "MixinMinecraftClient",
     "MixinShaderProgram",
     "ScreenInvoker",

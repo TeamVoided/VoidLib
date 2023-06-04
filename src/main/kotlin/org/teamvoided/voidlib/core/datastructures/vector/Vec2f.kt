@@ -3,6 +3,8 @@ package org.teamvoided.voidlib.core.datastructures.vector
 import kotlinx.serialization.Serializable
 import net.minecraft.nbt.NbtCompound
 import org.joml.Math
+import org.teamvoided.voidlib.core.d
+import org.teamvoided.voidlib.core.i
 import kotlin.math.ceil
 
 @Serializable
@@ -49,7 +51,7 @@ data class Vec2f(var x: Float, var y: Float) {
         val totalValThis = this.x + this.y
         val totalValCompare = toCompare.x + toCompare.y
 
-        return ceil(totalValThis - totalValCompare).toInt()
+        return ceil(totalValThis - totalValCompare).i
     }
 
     fun add(x: Int, y: Int): Vec2f = Vec2f(x = this.x + x, y = this.y + y)
@@ -83,8 +85,8 @@ data class Vec2f(var x: Float, var y: Float) {
         return Vec2f(this.x, this.y)
     }
 
-    fun to2i() = Vec2i(x.toInt(), y.toInt())
-    fun to2d() = Vec2d(x.toDouble(), y.toDouble())
+    fun to2i() = Vec2i(x.i, y.i)
+    fun to2d() = Vec2d(x.d, y.d)
 
     fun toNbt(): NbtCompound {
         val compound = NbtCompound()

@@ -3,6 +3,8 @@ package org.teamvoided.voidlib.core.datastructures.vector
 import kotlinx.serialization.Serializable
 import net.minecraft.nbt.NbtCompound
 import org.joml.Math
+import org.teamvoided.voidlib.core.d
+import org.teamvoided.voidlib.core.f
 
 @Serializable
 data class Vec3i(var x: Int, var y: Int, var z: Int) {
@@ -80,8 +82,8 @@ data class Vec3i(var x: Int, var y: Int, var z: Int) {
         return Vec3i(this.x, this.y, this.z)
     }
 
-    fun to3f() = Vec3f(x.toFloat(), y.toFloat(), z.toFloat())
-    fun to3d() = Vec3d(x.toDouble(), y.toDouble(), z.toDouble())
+    fun to3f() = Vec3f(x.f, y.f, z.f)
+    fun to3d() = Vec3d(x.d, y.d, z.d)
 
     fun toNbt(): NbtCompound {
         val compound = NbtCompound()
