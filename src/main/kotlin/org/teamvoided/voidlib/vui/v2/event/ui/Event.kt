@@ -1,14 +1,15 @@
-package org.teamvoided.voidlib.vui.v2.event
+package org.teamvoided.voidlib.vui.v2.event.ui
 
 import net.minecraft.client.util.math.MatrixStack
-import org.teamvoided.voidlib.core.datastructures.Vec2i
+import org.teamvoided.voidlib.core.datastructures.vector.Vec2d
+import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
 
 sealed interface Event {
     sealed interface InputEvent: Event {
-        data class MousePressEvent(val pos: Vec2i, val button: Int): InputEvent
-        data class MouseReleaseEvent(val pos: Vec2i, val button: Int): InputEvent
-        data class MouseScrollEvent(val pos: Vec2i, val amount: Double): InputEvent
-        data class MouseDragEvent(val pos: Vec2i, val delta: Vec2i, val button: Int): InputEvent
+        data class MousePressEvent(val pos: Vec2d, val button: Int): InputEvent
+        data class MouseReleaseEvent(val pos: Vec2d, val button: Int): InputEvent
+        data class MouseScrollEvent(val pos: Vec2d, val amount: Double): InputEvent
+        data class MouseDragEvent(val pos: Vec2d, val delta: Vec2d, val button: Int): InputEvent
         data class KeyPressEvent(val keyCode: Int, val scanCode: Int, val modifiers: Int): InputEvent
         data class KeyReleaseEvent(val keyCode: Int, val scanCode: Int, val modifiers: Int): InputEvent
         data class CharTypedEvent(val char: Char, val modifiers: Int): InputEvent

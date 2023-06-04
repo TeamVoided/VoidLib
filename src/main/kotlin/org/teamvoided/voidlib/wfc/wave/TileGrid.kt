@@ -4,7 +4,7 @@ import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.BlockMirror
 import net.minecraft.util.BlockRotation
 import net.minecraft.util.math.BlockPos
-import org.teamvoided.voidlib.core.datastructures.Vec2i
+import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
 import org.teamvoided.voidlib.wfc.wave.structuregen.StructureGenerator
 import kotlin.random.Random
 

@@ -2,10 +2,10 @@ package org.teamvoided.voidlib.vui.v2.node
 
 import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.client.gui.DrawableHelper
-import org.teamvoided.voidlib.core.datastructures.Vec2i
+import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
 import org.teamvoided.voidlib.id
 import org.teamvoided.voidlib.vui.VuiSpriteManager
-import org.teamvoided.voidlib.vui.v2.event.Event
+import org.teamvoided.voidlib.vui.v2.event.ui.Event
 
 open class ExpandableNode(val arrowScale: Double) : Node() {
     var expanded = false
@@ -27,7 +27,7 @@ open class ExpandableNode(val arrowScale: Double) : Node() {
     override fun onMousePress(event: Event.InputEvent.MousePressEvent): Boolean {
         if (isDoubleClick()) {
             expanded = !expanded
-        } else if (isTouchingArrow(event.pos)) {
+        } else if (isTouchingArrow(event.pos.to2i())) {
             expanded = !expanded
         } else if (isTouching(event.pos)) {
             interval = clickInterval

@@ -3,9 +3,9 @@ package org.teamvoided.voidlib.vui.v2.node
 import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.texture.Sprite
-import org.teamvoided.voidlib.core.datastructures.Vec2i
-import org.teamvoided.voidlib.vui.v2.event.Event
-import org.teamvoided.voidlib.vui.v2.event.Event.InputEvent.MousePressEvent
+import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
+import org.teamvoided.voidlib.vui.v2.event.ui.Event
+import org.teamvoided.voidlib.vui.v2.event.ui.Event.InputEvent.MousePressEvent
 import java.util.*
 
 open class CheckBoxNode(defaultValue: Boolean, private val onSprite: Sprite, private val offSprite: Sprite): Node() {

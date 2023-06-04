@@ -21,11 +21,15 @@ fun interface Interpolator<T> {
 
         val colorInterpolator = Interpolator<ARGB> { start, end, delta, easing ->
             ARGB(
-                MathHelper.lerp(easing(delta), start.alpha, end.alpha),
-                MathHelper.lerp(easing(delta), start.red, end.red),
-                MathHelper.lerp(easing(delta), start.green, end.green),
-                MathHelper.lerp(easing(delta), start.blue, end.blue)
+                ubLerp(easing(delta), start.alpha, end.alpha),
+                ubLerp(easing(delta), start.red, end.red),
+                ubLerp(easing(delta), start.green, end.green),
+                ubLerp(easing(delta), start.blue, end.blue)
             )
+        }
+
+        fun ubLerp(delta: Float, start: UByte, end: UByte): UByte {
+            return (start + floor(delta * (end - start).toInt()).toUInt()).toUByte()
         }
 
         fun bLerp(delta: Float, start: Byte, end: Byte): Byte {

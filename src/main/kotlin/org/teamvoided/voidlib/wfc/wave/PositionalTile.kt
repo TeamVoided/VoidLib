@@ -1,7 +1,7 @@
 package org.teamvoided.voidlib.wfc.wave
 
 import net.minecraft.util.BlockRotation
-import org.teamvoided.voidlib.core.datastructures.Vec2i
+import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
 import java.util.*
 
 data class PositionalTile(val position: Vec2i, var tile: Tile?) {

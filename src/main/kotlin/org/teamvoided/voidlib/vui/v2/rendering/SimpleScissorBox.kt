@@ -1,7 +1,7 @@
 package org.teamvoided.voidlib.vui.v2.rendering
 
 import com.mojang.blaze3d.systems.RenderSystem
-import org.teamvoided.voidlib.core.datastructures.Vec2i
+import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
 
 class SimpleScissorBox(override val pos: Vec2i, override val size: Vec2i): ScissorBox() {
     override fun subBox(pos: Vec2i, size: Vec2i): ScissorBox {

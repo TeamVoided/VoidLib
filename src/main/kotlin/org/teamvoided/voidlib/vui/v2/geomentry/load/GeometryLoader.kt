@@ -1,4 +1,4 @@
-package org.teamvoided.voidlib.cresm.loader
+package org.teamvoided.voidlib.vui.v2.geomentry.load
 
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -6,12 +6,15 @@ import net.minecraft.resource.Resource
 import net.minecraft.resource.ResourceManager
 import net.minecraft.resource.metadata.ResourceMetadata
 import net.minecraft.util.Identifier
+import org.teamvoided.voidlib.vui.v2.geomentry.Geometry
 import java.io.BufferedReader
 import java.io.InputStream
 import java.nio.ByteBuffer
 
-fun interface CResMSingleLoader {
-    suspend fun loadResource(id: Identifier, manager: ResourceManager)
+interface GeometryLoader {
+    fun canLoad(id: Identifier, manager: ResourceManager): Boolean
+
+    fun load(id: Identifier, manager: ResourceManager): Geometry?
 
     fun parseJson(id: Identifier, manager: ResourceManager): JsonObject {
         return getGson().fromJson(getResourceFileReader(id, manager), JsonObject::class.java)

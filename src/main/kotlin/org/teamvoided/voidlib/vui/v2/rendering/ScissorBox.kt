@@ -1,6 +1,6 @@
 package org.teamvoided.voidlib.vui.v2.rendering
 
-import org.teamvoided.voidlib.core.datastructures.Vec2i
+import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
 import kotlin.math.min
 
 abstract class ScissorBox {

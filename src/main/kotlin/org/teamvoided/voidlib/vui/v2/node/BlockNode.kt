@@ -10,8 +10,8 @@ import net.minecraft.client.render.LightmapTextureManager
 import net.minecraft.client.render.OverlayTexture
 import net.minecraft.util.math.RotationAxis
 import org.joml.Vector3f
-import org.teamvoided.voidlib.core.datastructures.Vec2i
-import org.teamvoided.voidlib.vui.v2.event.Event.LogicalEvent.DrawEvent
+import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
+import org.teamvoided.voidlib.vui.v2.event.ui.Event.LogicalEvent.DrawEvent
 
 
 class BlockNode(val state: BlockState, val entity: BlockEntity? = null): Node() {

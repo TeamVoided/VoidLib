@@ -1,13 +1,15 @@
 package org.teamvoided.voidlib.vui.v2.node
 
 import net.minecraft.nbt.NbtCompound
-import org.teamvoided.voidlib.core.datastructures.Vec2i
-import org.teamvoided.voidlib.vui.v2.event.Event.InputEvent
-import org.teamvoided.voidlib.vui.v2.event.Event.InputEvent.*
-import org.teamvoided.voidlib.vui.v2.event.Event.LogicalEvent.*
-import org.teamvoided.voidlib.vui.v2.event.Event.LogicalEventContext
-import org.teamvoided.voidlib.vui.v2.event.Event.LogicalEventContext.DrawContext
-import org.teamvoided.voidlib.vui.v2.event.Event.LogicalEventContext.UpdateContext
+import org.teamvoided.voidlib.core.datastructures.vector.Vec2d
+import org.teamvoided.voidlib.core.datastructures.vector.Vec2f
+import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
+import org.teamvoided.voidlib.vui.v2.event.ui.Event.InputEvent
+import org.teamvoided.voidlib.vui.v2.event.ui.Event.InputEvent.*
+import org.teamvoided.voidlib.vui.v2.event.ui.Event.LogicalEvent.*
+import org.teamvoided.voidlib.vui.v2.event.ui.Event.LogicalEventContext
+import org.teamvoided.voidlib.vui.v2.event.ui.Event.LogicalEventContext.DrawContext
+import org.teamvoided.voidlib.vui.v2.event.ui.Event.LogicalEventContext.UpdateContext
 import java.util.*
 
 abstract class Node() {
@@ -93,6 +95,16 @@ abstract class Node() {
     }
 
     fun isTouching(point: Vec2i): Boolean {
+        return point.x >= this.globalPos.x && point.x <= this.globalPos.x + size.x &&
+                point.y >= this.globalPos.y && point.y <= this.globalPos.y + size.y
+    }
+
+    fun isTouching(point: Vec2f): Boolean {
+        return point.x >= this.globalPos.x && point.x <= this.globalPos.x + size.x &&
+                point.y >= this.globalPos.y && point.y <= this.globalPos.y + size.y
+    }
+
+    fun isTouching(point: Vec2d): Boolean {
         return point.x >= this.globalPos.x && point.x <= this.globalPos.x + size.x &&
                 point.y >= this.globalPos.y && point.y <= this.globalPos.y + size.y
     }

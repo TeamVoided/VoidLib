@@ -1,7 +1,7 @@
 package org.teamvoided.voidlib.vui.v2.node
 
-import org.teamvoided.voidlib.core.datastructures.Vec2i
-import org.teamvoided.voidlib.vui.v2.event.Event.InputEvent.*
+import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
+import org.teamvoided.voidlib.vui.v2.event.ui.Event.InputEvent.*
 
 
 open class MovableNode(val node: Node): Node() {
@@ -18,7 +18,7 @@ open class MovableNode(val node: Node): Node() {
     override fun onMousePress(event: MousePressEvent): Boolean {
         if (isTouching(event.pos)) {
             selected = true
-            offset = (event.pos - this.globalPos)
+            offset = (event.pos.to2i() - this.globalPos)
 
             return false
         }
@@ -33,9 +33,9 @@ open class MovableNode(val node: Node): Node() {
 
     override fun onMouseDrag(event: MouseDragEvent): Boolean {
         if (selected) {
-            val nPos = (event.pos - offset + event.delta)
-            this.globalPos = nPos.copy()
-            node.globalPos = nPos.copy()
+            val nPos = (event.pos.to2i() - offset + event.delta.to2i())
+            this.globalPos = nPos
+            node.globalPos = nPos
 
             return false
         }

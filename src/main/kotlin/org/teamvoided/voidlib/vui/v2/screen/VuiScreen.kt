@@ -4,10 +4,12 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.Text
-import org.teamvoided.voidlib.core.datastructures.Vec2i
-import org.teamvoided.voidlib.vui.v2.event.Event.InputEvent
-import org.teamvoided.voidlib.vui.v2.event.Event.LogicalEventContext.DrawContext
-import org.teamvoided.voidlib.vui.v2.event.Event.LogicalEventContext.UpdateContext
+import org.teamvoided.voidlib.core.datastructures.vector.Vec2d
+import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
+import org.teamvoided.voidlib.vui.v2.event.fabric.WindowResizeCallback
+import org.teamvoided.voidlib.vui.v2.event.ui.Event.InputEvent
+import org.teamvoided.voidlib.vui.v2.event.ui.Event.LogicalEventContext.DrawContext
+import org.teamvoided.voidlib.vui.v2.event.ui.Event.LogicalEventContext.UpdateContext
 import org.teamvoided.voidlib.vui.v2.node.Node
 
 abstract class VuiScreen(title: Text): Screen(title) {
@@ -20,6 +22,9 @@ abstract class VuiScreen(title: Text): Screen(title) {
         val window = MinecraftClient.getInstance().window
         oldScaleFactor = window.scaleFactor
         window.scaleFactor = 3.0
+        WindowResizeCallback.event.register { cl, w ->
+            resize(cl, w.scaledWidth, w.scaledHeight)
+        }
         vuiInit()
         super.init()
     }
@@ -32,22 +37,22 @@ abstract class VuiScreen(title: Text): Screen(title) {
     }
 
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
-        parent.dispatchInputEvent(InputEvent.MousePressEvent(Vec2i(mouseX.toInt(), mouseY.toInt()), button))
+        parent.dispatchInputEvent(InputEvent.MousePressEvent(Vec2d(mouseX, mouseY), button))
         return super.mouseClicked(mouseX, mouseY, button)
     }
 
     override fun mouseReleased(mouseX: Double, mouseY: Double, button: Int): Boolean {
-        parent.dispatchInputEvent(InputEvent.MouseReleaseEvent(Vec2i(mouseX.toInt(), mouseY.toInt()), button))
+        parent.dispatchInputEvent(InputEvent.MouseReleaseEvent(Vec2d(mouseX, mouseY), button))
         return super.mouseReleased(mouseX, mouseY, button)
     }
 
     override fun mouseScrolled(mouseX: Double, mouseY: Double, amount: Double): Boolean {
-        parent.dispatchInputEvent(InputEvent.MouseScrollEvent(Vec2i(mouseX.toInt(), mouseY.toInt()), amount))
+        parent.dispatchInputEvent(InputEvent.MouseScrollEvent(Vec2d(mouseX, mouseY), amount))
         return super.mouseScrolled(mouseX, mouseY, amount)
     }
 
     override fun mouseDragged(mouseX: Double, mouseY: Double, button: Int, deltaX: Double, deltaY: Double): Boolean {
-        parent.dispatchInputEvent(InputEvent.MouseDragEvent(Vec2i(mouseX.toInt(), mouseY.toInt()), Vec2i(deltaX.toInt(), deltaY.toInt()), button))
+        parent.dispatchInputEvent(InputEvent.MouseDragEvent(Vec2d(mouseX, mouseY), Vec2d(deltaX, deltaY), button))
         return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY)
     }
 

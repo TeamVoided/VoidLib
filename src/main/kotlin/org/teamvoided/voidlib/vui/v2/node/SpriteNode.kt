@@ -3,9 +3,9 @@ package org.teamvoided.voidlib.vui.v2.node
 import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.texture.Sprite
-import org.teamvoided.voidlib.core.datastructures.Vec2i
-import org.teamvoided.voidlib.core.datastructures.Vec3i
-import org.teamvoided.voidlib.vui.v2.event.Event
+import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
+import org.teamvoided.voidlib.core.datastructures.vector.Vec3i
+import org.teamvoided.voidlib.vui.v2.event.ui.Event
 
 open class SpriteNode(val sprite: () -> Sprite) : Node() {
     private var z: Int = 0

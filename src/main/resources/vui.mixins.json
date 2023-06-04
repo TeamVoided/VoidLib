@@ -1,4 +1,9 @@
 {
   "package": "org.teamvoided.voidlib.vui.mixin",
-  "client": [ ]
+  "client": [
+    "MixinMinecraftClient",
+    "MixinShaderProgram",
+    "ScreenInvoker",
+    "ShaderProgramAccessor"
+  ]
 }
