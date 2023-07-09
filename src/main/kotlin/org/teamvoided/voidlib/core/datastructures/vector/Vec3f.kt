@@ -3,8 +3,7 @@ package org.teamvoided.voidlib.core.datastructures.vector
 import kotlinx.serialization.Serializable
 import net.minecraft.nbt.NbtCompound
 import org.joml.Math
-import org.teamvoided.voidlib.core.d
-import org.teamvoided.voidlib.core.i
+import org.teamvoided.voidlib.core.*
 import kotlin.math.ceil
 
 @Serializable
@@ -33,19 +32,19 @@ data class Vec3f(var x: Float, var y: Float, var z: Float) {
     }
 
     operator fun plus(toAdd: Vec3f): Vec3f = Vec3f(x = (this.x + toAdd.x), y = (this.y + toAdd.y), z = (this.z + toAdd.z))
-    operator fun plus(toAdd: Float): Vec3f = Vec3f(x = (this.x + toAdd), y = (this.y + toAdd), z = (this.z + toAdd))
+    operator fun plus(toAdd: Number): Vec3f = Vec3f(x = (this.x + toAdd).f, y = (this.y + toAdd).f, z = (this.z + toAdd).f)
 
     operator fun minus(toSubtract: Vec3f): Vec3f = Vec3f(x = (this.x - toSubtract.x), y = (this.y - toSubtract.y), z = (this.z - toSubtract.z))
-    operator fun minus(toSubtract: Float): Vec3f = Vec3f(x = (this.x - toSubtract), y = (this.y - toSubtract), z = (this.z - toSubtract))
+    operator fun minus(toSubtract: Number): Vec3f = Vec3f(x = (this.x - toSubtract).f, y = (this.y - toSubtract).f, z = (this.z - toSubtract).f)
 
     operator fun times(toMultiply: Vec3f): Vec3f = Vec3f(x = (this.x * toMultiply.x), y = (this.y * toMultiply.y), z = (this.z * toMultiply.z))
-    operator fun times(toMultiply: Float): Vec3f = Vec3f(x = (this.x * toMultiply), y = (this.y * toMultiply), z = (this.z * toMultiply))
+    operator fun times(toMultiply: Number): Vec3f = Vec3f(x = (this.x * toMultiply.d).f, y = (this.y * toMultiply.d).f, z = (this.z * toMultiply.d).f)
 
     operator fun div(toDivide: Vec3f): Vec3f = Vec3f(x = (this.x / toDivide.x), y = (this.y / toDivide.y), z = (this.z / toDivide.z))
-    operator fun div(toDivide: Float): Vec3f = Vec3f(x = (this.x / toDivide), y = (this.y / toDivide), z = (this.z / toDivide))
+    operator fun div(toDivide: Number): Vec3f = Vec3f(x = (this.x / toDivide).f, y = (this.y / toDivide).f, z = (this.z / toDivide).f)
 
     operator fun rem(toRem: Vec3f): Vec3f = Vec3f(x = (this.x % toRem.x), y = (this.y % toRem.y), z = (this.z % toRem.z))
-    operator fun rem(toRem: Float): Vec3f = Vec3f(x = (this.x % toRem), y = (this.y % toRem), z = (this.z % toRem))
+    operator fun rem(toRem: Number): Vec3f = Vec3f(x = (this.x % toRem).f, y = (this.y % toRem).f, z = (this.z % toRem).f)
 
     operator fun contains(int: Float): Boolean = this.x == int || this.y == int || this.z == int
 

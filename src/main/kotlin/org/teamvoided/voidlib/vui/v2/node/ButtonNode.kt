@@ -11,14 +11,19 @@ import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
 import org.teamvoided.voidlib.core.datastructures.vector.Vec3i
 import org.teamvoided.voidlib.id
 import org.teamvoided.voidlib.vui.VuiSpriteManager
+import org.teamvoided.voidlib.vui.v2.event.Callback
 import org.teamvoided.voidlib.vui.v2.event.ui.Event
+import org.teamvoided.voidlib.vui.v2.node.ButtonNode.Renderer
 import org.teamvoided.voidlib.vui.v2.rendering.Pencil
 import org.teamvoided.voidlib.vui.v2.screen.cursor.CursorStyle
 
-open class ButtonNode(var message: Text, var renderer: Renderer = Renderer.VANILLA, var onPress: (ButtonNode) -> Unit): Node() {
+open class ButtonNode(var message: Text, var renderer: Renderer = Renderer.VANILLA): Node() {
     var active = true
     var textShadow = true
     var hovered = false
+
+    val buttonPressCallback: Callback<ButtonNode>
+        get() = getCallbackAs(id("button_press_callback"))
 
     companion object {
         val ACTIVE_TEXTURE = id("vres/button/active")
@@ -26,32 +31,36 @@ open class ButtonNode(var message: Text, var renderer: Renderer = Renderer.VANIL
         val DISABLED_TEXTURE = id("vres/button/disabled")
     }
 
-    constructor(pos: Vec2i, message: Text, onPress: (ButtonNode) -> Unit): this(message, Renderer.VANILLA, onPress) {
+    constructor(pos: Vec2i, message: Text): this(message, Renderer.VANILLA) {
         this.pos = pos
     }
 
-    constructor(pos: Vec2i, size: Vec2i, message: Text, onPress: (ButtonNode) -> Unit): this(message, Renderer.VANILLA, onPress) {
-        this.pos = pos
-        this.size = size
-    }
-
-    constructor(pos: Vec2i, message: Text, renderer: Renderer, onPress: (ButtonNode) -> Unit): this(message, renderer, onPress) {
-        this.pos = pos
-    }
-
-    constructor(pos: Vec2i, size: Vec2i, message: Text, renderer: Renderer, onPress: (ButtonNode) -> Unit): this(message, renderer, onPress) {
+    constructor(pos: Vec2i, size: Vec2i, message: Text): this(message, Renderer.VANILLA) {
         this.pos = pos
         this.size = size
     }
 
-    override fun onMousePress(event: Event.InputEvent.MousePressEvent): Boolean {
-        if (hovered) onPress(this)
+    constructor(pos: Vec2i, message: Text, renderer: Renderer): this(message, renderer) {
+        this.pos = pos
+    }
 
-        return false
+    constructor(pos: Vec2i, size: Vec2i, message: Text, renderer: Renderer): this(message, renderer) {
+        this.pos = pos
+        this.size = size
+    }
+
+    override fun onMousePress(event: Event.InputEvent.MousePressEvent) {
+        if (hovered) {
+            buttonPressCallback(this)
+            event.cancel()
+        }
     }
 
     override fun update(event: Event.LogicalEvent.UpdateEvent) {
-        hovered = isTouching(event.updateContext.mousePos)
+        event.ensurePreChild {
+            val parent = parent()
+            hovered = isTouching(event.updateContext.mousePos) && ((parent != null && parent.childAt(event.updateContext.mousePos) == this) || (parent == null))
+        }
     }
 
     override fun draw(event: Event.LogicalEvent.DrawEvent) {
@@ -69,7 +78,7 @@ open class ButtonNode(var message: Text, var renderer: Renderer = Renderer.VANIL
     }
 
     override fun cursorStyle(): CursorStyle {
-        return if (hovered) CursorStyle.HAND else CursorStyle.NONE
+        return if (hovered) CursorStyle.HAND else CursorStyle.POINTER
     }
 
     fun interface Renderer {

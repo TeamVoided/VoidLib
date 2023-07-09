@@ -14,7 +14,7 @@ import org.teamvoided.voidlib.vui.v2.animation.EasingFunction
 import org.teamvoided.voidlib.vui.v2.animation.Interpolator
 import org.teamvoided.voidlib.vui.v2.shader.GlProgram
 
-class Vui: LibModule("vui") {
+class Vui: LibModule(id("vui")) {
     companion object {
         val hsvProgram = GlProgram(id("hsv"), VertexFormats.POSITION_COLOR)
 

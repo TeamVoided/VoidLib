@@ -9,7 +9,7 @@ import net.minecraft.util.Identifier
 import org.jetbrains.annotations.ApiStatus
 import org.teamvoided.voidlib.vui.mixin.ShaderProgramAccessor
 import java.io.IOException
-import java.util.LinkedList
+import java.util.*
 
 
 open class GlProgram(id: Identifier, vertexFormat: VertexFormat) {

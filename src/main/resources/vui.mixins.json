@@ -2,6 +2,7 @@
   "package": "org.teamvoided.voidlib.vui.mixin",
   "client": [
     "DrawableHelperInvoker",
+    "MixinEntityRendererDispatcher",
     "MixinGameRenderer",
     "MixinMinecraftClient",
     "MixinShaderProgram",

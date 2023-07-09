@@ -3,12 +3,13 @@ package org.teamvoided.voidlib.pow
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback
 import org.teamvoided.voidlib.core.LibModule
+import org.teamvoided.voidlib.id
 import org.teamvoided.voidlib.pow.client.gui.EnergyBarTooltipComponent
 import org.teamvoided.voidlib.pow.command.SetEnergyCommand
 import org.teamvoided.voidlib.pow.energy.EnergyUnits
 import java.text.DecimalFormat
 
-class Pow : LibModule("Pow") {
+class Pow : LibModule(id("pow")) {
     companion object {
         fun formatDouble(d: Double, maximumFractionalDigits: Int): String {
             val format = DecimalFormat()

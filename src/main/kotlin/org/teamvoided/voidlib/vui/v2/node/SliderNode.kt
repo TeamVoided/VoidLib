@@ -3,11 +3,8 @@ package org.teamvoided.voidlib.vui.v2.node
 import net.minecraft.client.gui.widget.SliderWidget
 import net.minecraft.text.Text
 import net.minecraft.util.math.MathHelper
-import org.teamvoided.voidlib.LOGGER
-import org.teamvoided.voidlib.core.d
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2d
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
-import org.teamvoided.voidlib.core.f
 import org.teamvoided.voidlib.core.str
 import org.teamvoided.voidlib.vui.v2.event.ui.Event
 import java.math.BigDecimal
@@ -19,7 +16,7 @@ open class SliderNode(): Node() {
 
     var scrollStep = 0.05
 
-    var messageProvider: (String) -> Text = {
+    open var messageProvider: (String) -> Text = {
         val format = DecimalFormat("0.000")
         val formatted = format.format(BigDecimal(it))
 
@@ -68,34 +65,31 @@ open class SliderNode(): Node() {
         slider?.render(event.drawContext.matrices, event.drawContext.mousePos.x, event.drawContext.mousePos.y, event.drawContext.delta)
     }
 
-    override fun onMousePress(event: Event.InputEvent.MousePressEvent): Boolean {
+    override fun onMousePress(event: Event.InputEvent.MousePressEvent) {
         if (isMouseOver) {
             slider?.onClick(event.pos.x, event.pos.y)
-            return false
+            event.cancel()
         }
-        return true
     }
 
-    override fun onKeyPress(event: Event.InputEvent.KeyPressEvent): Boolean {
-        return slider?.keyPressed(event.keyCode, event.scanCode, event.modifiers) ?: true
+    override fun onKeyPress(event: Event.InputEvent.KeyPressEvent) {
+        if (slider?.keyPressed(event.keyCode, event.scanCode, event.modifiers) != false) {
+            event.cancel()
+        }
     }
 
-    override fun onMouseDrag(event: Event.InputEvent.MouseDragEvent): Boolean {
+    override fun onMouseDrag(event: Event.InputEvent.MouseDragEvent) {
         if (isMouseOver) {
             slider?.void_onDrag(event.pos, event.delta)
-            return false
+            event.cancel()
         }
-
-        return true
     }
 
-    override fun onMouseScroll(event: Event.InputEvent.MouseScrollEvent): Boolean {
+    override fun onMouseScroll(event: Event.InputEvent.MouseScrollEvent) {
         if (isMouseOver) {
             slider?.void_setValue(this.value + (this.scrollStep * event.amount))
-            return false
+            event.cancel()
         }
-
-        return true
     }
 
     open class VoidSlider(val pos: Vec2i, val size: Vec2i, val node: SliderNode): SliderWidget(pos.x, pos.y, size.x, size.y, Text.literal("0.0"), 0.0) {

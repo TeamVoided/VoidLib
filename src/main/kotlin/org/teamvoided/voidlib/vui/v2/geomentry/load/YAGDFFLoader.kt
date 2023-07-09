@@ -5,13 +5,12 @@ import net.minecraft.util.Identifier
 import org.teamvoided.voidlib.LOGGER
 import org.teamvoided.voidlib.core.*
 import org.teamvoided.voidlib.core.datastructures.ListPartition
-import org.teamvoided.voidlib.core.datastructures.vector.Vec3d
 import org.teamvoided.voidlib.core.datastructures.vector.Vec3f
 import org.teamvoided.voidlib.core.datastructures.vector.Vec4d
 import org.teamvoided.voidlib.vui.v2.geomentry.Face
 import org.teamvoided.voidlib.vui.v2.geomentry.Geometry
 import java.nio.ByteBuffer
-import java.util.LinkedList
+import java.util.*
 
 open class YAGDFFLoader: GeometryLoader {
     companion object {

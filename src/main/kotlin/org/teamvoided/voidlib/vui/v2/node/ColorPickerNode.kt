@@ -29,7 +29,7 @@ open class ColorPickerNode(): Node() {
     var selectorPadding = 10
     var showAlpha = false
 
-    private var isMouseOver = false
+    private var hovered = false
 
     constructor(pos: Vec2i): this() {
         this.pos = pos
@@ -41,7 +41,10 @@ open class ColorPickerNode(): Node() {
     }
 
     override fun update(event: Event.LogicalEvent.UpdateEvent) {
-        isMouseOver = isTouching(event.updateContext.mousePos)
+        event.ensurePreChild {
+            val parent = parent()
+            hovered = isTouching(event.updateContext.mousePos) && ((parent != null && parent.childAt(event.updateContext.mousePos) == this) || (parent == null))
+        }
     }
 
     override fun draw(event: Event.LogicalEvent.DrawEvent) {
@@ -67,7 +70,7 @@ open class ColorPickerNode(): Node() {
             Vec2i((renderX() + (saturation * colorAreaWidth()) - 1).i, (renderY() + ((1 - value) * (renderHeight() - 1)) - 1).i),
             Vec2i(3, 3),
             ARGB(255, 255, 255)
-        );
+        )
 
         Pencil.drawSpectrum(matrices, Vec2f(renderX().f + hueSelectorX(), renderY().f), Vec2f(selectorWidth.f, renderHeight().f), true)
         Pencil.drawRectOutline(
@@ -95,18 +98,22 @@ open class ColorPickerNode(): Node() {
         }
     }
 
-    override fun onMousePress(event: Event.InputEvent.MousePressEvent): Boolean {
-        if (isMouseOver) updateFromMouse(event.pos)
-        return true
+    override fun onMousePress(event: Event.InputEvent.MousePressEvent) {
+        if (hovered) {
+            updateFromMouse(event.pos)
+            event.cancel()
+        }
     }
 
-    override fun onMouseDrag(event: Event.InputEvent.MouseDragEvent): Boolean {
-        if (isMouseOver) updateFromMouse(event.pos + event.delta)
-        return true
+    override fun onMouseDrag(event: Event.InputEvent.MouseDragEvent) {
+        if (hovered) {
+            updateFromMouse(event.pos + event.delta)
+            event.cancel()
+        }
     }
 
     override fun cursorStyle(): CursorStyle {
-        return if (isMouseOver) CursorStyle.HAND else CursorStyle.NONE
+        return if (hovered) CursorStyle.HAND else CursorStyle.POINTER
     }
 
     fun updateFromMouse(mousePos: Vec2d) {

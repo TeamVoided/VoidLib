@@ -2,9 +2,8 @@ package org.teamvoided.voidlib.core.datastructures
 
 import org.teamvoided.voidlib.core.d
 import org.teamvoided.voidlib.core.i
-import java.util.LinkedList
+import java.util.*
 import kotlin.math.ceil
-import kotlin.math.min
 
 
 open class ListPartition<T>(protected val list: List<T>, val chunkSize: Int): List<List<T>> {

@@ -3,8 +3,7 @@ package org.teamvoided.voidlib.core.datastructures.vector
 import kotlinx.serialization.Serializable
 import net.minecraft.nbt.NbtCompound
 import org.joml.Math
-import org.teamvoided.voidlib.core.d
-import org.teamvoided.voidlib.core.f
+import org.teamvoided.voidlib.core.*
 
 @Serializable
 data class Vec3i(var x: Int, var y: Int, var z: Int) {
@@ -32,19 +31,19 @@ data class Vec3i(var x: Int, var y: Int, var z: Int) {
     }
 
     operator fun plus(toAdd: Vec3i): Vec3i = Vec3i(x = (this.x + toAdd.x), y = (this.y + toAdd.y), z = (this.z + toAdd.z))
-    operator fun plus(toAdd: Int): Vec3i = Vec3i(x = (this.x + toAdd), y = (this.y + toAdd), z = (this.z + toAdd))
+    operator fun plus(toAdd: Number): Vec3i = Vec3i(x = (this.x + toAdd).i, y = (this.y + toAdd).i, z = (this.z + toAdd).i)
 
     operator fun minus(toSubtract: Vec3i): Vec3i = Vec3i(x = (this.x - toSubtract.x), y = (this.y - toSubtract.y), z = (this.z - toSubtract.z))
-    operator fun minus(toSubtract: Int): Vec3i = Vec3i(x = (this.x - toSubtract), y = (this.y - toSubtract), z = (this.z - toSubtract))
+    operator fun minus(toSubtract: Number): Vec3i = Vec3i(x = (this.x - toSubtract).i, y = (this.y - toSubtract).i, z = (this.z - toSubtract).i)
 
     operator fun times(toMultiply: Vec3i): Vec3i = Vec3i(x = (this.x * toMultiply.x), y = (this.y * toMultiply.y), z = (this.z * toMultiply.z))
-    operator fun times(toMultiply: Int): Vec3i = Vec3i(x = (this.x * toMultiply), y = (this.y * toMultiply), z = (this.z * toMultiply))
+    operator fun times(toMultiply: Number): Vec3i = Vec3i(x = (this.x * toMultiply.d).i, y = (this.y * toMultiply.d).i, z = (this.z * toMultiply.d).i)
 
     operator fun div(toDivide: Vec3i): Vec3i = Vec3i(x = (this.x / toDivide.x), y = (this.y / toDivide.y), z = (this.z / toDivide.z))
-    operator fun div(toDivide: Int): Vec3i = Vec3i(x = (this.x / toDivide), y = (this.y / toDivide), z = (this.z / toDivide))
+    operator fun div(toDivide: Number): Vec3i = Vec3i(x = (this.x / toDivide).i, y = (this.y / toDivide).i, z = (this.z / toDivide).i)
 
     operator fun rem(toRem: Vec3i): Vec3i = Vec3i(x = (this.x % toRem.x), y = (this.y % toRem.y), z = (this.z % toRem.z))
-    operator fun rem(toRem: Int): Vec3i = Vec3i(x = (this.x % toRem), y = (this.y % toRem), z = (this.z % toRem))
+    operator fun rem(toRem: Number): Vec3i = Vec3i(x = (this.x % toRem).i, y = (this.y % toRem).i, z = (this.z % toRem).i)
 
     operator fun contains(int: Int): Boolean = this.x == int || this.y == int || this.z == int
 

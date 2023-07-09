@@ -3,8 +3,7 @@ package org.teamvoided.voidlib.core.datastructures.vector
 import kotlinx.serialization.Serializable
 import net.minecraft.nbt.NbtCompound
 import org.joml.Math
-import org.teamvoided.voidlib.core.f
-import org.teamvoided.voidlib.core.i
+import org.teamvoided.voidlib.core.*
 import kotlin.math.ceil
 
 @Serializable
@@ -31,19 +30,19 @@ data class Vec2d(var x: Double, var y: Double) {
     }
 
     operator fun plus(toAdd: Vec2d): Vec2d = Vec2d(x = (this.x + toAdd.x), y = (this.y + toAdd.y))
-    operator fun plus(toAdd: Double): Vec2d = Vec2d(x = (this.x + toAdd), y = (this.y + toAdd))
+    operator fun plus(toAdd: Number): Vec2d = Vec2d(x = (this.x + toAdd), y = (this.y + toAdd))
 
     operator fun minus(toSubtract: Vec2d): Vec2d = Vec2d(x = (this.x - toSubtract.x), y = (this.y - toSubtract.y))
-    operator fun minus(toSubtract: Double): Vec2d = Vec2d(x = (this.x - toSubtract), y = (this.y - toSubtract))
+    operator fun minus(toSubtract: Number): Vec2d = Vec2d(x = (this.x - toSubtract), y = (this.y - toSubtract))
 
     operator fun times(toMultiply: Vec2d): Vec2d = Vec2d(x = (this.x * toMultiply.x), y = (this.y * toMultiply.y))
-    operator fun times(toMultiply: Double): Vec2d = Vec2d(x = (this.x * toMultiply), y = (this.y * toMultiply))
+    operator fun times(toMultiply: Number): Vec2d = Vec2d(x = (this.x * toMultiply), y = (this.y * toMultiply))
 
     operator fun div(toDivide: Vec2d): Vec2d = Vec2d(x = (this.x / toDivide.x), y = (this.y / toDivide.y))
-    operator fun div(toDivide: Double): Vec2d = Vec2d(x = (this.x / toDivide), y = (this.y / toDivide))
+    operator fun div(toDivide: Number): Vec2d = Vec2d(x = (this.x / toDivide), y = (this.y / toDivide))
 
     operator fun rem(toRem: Vec2d): Vec2d = Vec2d(x = (this.x % toRem.x), y = (this.y % toRem.y))
-    operator fun rem(toRem: Double): Vec2d = Vec2d(x = (this.x % toRem), y = (this.y % toRem))
+    operator fun rem(toRem: Number): Vec2d = Vec2d(x = (this.x % toRem), y = (this.y % toRem))
 
     operator fun contains(int: Double): Boolean = this.x == int || this.y == int
 

@@ -3,9 +3,7 @@ package org.teamvoided.voidlib.core.datastructures.vector
 import kotlinx.serialization.Serializable
 import net.minecraft.nbt.NbtCompound
 import org.joml.Math
-import org.teamvoided.voidlib.core.d
-import org.teamvoided.voidlib.core.f
-import org.teamvoided.voidlib.core.i
+import org.teamvoided.voidlib.core.*
 
 @Serializable
 data class Vec2i(var x: Int, var y: Int) {
@@ -31,19 +29,19 @@ data class Vec2i(var x: Int, var y: Int) {
     }
 
     operator fun plus(toAdd: Vec2i): Vec2i = Vec2i(x = (this.x + toAdd.x), y = (this.y + toAdd.y))
-    operator fun plus(toAdd: Int): Vec2i = Vec2i(x = (this.x + toAdd), y = (this.y + toAdd))
+    operator fun plus(toAdd: Number): Vec2i = Vec2i(x = (this.x + toAdd.d).i, y = (this.y + toAdd.d).i)
 
     operator fun minus(toSubtract: Vec2i): Vec2i = Vec2i(x = (this.x - toSubtract.x), y = (this.y - toSubtract.y))
-    operator fun minus(toSubtract: Int): Vec2i = Vec2i(x = (this.x - toSubtract), y = (this.y - toSubtract))
+    operator fun minus(toSubtract: Number): Vec2i = Vec2i(x = (this.x - toSubtract.d).i, y = (this.y - toSubtract.d).i)
 
     operator fun times(toMultiply: Vec2i): Vec2i = Vec2i(x = (this.x * toMultiply.x), y = (this.y * toMultiply.y))
-    operator fun times(toMultiply: Int): Vec2i = Vec2i(x = (this.x * toMultiply), y = (this.y * toMultiply))
+    operator fun times(toMultiply: Number): Vec2i = Vec2i(x = (this.x * toMultiply.d).i, y = (this.y * toMultiply.d).i)
 
     operator fun div(toDivide: Vec2i): Vec2i = Vec2i(x = (this.x / toDivide.x), y = (this.y / toDivide.y))
-    operator fun div(toDivide: Int): Vec2i = Vec2i(x = (this.x / toDivide), y = (this.y / toDivide))
+    operator fun div(toDivide: Number): Vec2i = Vec2i(x = (this.x / toDivide).i, y = (this.y / toDivide.d).i)
 
     operator fun rem(toRem: Vec2i): Vec2i = Vec2i(x = (this.x % toRem.x), y = (this.y % toRem.y))
-    operator fun rem(toRem: Int): Vec2i = Vec2i(x = (this.x % toRem), y = (this.y % toRem))
+    operator fun rem(toRem: Number): Vec2i = Vec2i(x = (this.x % toRem).i, y = (this.y % toRem).i)
 
     operator fun contains(int: Int): Boolean = this.x == int || this.y == int
 
@@ -53,8 +51,8 @@ data class Vec2i(var x: Int, var y: Int) {
 
         return (totalValThis - totalValCompare)
     }
-
     fun add(x: Int, y: Int): Vec2i = Vec2i(x = this.x + x, y = this.y + y)
+
     fun addAssign(x: Int, y: Int) {
         this.x += x
         this.y += y
@@ -84,8 +82,8 @@ data class Vec2i(var x: Int, var y: Int) {
     fun copy(): Vec2i {
         return Vec2i(this.x, this.y)
     }
-
     fun to2f() = Vec2f(x.f, y.f)
+
     fun to2d() = Vec2d(x.d, y.d)
 
     fun toNbt(): NbtCompound {

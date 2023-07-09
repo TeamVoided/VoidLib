@@ -4,15 +4,23 @@ import net.minecraft.client.util.math.MatrixStack
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2d
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
 
-sealed interface Event {
-    sealed interface InputEvent: Event {
-        data class MousePressEvent(val pos: Vec2d, val button: Int): InputEvent
-        data class MouseReleaseEvent(val pos: Vec2d, val button: Int): InputEvent
-        data class MouseScrollEvent(val pos: Vec2d, val amount: Double): InputEvent
-        data class MouseDragEvent(val pos: Vec2d, val delta: Vec2d, val button: Int): InputEvent
-        data class KeyPressEvent(val keyCode: Int, val scanCode: Int, val modifiers: Int): InputEvent
-        data class KeyReleaseEvent(val keyCode: Int, val scanCode: Int, val modifiers: Int): InputEvent
-        data class CharTypedEvent(val char: Char, val modifiers: Int): InputEvent
+sealed class Event {
+    private var canceled = false
+
+    fun cancel() {
+        canceled = true
+    }
+
+    fun canceled() = canceled
+
+    sealed class InputEvent: Event() {
+        data class MousePressEvent(val pos: Vec2d, val button: Int): InputEvent()
+        data class MouseReleaseEvent(val pos: Vec2d, val button: Int): InputEvent()
+        data class MouseScrollEvent(val pos: Vec2d, val amount: Double): InputEvent()
+        data class MouseDragEvent(val pos: Vec2d, val delta: Vec2d, val button: Int): InputEvent()
+        data class KeyPressEvent(val keyCode: Int, val scanCode: Int, val modifiers: Int): InputEvent()
+        data class KeyReleaseEvent(val keyCode: Int, val scanCode: Int, val modifiers: Int): InputEvent()
+        data class CharTypedEvent(val char: Char, val modifiers: Int): InputEvent()
     }
 
     sealed interface LogicalEventContext {
@@ -20,16 +28,12 @@ sealed interface Event {
             val matrices: MatrixStack,
             val mousePos: Vec2i,
             val partialTicks: Float,
-            val delta: Float,
-            @Deprecated(
-                message = "Kind of useless will be removed next version, always true.",
-                replaceWith = ReplaceWith("Draw the tooltip if the mouse is colliding with the node.")
-            ) val drawTooltip: Boolean
+            val delta: Float
         ): LogicalEventContext
         data class UpdateContext(val delta: Float, val mousePos: Vec2i): LogicalEventContext
     }
 
-    sealed class LogicalEvent(val state: State): Event {
+    sealed class LogicalEvent(val state: State): Event() {
         enum class State { PreChild, PostChild }
 
         class DrawEvent(val drawContext: LogicalEventContext.DrawContext, state: State): LogicalEvent(state)

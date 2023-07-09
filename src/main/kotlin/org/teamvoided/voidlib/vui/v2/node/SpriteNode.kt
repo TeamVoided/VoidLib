@@ -1,7 +1,6 @@
 package org.teamvoided.voidlib.vui.v2.node
 
 import com.mojang.blaze3d.systems.RenderSystem
-import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.texture.Sprite
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
 import org.teamvoided.voidlib.core.datastructures.vector.Vec3i

@@ -8,6 +8,7 @@ import org.teamvoided.voidlib.core.ARGB
 import org.teamvoided.voidlib.core.d
 import org.teamvoided.voidlib.core.datastructures.vector.*
 import org.teamvoided.voidlib.id
+import org.teamvoided.voidlib.vui.v2.data.Padding
 import kotlin.math.floor
 
 fun interface Interpolator<T> {
@@ -81,6 +82,15 @@ fun interface Interpolator<T> {
                 MathHelper.lerp(easing(delta), start.red, end.red),
                 MathHelper.lerp(easing(delta), start.green, end.green),
                 MathHelper.lerp(easing(delta), start.blue, end.blue)
+            )
+        }
+
+        val paddingInterpolator = Interpolator<Padding> { start, end, delta, easing ->
+            Padding(
+                MathHelper.lerp(easing(delta), start.top, end.top),
+                MathHelper.lerp(easing(delta), start.bottom, end.bottom),
+                MathHelper.lerp(easing(delta), start.left, end.left),
+                MathHelper.lerp(easing(delta), start.right, end.right)
             )
         }
 

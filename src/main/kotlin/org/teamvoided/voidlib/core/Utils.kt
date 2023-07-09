@@ -97,10 +97,18 @@ val Number.c get() = toChar()
 val Number.bool get() = i != 0
 val Number.str get() = toString()
 
+operator fun Number.unaryPlus(): Double = + this.d
+operator fun Number.unaryMinus(): Double = -this.d
+operator fun Number.plus(number: Number): Double = this.d + number.d
+operator fun Number.minus(number: Number): Double = this.d - number.d
+operator fun Number.times(number: Number): Double = this.d * number.d
+operator fun Number.div(number: Number): Double = this.d / number.d
+operator fun Number.rem(number: Number): Double = this.d % number.d
+
 val String.f get() = toFloat()
 val String.b get() = toByte()
 val String.d get() = toDouble()
-val String.i get() = if (startsWith("0x")) java.lang.Integer.parseInt(substring(2), 16) else toInt()
+val String.i get() = if (startsWith("0x")) Integer.parseInt(substring(2), 16) else toInt()
 val String.L
     get() = try {
         if (startsWith("0x"))

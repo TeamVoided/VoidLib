@@ -4,9 +4,10 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper
 import org.slf4j.LoggerFactory
 import org.teamvoided.voidlib.core.LibModule
 import org.teamvoided.voidlib.cresm.loader.ICResMLoader
+import org.teamvoided.voidlib.id
 import java.util.*
 
-class CResM : LibModule("Custom Resource Manager") {
+class CResM : LibModule(id("cresm")) {
     companion object {
         val LOGGER = LoggerFactory.getLogger("VoidLib: CResM")
 

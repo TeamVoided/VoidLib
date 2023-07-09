@@ -3,8 +3,7 @@ package org.teamvoided.voidlib.core.datastructures.vector
 import kotlinx.serialization.Serializable
 import net.minecraft.nbt.NbtCompound
 import org.joml.Math
-import org.teamvoided.voidlib.core.f
-import org.teamvoided.voidlib.core.i
+import org.teamvoided.voidlib.core.*
 import kotlin.math.ceil
 
 @Serializable
@@ -33,19 +32,19 @@ data class Vec3d(var x: Double, var y: Double, var z: Double) {
     }
 
     operator fun plus(toAdd: Vec3d): Vec3d = Vec3d(x = (this.x + toAdd.x), y = (this.y + toAdd.y), z = (this.z + toAdd.z))
-    operator fun plus(toAdd: Double): Vec3d = Vec3d(x = (this.x + toAdd), y = (this.y + toAdd), z = (this.z + toAdd))
+    operator fun plus(toAdd: Number): Vec3d = Vec3d(x = (this.x + toAdd), y = (this.y + toAdd), z = (this.z + toAdd))
 
     operator fun minus(toSubtract: Vec3d): Vec3d = Vec3d(x = (this.x - toSubtract.x), y = (this.y - toSubtract.y), z = (this.z - toSubtract.z))
-    operator fun minus(toSubtract: Double): Vec3d = Vec3d(x = (this.x - toSubtract), y = (this.y - toSubtract), z = (this.z - toSubtract))
+    operator fun minus(toSubtract: Number): Vec3d = Vec3d(x = (this.x - toSubtract), y = (this.y - toSubtract), z = (this.z - toSubtract))
 
     operator fun times(toMultiply: Vec3d): Vec3d = Vec3d(x = (this.x * toMultiply.x), y = (this.y * toMultiply.y), z = (this.z * toMultiply.z))
-    operator fun times(toMultiply: Double): Vec3d = Vec3d(x = (this.x * toMultiply), y = (this.y * toMultiply), z = (this.z * toMultiply))
+    operator fun times(toMultiply: Number): Vec3d = Vec3d(x = (this.x * toMultiply.d), y = (this.y * toMultiply.d), z = (this.z * toMultiply.d))
 
     operator fun div(toDivide: Vec3d): Vec3d = Vec3d(x = (this.x / toDivide.x), y = (this.y / toDivide.y), z = (this.z / toDivide.z))
-    operator fun div(toDivide: Double): Vec3d = Vec3d(x = (this.x / toDivide), y = (this.y / toDivide), z = (this.z / toDivide))
+    operator fun div(toDivide: Number): Vec3d = Vec3d(x = (this.x / toDivide), y = (this.y / toDivide), z = (this.z / toDivide))
 
     operator fun rem(toRem: Vec3d): Vec3d = Vec3d(x = (this.x % toRem.x), y = (this.y % toRem.y), z = (this.z % toRem.z))
-    operator fun rem(toRem: Double): Vec3d = Vec3d(x = (this.x % toRem), y = (this.y % toRem), z = (this.z % toRem))
+    operator fun rem(toRem: Number): Vec3d = Vec3d(x = (this.x % toRem), y = (this.y % toRem), z = (this.z % toRem))
 
     operator fun contains(int: Double): Boolean = this.x == int || this.y == int || this.z == int
 

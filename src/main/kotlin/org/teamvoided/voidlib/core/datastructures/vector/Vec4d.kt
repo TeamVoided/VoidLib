@@ -3,8 +3,7 @@ package org.teamvoided.voidlib.core.datastructures.vector
 import kotlinx.serialization.Serializable
 import net.minecraft.nbt.NbtCompound
 import org.joml.Math
-import org.teamvoided.voidlib.core.ARGB
-import org.teamvoided.voidlib.core.i
+import org.teamvoided.voidlib.core.*
 import kotlin.math.ceil
 
 @Serializable
@@ -35,19 +34,19 @@ data class Vec4d(var x: Double, var y: Double, var z: Double, var w: Double) {
     }
 
     operator fun plus(toAdd: Vec4d): Vec4d = Vec4d(x = (this.x + toAdd.x), y = (this.y + toAdd.y), z = (this.z + toAdd.z), w = (this.w + toAdd.w))
-    operator fun plus(toAdd: Double): Vec4d = Vec4d(x = (this.x + toAdd), y = (this.y + toAdd), z = (this.z + toAdd), w = (this.w + toAdd))
+    operator fun plus(toAdd: Number): Vec4d = Vec4d(x = (this.x + toAdd), y = (this.y + toAdd), z = (this.z + toAdd), w = (this.w + toAdd))
 
     operator fun minus(toSubtract: Vec4d): Vec4d = Vec4d(x = (this.x - toSubtract.x), y = (this.y - toSubtract.y), z = (this.z - toSubtract.z), w = (this.w - toSubtract.w))
-    operator fun minus(toSubtract: Double): Vec4d = Vec4d(x = (this.x - toSubtract), y = (this.y - toSubtract), z = (this.z - toSubtract), w = (this.w - toSubtract))
+    operator fun minus(toSubtract: Number): Vec4d = Vec4d(x = (this.x - toSubtract), y = (this.y - toSubtract), z = (this.z - toSubtract), w = (this.w - toSubtract))
 
     operator fun times(toMultiply: Vec4d): Vec4d = Vec4d(x = (this.x * toMultiply.x), y = (this.y * toMultiply.y), z = (this.z * toMultiply.z), w = (this.w * toMultiply.w))
-    operator fun times(toMultiply: Double): Vec4d = Vec4d(x = (this.x * toMultiply), y = (this.y * toMultiply), z = (this.z * toMultiply), w = (this.w * toMultiply))
+    operator fun times(toMultiply: Number): Vec4d = Vec4d(x = (this.x * toMultiply), y = (this.y * toMultiply), z = (this.z * toMultiply), w = (this.w * toMultiply))
 
     operator fun div(toDivide: Vec4d): Vec4d = Vec4d(x = (this.x / toDivide.x), y = (this.y / toDivide.y), z = (this.z / toDivide.z), w = (this.w / toDivide.w))
-    operator fun div(toDivide: Double): Vec4d = Vec4d(x = (this.x / toDivide), y = (this.y / toDivide), z = (this.z / toDivide), w = (this.w / toDivide))
+    operator fun div(toDivide: Number): Vec4d = Vec4d(x = (this.x / toDivide), y = (this.y / toDivide), z = (this.z / toDivide), w = (this.w / toDivide))
 
     operator fun rem(toRem: Vec4d): Vec4d = Vec4d(x = (this.x % toRem.x), y = (this.y % toRem.y), z = (this.z % toRem.z), w = (this.w % toRem.w))
-    operator fun rem(toRem: Double): Vec4d = Vec4d(x = (this.x % toRem), y = (this.y % toRem), z = (this.z % toRem), w = (this.w % toRem))
+    operator fun rem(toRem: Number): Vec4d = Vec4d(x = (this.x % toRem), y = (this.y % toRem), z = (this.z % toRem), w = (this.w % toRem))
 
     operator fun contains(int: Double): Boolean = this.x == int || this.y == int || this.z == int || this.w == int
 
@@ -68,10 +67,10 @@ data class Vec4d(var x: Double, var y: Double, var z: Double, var w: Double) {
 
     fun normalize(): Vec4d {
         val invLength: Double = 1.0 / length()
-        x = x * invLength
-        y = y * invLength
-        z = z * invLength
-        w = w * invLength
+        x *= invLength
+        y *= invLength
+        z *= invLength
+        w *= invLength
         return this
     }
 

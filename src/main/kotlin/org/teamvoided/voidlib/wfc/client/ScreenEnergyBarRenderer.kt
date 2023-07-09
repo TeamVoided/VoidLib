@@ -1,4 +1,4 @@
-package org.teamvoided.voidlib.client
+package org.teamvoided.voidlib.wfc.client
 
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.gui.tooltip.TooltipComponent

@@ -9,19 +9,28 @@ import net.minecraft.client.gui.Selectable
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
 import net.minecraft.client.util.math.MatrixStack
+import net.minecraft.util.Identifier
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2d
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
+import org.teamvoided.voidlib.id
 import org.teamvoided.voidlib.vui.mixin.ScreenInvoker
+import org.teamvoided.voidlib.vui.v2.event.Callback
+import org.teamvoided.voidlib.vui.v2.event.CallbackManager
 import org.teamvoided.voidlib.vui.v2.event.ui.Event.InputEvent
 import org.teamvoided.voidlib.vui.v2.event.ui.Event.LogicalEventContext
 import org.teamvoided.voidlib.vui.v2.node.Node
 import org.teamvoided.voidlib.vui.v2.screen.cursor.CursorAdapter
-import java.util.function.BiFunction
 
 
-open class VoidUIAdapter<R : Node> protected constructor(protected var pos: Vec2i, protected var size: Vec2i, val rootNode: R): Element, Drawable, Selectable {
+open class VoidUIAdapter<R : Node> protected constructor(protected var pos: Vec2i, protected var size: Vec2i, val rootNode: R): CallbackManager(), Element, Drawable, Selectable {
     val cursorAdapter: CursorAdapter = CursorAdapter.ofClientWindow()
     protected var disposed = false
+
+    override val callbacks = HashMap<Identifier, Callback<*>>()
+    val updateCallback: Callback<LogicalEventContext.UpdateContext>
+        get() = getCallbackAs(id("update_callback"))
+    val drawCallback: Callback<LogicalEventContext.DrawContext>
+        get() = getCallbackAs(id("draw_callback"))
 
     fun inflateAndMount() {
         rootNode.inflate(size)
@@ -48,11 +57,15 @@ open class VoidUIAdapter<R : Node> protected constructor(protected var pos: Vec2
             isRendering = true
             val delta = MinecraftClient.getInstance().lastFrameDuration
             val window = MinecraftClient.getInstance().window
-            rootNode.dispatchLogicalEvent(LogicalEventContext.UpdateContext(delta, Vec2i(mouseX, mouseY)))
+            val updateContext = LogicalEventContext.UpdateContext(delta, Vec2i(mouseX, mouseY))
+            rootNode.dispatchLogicalEvent(updateContext)
+            updateCallback(updateContext)
             RenderSystem.enableDepthTest()
             GlStateManager._enableScissorTest()
             GlStateManager._scissorBox(0, 0, window.framebufferWidth, window.framebufferHeight)
-            rootNode.dispatchLogicalEvent(LogicalEventContext.DrawContext(matrices, Vec2i(mouseX, mouseY), partialTicks, delta, true))
+            val drawContext = LogicalEventContext.DrawContext(matrices, Vec2i(mouseX, mouseY), partialTicks, delta)
+            rootNode.dispatchLogicalEvent(drawContext)
+            drawCallback(drawContext)
             GlStateManager._disableScissorTest()
             RenderSystem.disableDepthTest()
             val hovered = rootNode.childAt(mouseX, mouseY)

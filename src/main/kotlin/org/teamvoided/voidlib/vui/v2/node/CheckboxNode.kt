@@ -4,13 +4,18 @@ import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.client.gui.DrawableHelper
 import net.minecraft.client.texture.Sprite
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
+import org.teamvoided.voidlib.id
+import org.teamvoided.voidlib.vui.v2.event.Callback
 import org.teamvoided.voidlib.vui.v2.event.ui.Event
 import org.teamvoided.voidlib.vui.v2.event.ui.Event.InputEvent.MousePressEvent
-import java.util.*
+import org.teamvoided.voidlib.vui.v2.screen.cursor.CursorStyle
 
-open class CheckBoxNode(defaultValue: Boolean, private val onSprite: Sprite, private val offSprite: Sprite): Node() {
+open class CheckboxNode(defaultValue: Boolean, private val onSprite: Sprite, private val offSprite: Sprite): Node() {
     private var value: Boolean = defaultValue
-    private val listeners: MutableList<Listener> = LinkedList()
+    private var hovered = false
+
+    private val checkboxUpdateCallback: Callback<Boolean>
+        get() = getCallbackAs(id("checkbox_update_callback"))
 
     constructor(pos: Vec2i, defaultValue: Boolean, onSprite: Sprite, offSprite: Sprite): this(defaultValue, onSprite, offSprite) {
         this.pos = pos
@@ -21,14 +26,19 @@ open class CheckBoxNode(defaultValue: Boolean, private val onSprite: Sprite, pri
         this.size = size
     }
 
-    override fun onMousePress(event: MousePressEvent): Boolean {
-        if (isTouching(event.pos)) {
+    override fun onMousePress(event: MousePressEvent) {
+        if (hovered) {
             value = !value
-            listeners(value)
-            return false
+            checkboxUpdateCallback(value)
+            event.cancel()
         }
+    }
 
-        return true
+    override fun update(event: Event.LogicalEvent.UpdateEvent) {
+        event.ensurePreChild {
+            val parent = parent()
+            hovered = isTouching(event.updateContext.mousePos) && ((parent != null && parent.childAt(event.updateContext.mousePos) == this) || (parent == null))
+        }
     }
 
     override fun draw(event: Event.LogicalEvent.DrawEvent) {
@@ -43,19 +53,9 @@ open class CheckBoxNode(defaultValue: Boolean, private val onSprite: Sprite, pri
         }
     }
 
-    fun attachListener(listener: Listener) {
-        listeners += listener
-    }
-
-    operator fun plusAssign(listener: Listener) {
-        attachListener(listener)
+    override fun cursorStyle(): CursorStyle {
+        return if (hovered) CursorStyle.HAND else CursorStyle.POINTER
     }
 
     fun value() = value
-}
-
-typealias Listener = (value: Boolean) -> Unit
-
-private operator fun MutableList<Listener>.invoke(value: Boolean) {
-    forEach { it(value) }
 }

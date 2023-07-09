@@ -1,19 +1,24 @@
 package org.teamvoided.voidlib.vui.v2.node
 
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.util.Identifier
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2d
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2f
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
+import org.teamvoided.voidlib.id
+import org.teamvoided.voidlib.vui.v2.event.ui.Event
 import org.teamvoided.voidlib.vui.v2.event.ui.Event.InputEvent
 import org.teamvoided.voidlib.vui.v2.event.ui.Event.InputEvent.*
 import org.teamvoided.voidlib.vui.v2.event.ui.Event.LogicalEvent.*
 import org.teamvoided.voidlib.vui.v2.event.ui.Event.LogicalEventContext
 import org.teamvoided.voidlib.vui.v2.event.ui.Event.LogicalEventContext.DrawContext
 import org.teamvoided.voidlib.vui.v2.event.ui.Event.LogicalEventContext.UpdateContext
+import org.teamvoided.voidlib.vui.v2.event.Callback
+import org.teamvoided.voidlib.vui.v2.event.CallbackManager
 import org.teamvoided.voidlib.vui.v2.screen.cursor.CursorStyle
 import java.util.*
 
-abstract class Node() {
+abstract class Node(): CallbackManager() {
     private var parent: Node? = null
     private val children: MutableList<Node> = LinkedList<Node>()
 
@@ -22,6 +27,35 @@ abstract class Node() {
         set(value) = if (parent != null) pos = (value - parent!!.pos)  else pos = value
     var pos = Vec2i(0, 0)
     var size = Vec2i(0, 0)
+
+    override val callbacks = HashMap<Identifier, Callback<*>>()
+
+    val mousePressCallback: Callback<MousePressEvent>
+        get() = getCallbackAs(id("mouse_press_callback"))
+
+    val mouseReleaseCallback: Callback<MouseReleaseEvent>
+        get() = getCallbackAs(id("mouse_release_callback"))
+
+    val mouseScrollCallback: Callback<MouseScrollEvent>
+        get() = getCallbackAs(id("mouse_sroll_callback"))
+
+    val mouseDragCallback: Callback<MouseDragEvent>
+        get() = getCallbackAs(id("mouse_drag_callback"))
+
+    val keyPressCallback: Callback<KeyPressEvent>
+        get() = getCallbackAs(id("key_press_callback"))
+
+    val keyReleaseCallback: Callback<KeyReleaseEvent>
+        get() = getCallbackAs(id("key_release_callback"))
+
+    val charTypedCallback: Callback<CharTypedEvent>
+        get() = getCallbackAs(id("char_typed_callback"))
+
+    val updateCallback: Callback<UpdateEvent>
+        get() = getCallbackAs(id("update_callback"))
+
+    val drawCallback: Callback<DrawEvent>
+        get() = getCallbackAs(id("draw_callback"))
 
     protected constructor(pos: Vec2i): this() {
         this.pos = pos
@@ -32,47 +66,19 @@ abstract class Node() {
         this.size = size
     }
 
-    /*
-    * Returns true if children should be notified of the event
-    * Returns false if they should not be notified, will also cancel children added after this child
-    */
-    protected open fun onMousePress(event: MousePressEvent): Boolean { return true }
+    protected open fun onMousePress(event: MousePressEvent) { }
 
-    /*
-    * Returns true if children should be notified of the event
-    * Returns false if they should not be notified, will also cancel children added after this child
-    */
-    protected open fun onMouseRelease(event: MouseReleaseEvent): Boolean { return true }
+    protected open fun onMouseRelease(event: MouseReleaseEvent) { }
 
-    /*
-    * Returns true if children should be notified of the event
-    * Returns false if they should not be notified, will also cancel children added after this child
-    */
-    protected open fun onMouseScroll(event: MouseScrollEvent): Boolean { return true }
+    protected open fun onMouseScroll(event: MouseScrollEvent) { }
 
-    /*
-    * Returns true if children should be notified of the event
-    * Returns false if they should not be notified, will also cancel children added after this child
-    */
-    protected open fun onMouseDrag(event: MouseDragEvent): Boolean { return true }
+    protected open fun onMouseDrag(event: MouseDragEvent) { }
 
-    /*
-    * Returns true if children should be notified of the event
-    * Returns false if they should not be notified, will also cancel children added after this child
-    */
-    protected open fun onKeyPress(event: KeyPressEvent): Boolean { return true }
+    protected open fun onKeyPress(event: KeyPressEvent) { }
 
-    /*
-    * Returns true if children should be notified of the event
-    * Returns false if they should not be notified, will also cancel children added after this child
-    */
-    protected open fun onKeyRelease(event: KeyReleaseEvent): Boolean { return true }
+    protected open fun onKeyRelease(event: KeyReleaseEvent) { }
 
-    /*
-    * Returns true if children should be notified of the event
-    * Returns false if they should not be notified, will also cancel children added after this child
-    */
-    protected open fun onCharTyped(event: CharTypedEvent): Boolean { return true }
+    protected open fun onCharTyped(event: CharTypedEvent) { }
 
     protected open fun update(event: UpdateEvent) {}
     protected open fun draw(event: DrawEvent) {}
@@ -154,17 +160,17 @@ abstract class Node() {
     }
 
     fun dispatchInputEvent(event: InputEvent): Boolean {
-        val updateChildren = when (event) {
-            is MousePressEvent -> onMousePress(event)
-            is MouseReleaseEvent -> onMouseRelease(event)
-            is MouseScrollEvent -> onMouseScroll(event)
-            is MouseDragEvent -> onMouseDrag(event)
-            is KeyPressEvent -> onKeyPress(event)
-            is KeyReleaseEvent -> onKeyRelease(event)
-            is CharTypedEvent -> onCharTyped(event)
+        when (event) {
+            is MousePressEvent -> {onMousePress(event); mousePressCallback(event)}
+            is MouseReleaseEvent -> {onMouseRelease(event); mouseReleaseCallback(event) }
+            is MouseScrollEvent -> {onMouseScroll(event); mouseScrollCallback(event) }
+            is MouseDragEvent -> {onMouseDrag(event); mouseDragCallback(event) }
+            is KeyPressEvent -> {onKeyPress(event); keyPressCallback(event) }
+            is KeyReleaseEvent -> {onKeyRelease(event); keyReleaseCallback(event) }
+            is CharTypedEvent -> {onCharTyped(event); charTypedCallback(event) }
         }
 
-        return if (updateChildren) {
+        return if (!event.canceled()) {
             children.forEach {
                 val b = it.dispatchInputEvent(event)
                 if (!b) return false
@@ -173,12 +179,21 @@ abstract class Node() {
     }
 
     fun dispatchLogicalEvent(context: LogicalEventContext) {
+        val event: Event.LogicalEvent
         when (context) {
-            is DrawContext -> draw(DrawEvent(context, State.PreChild))
-            is UpdateContext -> update(UpdateEvent(context, State.PreChild))
+            is DrawContext -> {
+                event = DrawEvent(context, State.PreChild)
+                draw(event)
+                drawCallback(event)
+            }
+            is UpdateContext -> {
+                event = UpdateEvent(context, State.PreChild)
+                update(event)
+                updateCallback(event)
+            }
         }
 
-        children.forEach { it.dispatchLogicalEvent(context) }
+        if (!event.canceled()) children.forEach { it.dispatchLogicalEvent(context) }
 
         when (context) {
             is DrawContext -> draw(DrawEvent(context, State.PostChild))

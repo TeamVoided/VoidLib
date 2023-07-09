@@ -28,6 +28,7 @@ import org.teamvoided.voidlib.vui.mixin.DrawableHelperInvoker
 import org.teamvoided.voidlib.vui.mixin.ScreenInvoker
 import org.teamvoided.voidlib.vui.v2.event.fabric.WindowResizeCallback
 import org.teamvoided.voidlib.vui.v2.geomentry.Geometry
+import org.teamvoided.voidlib.vui.v2.rendering.scissor.ScissorBox
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -154,8 +155,8 @@ object Pencil: DrawableHelper() {
         innerRadius: Double, outerRadius: Double,
         innerColor: ARGB, outerColor: ARGB
     ) {
-        Preconditions.checkArgument(angleFrom < angleTo, "angleFrom must be less than angleTo");
-        Preconditions.checkArgument(innerRadius < outerRadius, "innerRadius must be less than outerRadius");
+        Preconditions.checkArgument(angleFrom < angleTo, "angleFrom must be less than angleTo")
+        Preconditions.checkArgument(innerRadius < outerRadius, "innerRadius must be less than outerRadius")
 
         val buffer = Tessellator.getInstance().buffer
         val matrix = matrices.peek().positionMatrix
@@ -194,6 +195,7 @@ object Pencil: DrawableHelper() {
         RenderSystem.enableDepthTest()
         RenderSystem.enableBlend()
         RenderSystem.defaultBlendFunc()
+        DiffuseLighting.enableGuiDepthLighting()
         RenderSystem.setShader(GameRenderer::getPositionColorProgram)
 
         Tessellator.getInstance().draw()
@@ -219,7 +221,7 @@ object Pencil: DrawableHelper() {
         drawHorizontalLine(matrices, pos1.x, pos2.x, MathHelper.lerp(0.5, pos1.y.d, pos2.y.d).i, color.toInt())
 
     fun drawVerticalLine(matrices: MatrixStack, pos1: Vec2i, pos2: Vec2i, color: ARGB) =
-        DrawableHelper.drawVerticalLine(matrices, MathHelper.lerp(0.5, pos1.x.d, pos2.x.d).i, pos1.y, pos2.y, color.toInt())
+        drawVerticalLine(matrices, MathHelper.lerp(0.5, pos1.x.d, pos2.x.d).i, pos1.y, pos2.y, color.toInt())
 
     fun enableScissorBox(scissorBox: ScissorBox) {
         currentScissorBox = if (currentScissorBox == null) {
@@ -292,7 +294,7 @@ object Pencil: DrawableHelper() {
         drawTexture(matrices, pos.x, pos.y, uv.x, uv.y, size.x, size.y, textureSize.x, textureSize.y)
 
     fun drawTexture(matrices: MatrixStack, pos1: Vec2i, pos2: Vec2i, z: Int, regionSize: Vec2i, uv: Vec2f, textureSize: Vec2i) =
-        (this as DrawableHelperInvoker).void_drawTexture(matrices, pos1.x, pos2.x, pos1.y, pos2.y, z, regionSize.x, regionSize.y, uv.x, uv.y, textureSize.x, textureSize.y)
+        DrawableHelperInvoker.void_drawTexture(matrices, pos1.x, pos2.x, pos1.y, pos2.y, z, regionSize.x, regionSize.y, uv.x, uv.y, textureSize.x, textureSize.y)
 
     fun drawTexturedQuad(matrix: Matrix4f, pos1: Vec2i, pos2: Vec2i, z: Int, uv1: Vec2f, uv2: Vec2f) {
         RenderSystem.setShader { GameRenderer.getPositionTexProgram() }
@@ -306,7 +308,7 @@ object Pencil: DrawableHelper() {
     }
 
     fun drawTexturedQuad(matrix: Matrix4f, pos1: Vec2i, pos2: Vec2i, z: Int, uv1: Vec2f, uv2: Vec2f, color: ARGB) =
-        (this as DrawableHelperInvoker).void_drawTexturedQuad(
+        DrawableHelperInvoker.void_drawTexturedQuad(
             matrix,
             pos1.x, pos2.x,
             pos1.y, pos2.y, z,

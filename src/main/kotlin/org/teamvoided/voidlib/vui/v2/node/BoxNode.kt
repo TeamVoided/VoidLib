@@ -2,8 +2,8 @@ package org.teamvoided.voidlib.vui.v2.node
 
 import org.teamvoided.voidlib.core.ARGB
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
-import org.teamvoided.voidlib.vui.v2.rendering.Pencil
 import org.teamvoided.voidlib.vui.v2.event.ui.Event
+import org.teamvoided.voidlib.vui.v2.rendering.Pencil
 
 open class BoxNode(var topLeftColor: ARGB, var topRightColor: ARGB, var bottomLeftColor: ARGB, var bottomRightColor: ARGB): Node() {
 
