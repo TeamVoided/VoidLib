@@ -5,11 +5,11 @@ plugins {
 }
 
 modSettings {
-	modId("voidlib-wfc")
-	modName("VoidLib: WFC")
+	modId("voidlib-config")
+	modName("VoidLib: Config")
 }
 
-base.archivesName.set("voidlib-wfc")
+base.archivesName.set("voidlib-config")
 version = project.properties["mod_version"] as String
 group = project.properties["maven_group"] as String
 
