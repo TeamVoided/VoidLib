@@ -1,50 +1,26 @@
-//import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-
 plugins {
-	id("fabric-loom") version "1.2-SNAPSHOT"
-	kotlin("jvm") version "1.8.21"
-	kotlin("plugin.serialization") version "1.8.21"
-	id("maven-publish")
+	id("fabric-loom") version "1.3.8"
+	kotlin("jvm") version "1.9.0"
+	kotlin("plugin.serialization") version "1.9.0"
+	id("org.teamvoided.iridium") version "1.3.1"
 }
 
 base.archivesName.set(project.properties["archives_base_name"] as String)
 version = project.properties["mod_version"] as String
 group = project.properties["maven_group"] as String
 
-val sjar: Configuration = configurations.create("sjar")
-
 repositories {
-	// Add repositories to retrieve artifacts from in here.
-	// You should only use this when depending on other mods because
-	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
-	// for more information about repositories.
-    mavenCentral()
-}
-
-loom {
-	runs {
-		create("vuiVisualEditor") {
-			client()
-			vmArg("-Dvuieditor")
-			vmArg("-Dvuistopmusic")
-		}
-	}
+	mavenCentral()
+	maven("https://maven.quiltmc.org/repository/release")
 }
 
 dependencies {
-	// To change the versions see the gradle.properties file
 	minecraft("com.mojang:minecraft:${property("minecraft_version")}")
-	mappings("net.fabricmc:yarn:${property("yarn_mappings")}:v2")
+	mappings("org.quiltmc:quilt-mappings:1.19.4+build.10:intermediary-v2")
 	modImplementation("net.fabricmc:fabric-loader:${property("loader_version")}")
 
-	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${property("fabric_version")}")
 	modImplementation("net.fabricmc:fabric-language-kotlin:${property("fabric_kotlin_version")}")
-
-	// Uncomment the following line to enable the deprecated Fabric API modules. 
-	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
-	// modImplementation("net.fabricmc.fabric-api:fabric-api-deprecated:${project.properties["fabric_version"]}")
 }
 
 tasks {
@@ -57,7 +33,6 @@ tasks {
 		}
 	}
 
-	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
 	val targetJavaVersion = 17
 	withType<JavaCompile> {
 		options.encoding = "UTF-8"
@@ -70,38 +45,12 @@ tasks {
 
 	java {
 		toolchain.languageVersion.set(JavaLanguageVersion.of(JavaVersion.toVersion(targetJavaVersion).toString()))
-
-		// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-		// if it is present.
-		// If you remove this line, sources will not be generated.
 		withSourcesJar()
 	}
 
 	jar {
 		from("LICENSE") {
 			rename { "${it}_${base.archivesName.get()}" }
-		}
-	}
-}
-
-// configure the maven publication
-publishing {
-	publications {
-		create<MavenPublication>("mavenJava") {
-			artifactId = base.archivesName.get()
-			from(components["java"])
-		}
-	}
-
-	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-	repositories {
-		maven {
-			name = "BrokenFuse"
-			url = uri("https://maven.brokenfuse.me/releases")
-			credentials {
-				username = System.getenv("BFUSE_USER")
-				password = System.getenv("BFUSE_KEY")
-			}
 		}
 	}
 }

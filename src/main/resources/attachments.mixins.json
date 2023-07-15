@@ -1,9 +1,0 @@
-{
-  "package": "org.teamvoided.voidlib.attachments.mixin",
-  "mixins": [
-    "MixinEntity",
-    "MixinItemStack",
-    "MixinPlayerEntity"
-  ],
-  "client": []
-}

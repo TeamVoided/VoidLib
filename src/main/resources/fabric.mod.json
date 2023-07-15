@@ -11,26 +11,8 @@
   "license": "MIT",
   "icon": "assets/voidlib/icon.png",
   "environment": "*",
-  "entrypoints": {
-    "main": [
-      {
-        "adapter": "kotlin",
-        "value": "org.teamvoided.voidlib.VoidLibKt::onInitialize"
-      }
-    ],
-    "client": [
-      {
-        "adapter": "kotlin",
-        "value": "org.teamvoided.voidlib.client.VoidLibClientKt::onInitialize"
-      }
-    ]
-  },
-  "mixins": [
-    "attachments.mixins.json",
-    "pow.mixins.json",
-    "dimutils.mixins.json",
-    "vui.mixins.json"
-  ],
+  "entrypoints": { },
+  "mixins": [ ],
   "depends": {
     "fabricloader": ">=0.14.19",
     "fabric-api": "*",

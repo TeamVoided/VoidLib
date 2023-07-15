@@ -1,0 +1,12 @@
+{
+  "package": "org.teamvoided.voidlib.vui.mixin",
+  "client": [
+    "MixinEntityRendererDispatcher",
+    "MixinGameRenderer",
+    "MixinMinecraftClient",
+    "MixinShaderProgram",
+    "ScreenInvoker",
+    "ShaderProgramAccessor",
+    "VanillaDrawContextInvoker"
+  ]
+}
