@@ -8,6 +8,7 @@ import net.minecraft.sound.SoundCategory
 import org.teamvoided.voidlib.core.LOGGER
 import org.teamvoided.voidlib.core.id
 import org.teamvoided.voidlib.vui.VuiSpriteManager
+import org.teamvoided.voidlib.vui.impl.screen.EditorScreen
 import org.teamvoided.voidlib.vui.v2.animation.EasingFunction
 import org.teamvoided.voidlib.vui.v2.animation.Interpolator
 import org.teamvoided.voidlib.vui.v2.shader.GlProgram
@@ -30,7 +31,7 @@ object Vui {
         ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(VuiSpriteManager)
 
         ClientLifecycleEvents.CLIENT_STARTED.register {
-            if (openEditor) it.setScreen(org.teamvoided.voidlib.vui.impl.screen.EditorScreen())
+            if (openEditor) it.setScreen(EditorScreen())
             if (stopMusic) it.soundManager.updateSoundVolume(SoundCategory.MUSIC, 0f)
         }
         LOGGER.info("Finished loading Void Lib: Vui")
