@@ -2,7 +2,7 @@ plugins {
     kotlin("jvm")
     kotlin("plugin.serialization")
     id("iridium.mod.build-script")
-    id("iridium.mod.jar")
+    id("iridium.mod.jar-in-jar")
 }
 
 base.archivesName.set("voidlib-all")
