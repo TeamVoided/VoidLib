@@ -8,7 +8,7 @@ modSettings {
 	modId("voidlib-dimutil")
 	modName("VoidLib: DimUtil")
 	mixinFile("dimutils.mixins.json")
-	entrypoint("client", "org.teamvoided.voidlib.dimutil.DimUtil")
+	entrypoint("client", "org.teamvoided.voidlib.dimutil.DimUtil::onInitialize")
 }
 
 base.archivesName.set("voidlib-dimutil")

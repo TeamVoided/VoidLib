@@ -7,7 +7,7 @@ plugins {
 modSettings {
 	modId("voidlib-wfc")
 	modName("VoidLib: WFC")
-	entrypoint("main", "org.teamvoided.voidlib.wfc.WFC")
+	entrypoint("main", "org.teamvoided.voidlib.wfc.WFC::onInitialize")
 }
 
 base.archivesName.set("voidlib-wfc")

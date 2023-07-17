@@ -7,7 +7,7 @@ plugins {
 modSettings {
 	modId("voidlib-cresm")
 	modName("VoidLib: CResM")
-	entrypoint("main", "org.teamvoided.voidlib.cresm.CResM")
+	entrypoint("main", "org.teamvoided.voidlib.cresm.CResM::onInitialize")
 }
 
 base.archivesName.set("voidlib-cresm")

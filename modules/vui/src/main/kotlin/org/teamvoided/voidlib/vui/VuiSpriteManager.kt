@@ -20,7 +20,7 @@ object VuiSpriteManager: SimpleSynchronousResourceReloadListener {
     private var loader: SpriteLoader? = null
     private var atlas: SpriteAtlasTexture? = null
     private var firstReload = true
-    val atlasId = id("textures/atlas/vres.png")
+    val atlasId = id("vui", "textures/atlas/vres.png")
 
     override fun reload(
         synchronizer: ResourceReloader.Synchronizer?,
@@ -36,7 +36,7 @@ object VuiSpriteManager: SimpleSynchronousResourceReloadListener {
         if (loader == null)
             loader = fromAtlas(atlas!!)
 
-        val result = loader!!.load(manager, id("vres"), 0, prepareExecutor).thenCompose { it.whenComplete() }
+        val result = loader!!.load(manager, id("vui", "vres"), 0, prepareExecutor).thenCompose { it.whenComplete() }
 
         return result.thenCompose { preparedObject -> synchronizer!!.whenPrepared(preparedObject) }
             .thenAcceptAsync({ afterReload(it, applyProfiler) }, applyExecutor)
@@ -58,7 +58,7 @@ object VuiSpriteManager: SimpleSynchronousResourceReloadListener {
 
     override fun reload(manager: ResourceManager?) { }
 
-    override fun getFabricId(): Identifier = id("vres")
+    override fun getFabricId(): Identifier = id("vui", "vres")
 
     fun atlas() = atlas
 

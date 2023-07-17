@@ -7,7 +7,7 @@ plugins {
 modSettings {
 	modId("voidlib-pow")
 	modName("VoidLib: Pow")
-	mixinFile("pow.mixin.json")
+	mixinFile("pow.mixins.json")
 	entrypoint("main", "org.teamvoided.voidlib.pow.Pow::commonSetup")
 	entrypoint("client", "org.teamvoided.voidlib.pow.Pow::clientSetup")
 }
