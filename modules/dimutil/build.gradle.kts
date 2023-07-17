@@ -7,7 +7,7 @@ plugins {
 modSettings {
 	modId("voidlib-dimutil")
 	modName("VoidLib: DimUtil")
-	mixinFile("dimutil.mixins.json")
+	mixinFile("dimutils.mixins.json")
 	entrypoint("client", "org.teamvoided.voidlib.dimutil.DimUtil")
 }
 
