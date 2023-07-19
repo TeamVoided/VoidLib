@@ -17,6 +17,7 @@ include(
     "pow",
     "vl-all",
     "vui",
+    "vui:api",
     "wfc"
 )
 
@@ -27,4 +28,5 @@ project(":dimutil").projectDir = file("modules/dimutil")
 project(":pow").projectDir = file("modules/pow")
 project(":vl-all").projectDir = file("modules/vl-all")
 project(":vui").projectDir = file("modules/vui")
+project(":vui:api").projectDir = file("modules/vui/api")
 project(":wfc").projectDir = file("modules/wfc")

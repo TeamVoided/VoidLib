@@ -5,7 +5,6 @@ import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.font.TextRenderer.TextLayerType
-import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.gui.tooltip.HoveredTooltipPositioner
 import net.minecraft.client.gui.tooltip.TooltipComponent
 import net.minecraft.client.gui.tooltip.TooltipPositioner
@@ -26,12 +25,11 @@ import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
 import org.teamvoided.voidlib.core.datastructures.vector.Vec3i
 import org.teamvoided.voidlib.core.f
 import org.teamvoided.voidlib.core.i
-import org.teamvoided.voidlib.vui.impl.Vui
 import org.teamvoided.voidlib.vui.mixin.VanillaDrawContextInvoker
-import org.teamvoided.voidlib.vui.v2.event.fabric.WindowResizeCallback
 import org.teamvoided.voidlib.vui.v2.event.ui.Event.LogicalEventContext.DrawContext
 import org.teamvoided.voidlib.vui.v2.geomentry.Geometry
 import org.teamvoided.voidlib.vui.v2.rendering.scissor.ScissorBox
+import org.teamvoided.voidlib.vui.v2.shader.Shaders
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -78,7 +76,7 @@ object Pencil {
         buffer.vertex(matrix, (pos.x + size.x), (pos.y + size.y), 0f).color(0f, 1f, 1f, 1f).next()
         buffer.vertex(matrix, (pos.x + size.x), pos.y, 0f).color(if (vertical) 1f else 0f, 1f, 1f, 1f).next()
 
-        Vui.hsvProgram.use()
+        Shaders.hsvProgram.use()
         Tessellator.getInstance().draw()
     }
 
@@ -358,15 +356,5 @@ object Pencil {
         BOTTOM_RIGHT,
         TOP_LEFT,
         BOTTOM_LEFT
-    }
-
-    object UtilityScreen: Screen(Text.empty()) {
-        init {
-            val client = MinecraftClient.getInstance()
-            init(client, client.window.scaledWidth, client.window.scaledHeight)
-            WindowResizeCallback.event.register { cl, window ->
-                init(cl, window.scaledWidth, window.scaledHeight)
-            }
-        }
     }
 }

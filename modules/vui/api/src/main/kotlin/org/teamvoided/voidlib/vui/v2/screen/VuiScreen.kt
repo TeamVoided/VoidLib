@@ -25,6 +25,7 @@ abstract class VuiScreen<R: Node>(title: Text): Screen(title) {
         this.height = window.scaledHeight
 
         addDrawableChild(uiAdapter)
+        uiAdapter.moveAndResize(Vec2i(0, 0), Vec2i(width, height))
         uiAdapter.inflateAndMount()
         focusOn(uiAdapter)
 
@@ -34,6 +35,7 @@ abstract class VuiScreen<R: Node>(title: Text): Screen(title) {
 
             uiAdapter.moveAndResize(Vec2i(0, 0), Vec2i(width, height))
         }
+
 
         vuiInit()
         super.init()

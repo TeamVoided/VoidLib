@@ -18,4 +18,5 @@ group = project.properties["maven_group"] as String
 
 dependencies {
 	implementation(dependencyHelper.modProject(":core"))
+	implementation(dependencyHelper.jarInclude(":vui:api"))
 }

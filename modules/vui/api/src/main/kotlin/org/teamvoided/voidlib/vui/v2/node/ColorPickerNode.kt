@@ -11,10 +11,10 @@ import org.teamvoided.voidlib.core.datastructures.vector.Vec2f
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
 import org.teamvoided.voidlib.core.f
 import org.teamvoided.voidlib.core.i
-import org.teamvoided.voidlib.vui.impl.Vui
 import org.teamvoided.voidlib.vui.v2.event.ui.Event
 import org.teamvoided.voidlib.vui.v2.rendering.Pencil
 import org.teamvoided.voidlib.vui.v2.screen.cursor.CursorStyle
+import org.teamvoided.voidlib.vui.v2.shader.Shaders
 import kotlin.math.min
 
 open class ColorPickerNode(): Node() {
@@ -62,7 +62,7 @@ open class ColorPickerNode(): Node() {
         buffer.vertex(matrix, (renderX() + colorAreaWidth()).f, renderY().f, 0f)
             .color(hue, 1f, 1f, 1f).next()
 
-        Vui.hsvProgram.use()
+        Shaders.hsvProgram.use()
         Tessellator.getInstance().draw()
 
         Pencil.drawRectOutline(
