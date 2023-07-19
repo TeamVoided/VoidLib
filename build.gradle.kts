@@ -2,8 +2,8 @@ plugins {
 	id("fabric-loom") version "1.3.8"
 	kotlin("jvm") version "1.9.0"
 	kotlin("plugin.serialization") version "1.9.0"
-	id("org.teamvoided.iridium") version "2.2.1"
-	id("iridium.mod.build-script") version "2.2.1"
+	id("org.teamvoided.iridium") version "2.2.2"
+	id("iridium.mod.build-script") version "2.2.2"
 }
 
 base.archivesName.set(project.properties["archives_base_name"] as String)
