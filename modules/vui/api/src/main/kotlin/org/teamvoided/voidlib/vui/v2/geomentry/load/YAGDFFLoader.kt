@@ -19,7 +19,7 @@ open class YAGDFFLoader: GeometryLoader {
         }
 
         @Suppress("Duplicates")
-        fun loadYAGDFF(buffer: ByteBuffer): Geometry? {
+        fun loadYAGDFF(buffer: ByteBuffer): Geometry {
             var buf = String(ByteArray(buffer.position(0).remaining()))
             val normalBuffer = LinkedList<Vec3f>()
             val vertexBuffer = LinkedList<Vec3f>()

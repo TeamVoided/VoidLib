@@ -1,9 +1,10 @@
 package org.teamvoided.voidlib.vui.v2.node
 
+import org.teamvoided.voidlib.vui.v2.animation.Animation
 import org.teamvoided.voidlib.vui.v2.animation.ListExtAny.update
 import org.teamvoided.voidlib.vui.v2.event.ui.Event
 
-class AnimatedNode(val node: Node, animations: (Node) -> List<_root_ide_package_.org.teamvoided.voidlib.vui.v2.animation.Animation<*>>): Node() {
+class AnimatedNode(val node: Node, animations: (Node) -> List<Animation<*>>): Node() {
     private val animations = animations(node)
 
     init {

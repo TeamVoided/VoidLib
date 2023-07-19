@@ -33,7 +33,6 @@ import org.teamvoided.voidlib.vui.v2.shader.Shaders
 import kotlin.math.cos
 import kotlin.math.sin
 
-
 object Pencil {
     private var currentScissorBox: ScissorBox? = null
 
