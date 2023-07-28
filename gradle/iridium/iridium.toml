@@ -10,7 +10,7 @@ fabricLoaderVersion = "0.14.21"
 fabricApiVersion = "0.84.0+1.20.1"
 fabricLangKotlinVersion = "1.10.0+kotlin.1.9.0"
 license = "MIT"
-modules = [ "config", "core", "cresm", "dimutil", "pow", "vui", "wfc" ]
+modules = [ "config", "core", "cresm", "dimutil", "pow", "vui", "wfc", "woodset" ]
 
 [mappings]
     type = "YARN"
