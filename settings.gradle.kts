@@ -18,7 +18,8 @@ include(
     "vl-all",
     "vui",
     "vui:api",
-    "wfc"
+    "wfc",
+    "woodset"
 )
 
 project(":config").projectDir = file("modules/config")
@@ -30,3 +31,4 @@ project(":vl-all").projectDir = file("modules/vl-all")
 project(":vui").projectDir = file("modules/vui")
 project(":vui:api").projectDir = file("modules/vui/api")
 project(":wfc").projectDir = file("modules/wfc")
+project(":woodset").projectDir = file("modules/woodset")
