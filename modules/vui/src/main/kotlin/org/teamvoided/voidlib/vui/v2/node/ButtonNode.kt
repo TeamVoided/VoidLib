@@ -9,6 +9,7 @@ import org.teamvoided.voidlib.core.datastructures.vector.Vec2f
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
 import org.teamvoided.voidlib.core.datastructures.vector.Vec3i
 import org.teamvoided.voidlib.core.id
+import org.teamvoided.voidlib.vui.VuiSpriteManager
 import org.teamvoided.voidlib.vui.v2.event.Callback
 import org.teamvoided.voidlib.vui.v2.event.ui.Event
 import org.teamvoided.voidlib.vui.v2.event.ui.Event.LogicalEvent.DrawEvent
@@ -27,9 +28,9 @@ open class ButtonNode(var message: Text, var renderer: Renderer = Renderer.VANIL
         get() = getCallbackAs(id("button_press_callback"))
 
     companion object {
-        val ACTIVE_TEXTURE = id("vui", "vres/button/active")
-        val HOVERED_TEXTURE = id("vui", "vres/button/hovered")
-        val DISABLED_TEXTURE = id("vui", "vres/button/disabled")
+        val ACTIVE_TEXTURE = id("vres/button/active")
+        val HOVERED_TEXTURE = id("vres/button/hovered")
+        val DISABLED_TEXTURE = id("vres/button/disabled")
     }
 
     constructor(pos: Vec2i, message: Text): this(message, Renderer.VANILLA) {
@@ -87,7 +88,7 @@ open class ButtonNode(var message: Text, var renderer: Renderer = Renderer.VANIL
             val VANILLA = Renderer { matrices, button, _ ->
                 RenderSystem.enableDepthTest()
                 val texture = if (button.active) if (button.hovered) HOVERED_TEXTURE else ACTIVE_TEXTURE else DISABLED_TEXTURE
-                val sprite = org.teamvoided.voidlib.vui.VuiSpriteManager.getSprite(texture) ?: throw IllegalStateException("Sprite could not be found")
+                val sprite = VuiSpriteManager.getSprite(texture) ?: throw IllegalStateException("Sprite could not be found")
                 RenderSystem.setShaderTexture(0, sprite.atlasId)
                 Pencil.drawSprite(matrices, Vec3i(button.globalPos.x, button.globalPos.y, 0), button.size, sprite)
             }

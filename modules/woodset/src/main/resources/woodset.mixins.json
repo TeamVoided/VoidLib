@@ -1,11 +1,5 @@
 {
   "package": "org.teamvoided.voidlib.woodset.mixin",
-  "client": [
-    "MixinHangingSignBlockEntityRenderer",
-    "MixinSignBlockEntityRenderer",
-    "MixinTexturedRenderLayers"
-  ],
-  "mixins": [
-    "MixinBlockEntityType"
-  ]
+  "client": [ ],
+  "mixins": [ ]
 }

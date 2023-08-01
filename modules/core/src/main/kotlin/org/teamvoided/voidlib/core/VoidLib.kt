@@ -10,4 +10,3 @@ const val MODID = "voidlib"
 val LOGGER: Logger = LoggerFactory.getLogger(MODID)
 
 fun id(path: String): Identifier = Identifier(MODID, path)
-fun id(subLib: String, path: String): Identifier = Identifier("$MODID-$subLib", path)

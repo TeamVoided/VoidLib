@@ -24,12 +24,5 @@ repositories {
 
 dependencies {
 	//Temp while I figure out how to sign
-	annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-fabric:0.2.0-beta.9")?.let { dep ->
-		implementation(dep)?.let {
-			include(
-				it
-			)
-		}
-	}
-
+	implementation(include(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-fabric:0.2.0-beta.9")!!)!!)
 }

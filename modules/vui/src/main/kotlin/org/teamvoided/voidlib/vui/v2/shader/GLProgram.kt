@@ -28,6 +28,7 @@ open class GlProgram(id: Identifier, vertexFormat: VertexFormat) {
         REGISTERED_PROGRAMS.add(Pair(program@
         { resourceFactory ->
             try {
+                println(id)
                 return@program VoidShaderProgram(resourceFactory, id.toString(), vertexFormat)
             } catch (e: IOException) {
                 throw RuntimeException("Failed to initialize void shader program", e)

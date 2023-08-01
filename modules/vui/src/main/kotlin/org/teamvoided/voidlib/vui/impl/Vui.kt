@@ -10,6 +10,7 @@ import org.teamvoided.voidlib.vui.VuiSpriteManager
 import org.teamvoided.voidlib.vui.impl.screen.EditorScreen
 import org.teamvoided.voidlib.vui.v2.animation.EasingFunction
 import org.teamvoided.voidlib.vui.v2.animation.Interpolator
+import org.teamvoided.voidlib.vui.v2.shader.Shaders
 
 object Vui {
     val openEditor = System.getProperty("vuieditor") != null
@@ -29,6 +30,7 @@ object Vui {
         ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(VuiSpriteManager)
 
         ClientLifecycleEvents.CLIENT_STARTED.register {
+            Shaders.init()
             if (openEditor) it.setScreen(EditorScreen())
             if (stopMusic) it.soundManager.updateSoundVolume(SoundCategory.MUSIC, 0f)
         }

@@ -20,7 +20,7 @@ object VuiSpriteManager: SimpleSynchronousResourceReloadListener {
     private var loader: SpriteLoader? = null
     private var atlas: SpriteAtlasTexture? = null
     private var firstReload = true
-    val atlasId = id("vui", "textures/atlas/vres.png")
+    val atlasId = id("textures/atlas/vres.png")
 
     override fun reload(
         synchronizer: ResourceReloader.Synchronizer?,
@@ -30,37 +30,37 @@ object VuiSpriteManager: SimpleSynchronousResourceReloadListener {
         prepareExecutor: Executor,
         applyExecutor: Executor
     ): CompletableFuture<Void> {
-        if (org.teamvoided.voidlib.vui.VuiSpriteManager.atlas == null)
-            org.teamvoided.voidlib.vui.VuiSpriteManager.atlas = SpriteAtlasTexture(org.teamvoided.voidlib.vui.VuiSpriteManager.atlasId)
+        if (atlas == null)
+            atlas = SpriteAtlasTexture(atlasId)
 
-        if (org.teamvoided.voidlib.vui.VuiSpriteManager.loader == null)
-            org.teamvoided.voidlib.vui.VuiSpriteManager.loader = fromAtlas(org.teamvoided.voidlib.vui.VuiSpriteManager.atlas!!)
+        if (loader == null)
+            loader = fromAtlas(atlas!!)
 
-        val result = org.teamvoided.voidlib.vui.VuiSpriteManager.loader!!.load(manager, id("vui", "vres"), 0, prepareExecutor).thenCompose { it.whenComplete() }
+        val result = loader!!.load(manager, id("vres"), 0, prepareExecutor).thenCompose { it.whenComplete() }
 
         return result.thenCompose { preparedObject -> synchronizer!!.whenPrepared(preparedObject) }
-            .thenAcceptAsync({ org.teamvoided.voidlib.vui.VuiSpriteManager.afterReload(it, applyProfiler) }, applyExecutor)
+            .thenAcceptAsync({ afterReload(it, applyProfiler) }, applyExecutor)
     }
 
     private fun afterReload(result: StitchResult, profiler: Profiler) {
         profiler.startTick()
         profiler.push("upload")
-        org.teamvoided.voidlib.vui.VuiSpriteManager.atlas!!.upload(result)
+        atlas!!.upload(result)
         profiler.pop()
         profiler.endTick()
 
         val textureManager = MinecraftClient.getInstance().textureManager
-        if (org.teamvoided.voidlib.vui.VuiSpriteManager.firstReload) {
-            textureManager.registerTexture(org.teamvoided.voidlib.vui.VuiSpriteManager.atlasId, org.teamvoided.voidlib.vui.VuiSpriteManager.atlas!!)
-            org.teamvoided.voidlib.vui.VuiSpriteManager.firstReload = false
+        if (firstReload) {
+            textureManager.registerTexture(atlasId, atlas!!)
+            firstReload = false
         }
     }
 
     override fun reload(manager: ResourceManager?) { }
 
-    override fun getFabricId(): Identifier = id("vui", "vres")
+    override fun getFabricId(): Identifier = id("vres")
 
-    fun atlas() = org.teamvoided.voidlib.vui.VuiSpriteManager.atlas
+    fun atlas() = atlas
 
-    fun getSprite(id: Identifier): Sprite? = org.teamvoided.voidlib.vui.VuiSpriteManager.atlas?.getSprite(id)
+    fun getSprite(id: Identifier): Sprite? = atlas?.getSprite(id)
 }
