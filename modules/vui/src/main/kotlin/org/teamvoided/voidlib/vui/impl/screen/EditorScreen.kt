@@ -66,12 +66,10 @@ class EditorScreen: VuiScreen<BoxNode>(Text.literal("Vui Editor")) {
 
     val mov2 = MovableNode(boxNode)
 
-    val subAdapter = VoidUIAdapter.create(
-        this,
-        Vec2i(500, 500), Vec2i(300, 300),
-        { pos, size -> BoxNode(pos, size, ARGB(0, 0, 0, 0)) },
-        debugBox = true
-    )
+    val container = ContainerNode(Vec2i(500, 500), Vec2i(500, 500))
+
+    val textNode = TextNode(Vec2i(400, 400), Vec2i(0, 1), Text.of("something"), ARGB(255, 255, 255))
+    val movNode = MovableNode(BoxNode(Vec2i(0, 0), Vec2i(50, 50), ARGB(255, 255, 255)))
 
     override fun vuiInit() {
         //if there are no nodes the window will never flush out the minecraft loading screen cuz there's nothing to render on top of it
@@ -102,7 +100,15 @@ class EditorScreen: VuiScreen<BoxNode>(Text.literal("Vui Editor")) {
         root.addChild(colorSelector)
         root.addChild(slider)
 
-        subAdapter.rootNode.addChild(MovableNode(BoxNode(Vec2i(0, 0), Vec2i(50, 50), ARGB(255, 255, 255))))
+        root.addChild(container)
+
+        root.addChild(textNode)
+
+        container.debugBox = true
+        container.addChild(movNode)
+        container.updateCallback += {
+            textNode.text = Text.literal("Pos: ${container.children()[0].pos} | Size: ${container.children()[0].size}")
+        }
     }
 
     override fun vuiUpdate() {

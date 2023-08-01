@@ -10,7 +10,6 @@ import net.minecraft.client.gui.Selectable
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder
 import net.minecraft.util.Identifier
-import org.teamvoided.voidlib.core.ARGB
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2d
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
 import org.teamvoided.voidlib.core.id
@@ -20,12 +19,10 @@ import org.teamvoided.voidlib.vui.v2.event.CallbackManager
 import org.teamvoided.voidlib.vui.v2.event.ui.Event.InputEvent
 import org.teamvoided.voidlib.vui.v2.event.ui.Event.LogicalEventContext
 import org.teamvoided.voidlib.vui.v2.node.Node
-import org.teamvoided.voidlib.vui.v2.node.layout.BoundingBox
-import org.teamvoided.voidlib.vui.v2.rendering.Pencil
 import org.teamvoided.voidlib.vui.v2.screen.cursor.CursorAdapter
 
 
-open class VoidUIAdapter<R : Node> protected constructor(protected open var pos: Vec2i, protected open var size: Vec2i, val rootNode: R): CallbackManager(), Element, Drawable, Selectable {
+open class VoidUIAdapter<R: Node> protected constructor(protected open var pos: Vec2i, protected open var size: Vec2i, val rootNode: R): CallbackManager(), Element, Drawable, Selectable {
     val cursorAdapter: CursorAdapter = CursorAdapter.ofClientWindow()
     protected var disposed = false
 
@@ -133,36 +130,6 @@ open class VoidUIAdapter<R : Node> protected constructor(protected open var pos:
         ): VoidUIAdapter<R> {
             val rootComponent = rootNodeMaker(Vec2i(0, 0), Vec2i(screen.width, screen.height))
             val adapter = VoidUIAdapter(Vec2i(0, 0), Vec2i(screen.width, screen.height), rootComponent)
-            (screen as ScreenInvoker).void_addDrawableChild(adapter)
-            screen.focusOn(adapter)
-            return adapter
-        }
-
-        fun <R : Node> create(
-            screen: Screen,
-            pos: Vec2i,
-            size: Vec2i = Vec2i(screen.width, screen.height),
-            rootNodeMaker: (Vec2i, Vec2i) -> R,
-            debugBox: Boolean = false
-        ): VoidUIAdapter<R> {
-            val rootComponent = rootNodeMaker(Vec2i(0, 0), Vec2i(screen.width, screen.height))
-            val adapter = object : VoidUIAdapter<R>(pos, Vec2i(screen.width, screen.height), rootComponent) {
-                override fun render(drawContext: DrawContext, mouseX: Int, mouseY: Int, partialTicks: Float) {
-                    try {
-                        if (debugBox) {
-                            isRendering = true
-                            rootComponent.boundTo(BoundingBox.of(pos, size), true)
-                            val delta = MinecraftClient.getInstance().lastFrameDuration
-                            val context = LogicalEventContext.DrawContext(drawContext.matrices, drawContext, Vec2i(mouseX, mouseY), partialTicks, delta)
-                            Pencil.drawBorder(context, pos, size, ARGB(127, 127, 127))
-                        }
-                    } finally {
-                        isRendering = false
-                    }
-
-                    super.render(drawContext, mouseX, mouseY, partialTicks)
-                }
-            }
             (screen as ScreenInvoker).void_addDrawableChild(adapter)
             screen.focusOn(adapter)
             return adapter

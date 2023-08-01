@@ -157,12 +157,15 @@ abstract class Node(): CallbackManager() {
     }
 
     fun boundTo(boundingBox: BoundingBox, keepProportions: Boolean = true) {
-        if (globalPos.x > boundingBox.pos.x) globalPos = Vec2i(boundingBox.pos.x, globalPos.y)
-        if (globalPos.y > boundingBox.pos.y) globalPos = Vec2i(globalPos.x, boundingBox.pos.y)
+        if (globalPos.x < boundingBox.pos.x) globalPos = Vec2i(boundingBox.pos.x, globalPos.y)
+        if (globalPos.x + size.x > boundingBox.pos.x + boundingBox.size.x) globalPos = Vec2i(boundingBox.pos.x + boundingBox.size.x - size.x, globalPos.y)
+
+        if (globalPos.y < boundingBox.pos.y) globalPos = Vec2i(globalPos.x, boundingBox.pos.y)
+        if (globalPos.y + size.y > boundingBox.pos.y + boundingBox.size.y) globalPos = Vec2i(globalPos.x, boundingBox.pos.y + boundingBox.size.y - size.y)
 
         if (keepProportions) {
-            val scale = min(boundingBox.size.x / size.x, boundingBox.size.y / size.y)
-            size *= scale
+            val scale = min(boundingBox.size.x, boundingBox.size.y / size.y)
+            if (scale < 1) size *= scale
         } else {
             if (size.x > boundingBox.size.x) size.x = boundingBox.size.x
             if (size.y > boundingBox.size.y) size.y = boundingBox.size.y
@@ -227,6 +230,8 @@ abstract class Node(): CallbackManager() {
             is UpdateContext -> update(UpdateEvent(context, State.PostChild))
         }
     }
+
+    fun asBoundingBox() = BoundingBox.of(globalPos, size)
 
     fun children(): List<Node> = children
 

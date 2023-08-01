@@ -32,6 +32,10 @@ interface BoundingBox {
                 point.y >= this.pos.y && point.y <= this.pos.y + size.y
     }
 
+    fun isInside(box: BoundingBox): Boolean {
+        return isTouching(box.pos) && box.size.x < size.x && box.size.y < pos.y
+    }
+
     fun inflate(pos: Vec2i, size: Vec2i) {
         this.pos = pos
         this.size = size

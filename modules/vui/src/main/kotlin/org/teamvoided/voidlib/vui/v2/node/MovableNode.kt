@@ -1,6 +1,7 @@
 package org.teamvoided.voidlib.vui.v2.node
 
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
+import org.teamvoided.voidlib.vui.v2.event.ui.Event
 import org.teamvoided.voidlib.vui.v2.event.ui.Event.InputEvent.*
 
 
@@ -13,6 +14,11 @@ open class MovableNode(val node: Node): Node() {
         this.globalPos = node.globalPos.copy()
 
         addChild(node)
+    }
+
+    override fun update(event: Event.LogicalEvent.UpdateEvent) {
+        node.pos = Vec2i(0, 0)
+        node.size = this.size
     }
 
     override fun onMousePress(event: MousePressEvent) {
