@@ -2,12 +2,18 @@ plugins {
 	kotlin("jvm")
 	kotlin("plugin.serialization")
 	id("iridium.mod.build-script")
+	id("iridium.project.publish-script")
 }
 
 modSettings {
 	modId("voidlib-cresm")
 	modName("VoidLib: CResM")
 	entrypoint("main", "org.teamvoided.voidlib.cresm.CResM::onInitialize")
+}
+
+publishScript {
+	repository("TeamVoided", "https://maven.teamvoided.org/releases")
+	publicationName(modSettings.modId())
 }
 
 base.archivesName.set("voidlib-cresm")

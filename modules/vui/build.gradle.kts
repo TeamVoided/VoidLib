@@ -19,7 +19,7 @@ publishScript {
 }
 
 base.archivesName.set("voidlib-vui")
-version = "0.1.0-BETA"
+version = project.properties["mod_version"] as String
 group = project.properties["maven_group"] as String
 
 dependencies {

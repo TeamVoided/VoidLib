@@ -2,12 +2,18 @@ plugins {
 	kotlin("jvm")
 	kotlin("plugin.serialization")
 	id("iridium.mod.build-script")
+	id("iridium.project.publish-script")
 }
 
 modSettings {
 	modId("voidlib-wfc")
 	modName("VoidLib: WFC")
 	entrypoint("main", "org.teamvoided.voidlib.wfc.WFC::onInitialize")
+}
+
+publishScript {
+	repository("TeamVoided", "https://maven.teamvoided.org/releases")
+	publicationName(modSettings.modId())
 }
 
 base.archivesName.set("voidlib-wfc")
