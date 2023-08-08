@@ -5,6 +5,7 @@ import org.teamvoided.voidlib.core.datastructures.vector.Vec2d
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
 import org.teamvoided.voidlib.core.datastructures.vector.Vec3i
 import org.teamvoided.voidlib.core.id
+import org.teamvoided.voidlib.vui.VuiSpriteManager
 import org.teamvoided.voidlib.vui.v2.event.ui.Event
 import org.teamvoided.voidlib.vui.v2.node.layout.BoundingBox
 import org.teamvoided.voidlib.vui.v2.node.layout.FlowLayout
@@ -54,13 +55,13 @@ class DropdownNode(): FlowLayout() {
 
     override fun draw(event: Event.LogicalEvent.DrawEvent) {
         event.ensurePreChild {
-            RenderSystem.setShaderTexture(0, org.teamvoided.voidlib.vui.VuiSpriteManager.atlasId)
+            RenderSystem.setShaderTexture(0, VuiSpriteManager.atlasId)
             if (expanded) {
-                Pencil.drawSprite(event.drawContext, Vec3i(arrowPos.x, arrowPos.y, 0), arrowSize, org.teamvoided.voidlib.vui.VuiSpriteManager.getSprite(
+                Pencil.drawSprite(event.drawContext, Vec3i(arrowPos.x, arrowPos.y, 0), arrowSize, VuiSpriteManager.getSprite(
                     OPEN_SPRITE
                 ) ?: throw IllegalStateException("Could not find core sprite $OPEN_SPRITE"))
             } else {
-                Pencil.drawSprite(event.drawContext, Vec3i(arrowPos.x, arrowPos.y, 0), arrowSize, org.teamvoided.voidlib.vui.VuiSpriteManager.getSprite(
+                Pencil.drawSprite(event.drawContext, Vec3i(arrowPos.x, arrowPos.y, 0), arrowSize, VuiSpriteManager.getSprite(
                     CLOSED_SPRITE
                 ) ?: throw IllegalStateException("Could not find core sprite $CLOSED_SPRITE"))
                 event.cancel()

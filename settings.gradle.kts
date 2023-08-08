@@ -5,7 +5,7 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
-        maven("https://maven.teamvoided.org/releases")
+        mavenLocal()
     }
 }
 
@@ -15,7 +15,6 @@ include(
     "cresm",
     "dimutil",
     "pow",
-    "vl-all",
     "vui",
     "wfc",
     "woodset"
@@ -26,7 +25,6 @@ project(":core").projectDir = file("modules/core")
 project(":cresm").projectDir = file("modules/cresm")
 project(":dimutil").projectDir = file("modules/dimutil")
 project(":pow").projectDir = file("modules/pow")
-project(":vl-all").projectDir = file("modules/vl-all")
 project(":vui").projectDir = file("modules/vui")
 project(":wfc").projectDir = file("modules/wfc")
 project(":woodset").projectDir = file("modules/woodset")

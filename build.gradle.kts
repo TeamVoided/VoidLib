@@ -1,9 +1,11 @@
+import org.gradle.configurationcache.extensions.capitalized
+
 plugins {
 	id("fabric-loom") version "1.3.8"
 	kotlin("jvm") version "1.9.0"
 	kotlin("plugin.serialization") version "1.9.0"
-	id("org.teamvoided.iridium") version "2.4.0"
-	id("iridium.mod.build-script") version "2.4.0"
+	id("org.teamvoided.iridium") version "3.0.0"
+	id("iridium.mod.build-script") version "3.0.0"
 }
 
 base.archivesName.set(project.properties["archives_base_name"] as String)
@@ -12,6 +14,11 @@ group = project.properties["maven_group"] as String
 
 repositories {
 	mavenCentral()
+}
+
+modSettings {
+	modId(base.archivesName.get())
+	modName(base.archivesName.get().capitalized())
 }
 
 tasks {
