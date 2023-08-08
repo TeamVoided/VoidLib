@@ -5,7 +5,7 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
-        mavenLocal()
+        maven("https://maven.teamvoided.org/releases")
     }
 }
 
