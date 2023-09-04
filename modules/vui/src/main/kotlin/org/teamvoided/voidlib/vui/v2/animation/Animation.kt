@@ -4,10 +4,10 @@ import net.minecraft.util.math.MathHelper
 
 class Animation<T>(
     private val duration: Int,
-    private var direction: org.teamvoided.voidlib.vui.v2.animation.Animation.Direction,
+    private var direction: Direction,
     private var looping: Boolean,
-    private val property: org.teamvoided.voidlib.vui.v2.animation.InterpolatedProperty<T>,
-    private val easing: org.teamvoided.voidlib.vui.v2.animation.EasingFunction,
+    private val property: InterpolatedProperty<T>,
+    private val easing: EasingFunction,
     private val destination: T,
 ) {
     private var delta = 0f
@@ -22,22 +22,22 @@ class Animation<T>(
         property.interpolate(destination, this.delta, easing)
     }
 
-    fun forwards(): org.teamvoided.voidlib.vui.v2.animation.Animation<T> {
-        this.direction = org.teamvoided.voidlib.vui.v2.animation.Animation.Direction.Forwards
+    fun forwards(): Animation<T> {
+        this.direction = Direction.Forwards
         return this
     }
 
-    fun backwards(): org.teamvoided.voidlib.vui.v2.animation.Animation<T> {
-        this.direction = org.teamvoided.voidlib.vui.v2.animation.Animation.Direction.Backwards
+    fun backwards(): Animation<T> {
+        this.direction = Direction.Backwards
         return this
     }
 
-    fun reverse(): org.teamvoided.voidlib.vui.v2.animation.Animation<T> {
+    fun reverse(): Animation<T> {
         this.direction = direction.reverse()
         return this
     }
 
-    fun loop(looping: Boolean): org.teamvoided.voidlib.vui.v2.animation.Animation<T> {
+    fun loop(looping: Boolean): Animation<T> {
         this.looping = looping
         return this
     }
@@ -51,8 +51,8 @@ class Animation<T>(
         Forwards(1f, 1f),
         Backwards(-1f, 0f);
 
-        fun reverse(): org.teamvoided.voidlib.vui.v2.animation.Animation.Direction {
-            return if (this == org.teamvoided.voidlib.vui.v2.animation.Animation.Direction.Forwards) org.teamvoided.voidlib.vui.v2.animation.Animation.Direction.Backwards else org.teamvoided.voidlib.vui.v2.animation.Animation.Direction.Forwards
+        fun reverse(): Direction {
+            return if (this == Forwards) Backwards else Forwards
         }
     }
 }

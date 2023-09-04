@@ -1,5 +1,9 @@
 package org.teamvoided.voidlib.vui.v2.node
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.util.Identifier
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2d
@@ -75,19 +79,12 @@ abstract class Node(): CallbackManager() {
     }
 
     protected open fun onMousePress(event: MousePressEvent) { }
-
     protected open fun onMouseRelease(event: MouseReleaseEvent) { }
-
     protected open fun onMouseScroll(event: MouseScrollEvent) { }
-
     protected open fun onMouseDrag(event: MouseDragEvent) { }
-
     protected open fun onKeyPress(event: KeyPressEvent) { }
-
     protected open fun onKeyRelease(event: KeyReleaseEvent) { }
-
     protected open fun onCharTyped(event: CharTypedEvent) { }
-
     protected open fun update(event: UpdateEvent) {}
     protected open fun draw(event: DrawEvent) {}
 
@@ -191,13 +188,13 @@ abstract class Node(): CallbackManager() {
 
     fun dispatchInputEvent(event: InputEvent): Boolean {
         when (event) {
-            is MousePressEvent -> {onMousePress(event); mousePressCallback(event)}
-            is MouseReleaseEvent -> {onMouseRelease(event); mouseReleaseCallback(event) }
-            is MouseScrollEvent -> {onMouseScroll(event); mouseScrollCallback(event) }
-            is MouseDragEvent -> {onMouseDrag(event); mouseDragCallback(event) }
-            is KeyPressEvent -> {onKeyPress(event); keyPressCallback(event) }
-            is KeyReleaseEvent -> {onKeyRelease(event); keyReleaseCallback(event) }
-            is CharTypedEvent -> {onCharTyped(event); charTypedCallback(event) }
+            is MousePressEvent -> { onMousePress(event); mousePressCallback(event) }
+            is MouseReleaseEvent -> { onMouseRelease(event); mouseReleaseCallback(event) }
+            is MouseScrollEvent -> { onMouseScroll(event); mouseScrollCallback(event) }
+            is MouseDragEvent -> { onMouseDrag(event); mouseDragCallback(event) }
+            is KeyPressEvent -> { onKeyPress(event); keyPressCallback(event) }
+            is KeyReleaseEvent -> { onKeyRelease(event); keyReleaseCallback(event) }
+            is CharTypedEvent -> { onCharTyped(event); charTypedCallback(event) }
         }
 
         return if (!event.canceled()) {
@@ -237,5 +234,5 @@ abstract class Node(): CallbackManager() {
 
     fun parent() = parent
 
-    data class Type<T: Node>(val deserialize: (NbtCompound) -> T)
+    data class Type<T: Node>(val serializer: KSerializer<T>)
 }

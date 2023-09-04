@@ -14,4 +14,4 @@ modules = [ "config", "core", "cresm", "dimutil", "pow", "vui", "wfc", "woodset"
 
 [mappings]
     type = "YARN"
-    version = "1.20.1+build.9"
+    version = "1.20.1+build.10"
