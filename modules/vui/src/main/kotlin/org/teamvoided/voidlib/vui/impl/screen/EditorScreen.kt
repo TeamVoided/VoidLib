@@ -78,7 +78,7 @@ class EditorScreen : VuiScreen<BoxNode>(Text.literal("Vui Editor")) {
     val movNode = MovableNode(BoxNode(Vec2i(0, 0), Vec2i(50, 50), ARGB(255, 255, 255)))
 
     val clickableLink = TextNode(
-        Vec2i(100, 25), Vec2i(0, 1),
+        Vec2i(100, 25), Vec2i(2, 2),
         Text.literal("heyo ").formatted(Formatting.RED).append(
             Text.literal("Click here!").styled {
                 it.withColor(Formatting.GREEN)
@@ -88,6 +88,8 @@ class EditorScreen : VuiScreen<BoxNode>(Text.literal("Vui Editor")) {
         ),
         this
     )
+
+    val textBox = TextFieldWidgetNode(Vec2i(200, 75), Vec2i(200, 48))
 
     override fun vuiInit() {
 
@@ -125,6 +127,7 @@ class EditorScreen : VuiScreen<BoxNode>(Text.literal("Vui Editor")) {
 
         root.addChild(textNode)
         root.addChild(clickableLink)
+        root.addChild(textBox)
 
         container.debugBox = true
         container.addChild(movNode)
