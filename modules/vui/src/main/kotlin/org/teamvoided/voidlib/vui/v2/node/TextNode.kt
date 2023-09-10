@@ -19,7 +19,7 @@ import java.net.URI
 import java.net.URISyntaxException
 
 open class TextNode(var text: Text, var textColor: ARGB, val screen: Screen) : Node() {
-    private val allowedProtocols: Set<String> = Sets.newHashSet(*arrayOf("http", "https"))
+    private val allowedProtocols: Set<String> = Sets.newHashSet(*arrayOf("http", "https", "ws"))
     private val LOGGER = LoggerFactory.getLogger("TextNode")
     private var clickedLink: URI? = null
 
