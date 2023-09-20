@@ -19,7 +19,7 @@ import java.net.URI
 import java.net.URISyntaxException
 
 open class TextNode(var text: Text, var textColor: ARGB, val screen: Screen) : Node() {
-    private val allowedProtocols: Set<String> = Sets.newHashSet(*arrayOf("http", "https", "ws"))
+    private val allowedProtocols: Set<String> = Sets.newHashSet(*arrayOf("http", "https"))
     private val LOGGER = LoggerFactory.getLogger("TextNode")
     private var clickedLink: URI? = null
 
@@ -32,7 +32,7 @@ open class TextNode(var text: Text, var textColor: ARGB, val screen: Screen) : N
         this.size = size
     }
 
-    constructor(pos: Vec2i, size: Vec2i, text: Text, screen: Screen) : this(text, ARGB(255, 255, 255), screen) {
+    constructor(pos: Vec2i, size: Vec2i, text: Text, screen: Screen) : this(text, ARGB.WHITE, screen) {
         this.pos = pos
         this.size = size
     }

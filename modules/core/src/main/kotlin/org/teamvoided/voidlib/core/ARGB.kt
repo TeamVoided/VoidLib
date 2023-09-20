@@ -33,6 +33,8 @@ data class ARGB(var alpha: Int, var red: Int, var green: Int, var blue: Int) {
             val gson = Gson()
             return fromJson(gson.fromJson(json, JsonObject::class.java))
         }
+        val WHITE = ARGB(255, 255,255)
+
     }
 
     constructor(red: Int, green: Int, blue: Int): this(255, red, green, blue)
