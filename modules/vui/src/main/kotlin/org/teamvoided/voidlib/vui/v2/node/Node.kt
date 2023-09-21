@@ -1,10 +1,6 @@
 package org.teamvoided.voidlib.vui.v2.node
 
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
-import net.minecraft.nbt.NbtCompound
 import net.minecraft.util.Identifier
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2d
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2f
@@ -32,7 +28,15 @@ abstract class Node(): CallbackManager() {
         get() = if (parent != null) (parent!!.globalPos + pos) else pos
         set(value) = if (parent != null) pos = (value - parent!!.pos)  else pos = value
     var pos = Vec2i(0, 0)
+        set(value) {
+            moveCallback(value)
+            field = value
+        }
     var size = Vec2i(0, 0)
+        set(value) {
+            resizeCallback(value)
+            field = value
+        }
 
     override val callbacks = HashMap<Identifier, Callback<*>>()
 
@@ -43,7 +47,7 @@ abstract class Node(): CallbackManager() {
         get() = getCallbackAs(id("mouse_release_callback"))
 
     val mouseScrollCallback: Callback<MouseScrollEvent>
-        get() = getCallbackAs(id("mouse_sroll_callback"))
+        get() = getCallbackAs(id("mouse_scroll_callback"))
 
     val mouseDragCallback: Callback<MouseDragEvent>
         get() = getCallbackAs(id("mouse_drag_callback"))
@@ -68,6 +72,12 @@ abstract class Node(): CallbackManager() {
 
     val removeChildCallback: Callback<List<Node>>
         get() = getCallbackAs(id("child_remove_callback"))
+
+    val resizeCallback: Callback<Vec2i>
+        get() = getCallbackAs(id("node_resize_callback"))
+
+    val moveCallback: Callback<Vec2i>
+        get() = getCallbackAs(id("node_move_callback"))
 
     protected constructor(pos: Vec2i): this() {
         this.pos = pos
