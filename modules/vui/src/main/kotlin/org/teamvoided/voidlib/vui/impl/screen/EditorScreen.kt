@@ -1,5 +1,7 @@
 package org.teamvoided.voidlib.vui.impl.screen
 
+import net.minecraft.client.MinecraftClient
+import net.minecraft.client.gui.widget.TextFieldWidget
 import net.minecraft.text.ClickEvent
 import net.minecraft.text.HoverEvent
 import net.minecraft.text.Text
@@ -87,20 +89,21 @@ class EditorScreen : VuiScreen<BoxNode>(Text.literal("Vui Editor")) {
         this
     )
 
-    val demoTextNode = TextNode(Vec2i(200, 50), Vec2i(0, 1), Text.literal("RENDER THIS").formatted(Formatting.WHITE),this)
+    val demoTextNode =
+        TextNode(Vec2i(200, 50), Vec2i(0, 1), Text.literal("RENDER THIS").formatted(Formatting.WHITE), this)
 
-    val textBox = TextFieldWidgetNode(Vec2i(250, 50), Vec2i(100, 0))
+    val textBox = WidgetNode(
+        Vec2i(250, 50), Vec2i(0, 0),
+        TextFieldWidget(MinecraftClient.getInstance().textRenderer, 250, 50, 100, 30, Text.literal("name"))
+    )
 
-//    private val nameField: TextFieldWidget =
 
     override fun vuiInit() {
         //if there are no nodes the window will never flush out the minecraft loading screen cuz there's nothing to render on top of it
         //Add nodes here
 
-        textBox.onChangeCallback += {
-            LOGGER.info(it.text)
-            demoTextNode.text = Text.literal(it.text).formatted(Formatting.WHITE)
-        }
+        this.addDrawableChild(textBox.widget)
+
 
         button.buttonPressCallback += {
             LOGGER.info("---")
