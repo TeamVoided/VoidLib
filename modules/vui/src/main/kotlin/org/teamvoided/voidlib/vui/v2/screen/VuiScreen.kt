@@ -8,11 +8,12 @@ import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
 import org.teamvoided.voidlib.vui.v2.event.fabric.WindowResizeCallback
 import org.teamvoided.voidlib.vui.v2.node.Node
 
-abstract class VuiScreen<R: Node>(title: Text): Screen(title) {
+abstract class VuiScreen<R : Node>(title: Text) : Screen(title) {
     abstract val uiAdapter: VoidUIAdapter<R>
     val root get() = uiAdapter.rootNode
     protected open var scale = 1.0
     private var oldScaleFactor = 1.0
+    private var isInit = false
 
     open fun vuiInit() {}
     open fun vuiUpdate() {}
@@ -29,15 +30,17 @@ abstract class VuiScreen<R: Node>(title: Text): Screen(title) {
         uiAdapter.inflateAndMount()
         focusOn(uiAdapter)
 
-        WindowResizeCallback.event.register { _, w ->
-            this.width = w.scaledWidth
-            this.height = w.scaledHeight
+//        WindowResizeCallback.event.register { _, w ->
+//            this.width = w.scaledWidth
+//            this.height = w.scaledHeight
+//
+//            uiAdapter.moveAndResize(Vec2i(0, 0), Vec2i(width, height))
+//        }
 
-            uiAdapter.moveAndResize(Vec2i(0, 0), Vec2i(width, height))
+        if (!isInit) {
+            vuiInit()
+            isInit = true
         }
-
-
-        vuiInit()
         super.init()
     }
 
