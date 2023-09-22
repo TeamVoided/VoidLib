@@ -427,11 +427,11 @@ class TextInputNode(val color: ARGB) : Node() {
             j = l
             l = m
         }
-        if (k > size.x + width) {
-            k = size.x + width
+        if (k > globalPos.x + width) {
+            k = globalPos.x + width
         }
-        if (i > size.x + width) {
-            i = size.x + width
+        if (i > globalPos.x + width) {
+            i = globalPos.x + width
         }
         drawContext.fill(RenderLayer.getGuiTextHighlight(), i, j, k, l, -16776961)
     }
