@@ -209,8 +209,7 @@ abstract class Node(): CallbackManager() {
 
         return if (!event.canceled()) {
             children.forEach {
-                val b = it.dispatchInputEvent(event)
-                if (!b) return false
+                if (!it.dispatchInputEvent(event)) return false
             }; return true
         } else false
     }

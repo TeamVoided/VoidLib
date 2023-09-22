@@ -1,7 +1,6 @@
 package org.teamvoided.voidlib.vui.impl.screen
 
-import net.minecraft.client.MinecraftClient
-import net.minecraft.client.gui.widget.TextFieldWidget
+import net.minecraft.client.gui.widget.ButtonWidget
 import net.minecraft.text.ClickEvent
 import net.minecraft.text.HoverEvent
 import net.minecraft.text.Text
@@ -92,18 +91,24 @@ class EditorScreen : VuiScreen<BoxNode>(Text.literal("Vui Editor")) {
     val demoTextNode =
         TextNode(Vec2i(200, 50), Vec2i(0, 1), Text.literal("RENDER THIS").formatted(Formatting.WHITE), this)
 
-    val textBox = WidgetNode(
-        Vec2i(250, 50), Vec2i(0, 0),
-        TextFieldWidget(MinecraftClient.getInstance().textRenderer, 250, 50, 100, 30, Text.literal("name"))
-    )
+
+    val yesM = BoxNode(Vec2i(350, 50), Vec2i(100, 100), ARGB( 50, 50, 50))
+    val textBox = TextInputNode(Vec2i(350, 50), Vec2i(100, 100), ARGB.WHITE)
+
+    val widgetNode = WidgetNode(Vec2i(250, 50), Vec2i(40, 40)) { pos: Vec2i, size: Vec2i ->
+        ButtonWidget.builder(Text.literal("pain")) { LOGGER.info("hello") }
+            .position(pos.x, pos.y).size(size.x, size.y).build()
+    }
 
 
     override fun vuiInit() {
         //if there are no nodes the window will never flush out the minecraft loading screen cuz there's nothing to render on top of it
         //Add nodes here
 
-        this.addDrawableChild(textBox.widget)
-
+        textBox.onChangeCallback += {
+            LOGGER.info("chenge ${it.text}")
+            demoTextNode.text = Text.literal(it.text)
+        }
 
         button.buttonPressCallback += {
             LOGGER.info("---")
@@ -137,7 +142,10 @@ class EditorScreen : VuiScreen<BoxNode>(Text.literal("Vui Editor")) {
         root.addChild(textNode)
         root.addChild(clickableLink)
 
-        root.addChild(textBox)
+        root.addChild(widgetNode)
+
+        root.addChild(yesM)
+        yesM.addChild(textBox)
         root.addChild(demoTextNode)
 
 
