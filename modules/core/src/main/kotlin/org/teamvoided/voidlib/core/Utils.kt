@@ -1,3 +1,4 @@
+@file:Suppress("unused")
 package org.teamvoided.voidlib.core
 
 import java.math.BigInteger
