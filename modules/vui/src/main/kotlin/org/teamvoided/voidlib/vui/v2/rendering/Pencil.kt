@@ -97,7 +97,7 @@ object Pencil {
             TextAnchor.TOP_LEFT -> {}
         }
 
-        textRenderer.draw(text.asOrderedText(), x * (1 / scale), y * (1 / scale), (textRenderer.getWidth(text) * scale).i, true, drawContext.matrices.peek().positionMatrix, drawContext.vanillaInstance.vertexConsumers, TextLayerType.NORMAL, 0, color.toInt())
+        textRenderer.draw(text.asOrderedText(), x * (1 / scale), y * (1 / scale), color.toInt(), true, drawContext.matrices.peek().positionMatrix, drawContext.vanillaInstance.vertexConsumers, TextLayerType.NORMAL, (textRenderer.getWidth(text) * scale).i, 0)
         drawContext.matrices.pop()
     }
 
