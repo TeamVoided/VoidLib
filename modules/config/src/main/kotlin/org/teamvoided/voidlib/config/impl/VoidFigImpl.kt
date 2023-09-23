@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import org.teamvoided.voidlib.config.ConfigManager
+import org.teamvoided.voidlib.config.VoidFigHelpers
 import org.teamvoided.voidlib.config.network.ConfigSyncPacket
 
 object VoidFigImpl {
@@ -12,6 +13,8 @@ object VoidFigImpl {
         ServerPlayNetworking.registerGlobalReceiver(ConfigSyncPacket.id, ConfigSyncPacket)
         ServerLifecycleEvents.SERVER_STARTING.register {
             ConfigManager.serverConfigs.forEach { (_, config) ->
+                if (!VoidFigHelpers.getConfigFile(config.id, config.side, config.fileType).exists())
+                    config.serialize()
                 config.deserialize()
             }
 
@@ -21,7 +24,9 @@ object VoidFigImpl {
         }
 
         ServerLifecycleEvents.SERVER_STOPPING.register {
-            ConfigManager.clientConfigs.forEach { (_, config) ->
+            ConfigManager.serverConfigs.forEach { (_, config) ->
+                if (!VoidFigHelpers.getConfigFile(config.id, config.side, config.fileType).exists())
+                    config.serialize()
                 config.serialize()
             }
 
@@ -35,6 +40,8 @@ object VoidFigImpl {
         ClientPlayNetworking.registerGlobalReceiver(ConfigSyncPacket.id, ConfigSyncPacket)
         ClientLifecycleEvents.CLIENT_STARTED.register {
             ConfigManager.clientConfigs.forEach { (_, config) ->
+                if (!VoidFigHelpers.getConfigFile(config.id, config.side, config.fileType).exists())
+                    config.serialize()
                 config.deserialize()
             }
 
@@ -45,6 +52,8 @@ object VoidFigImpl {
 
         ClientLifecycleEvents.CLIENT_STOPPING.register {
             ConfigManager.clientConfigs.forEach { (_, config) ->
+                if (!VoidFigHelpers.getConfigFile(config.id, config.side, config.fileType).exists())
+                    config.serialize()
                 config.serialize()
             }
 
