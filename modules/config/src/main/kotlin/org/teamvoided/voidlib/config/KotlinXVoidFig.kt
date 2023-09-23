@@ -50,5 +50,6 @@ abstract class KotlinXVoidFig<Config: Any>(
         config = deserialize(file.readText())
     }
 
+    @JvmName("get_config")
     fun getConfig() = config
 }
