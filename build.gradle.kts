@@ -30,6 +30,10 @@ loom {
 	}
 }
 
+dependencies {
+	implementation(dependencyHelper.modProject(":tests"))
+}
+
 tasks {
 	val targetJavaVersion = 17
 	withType<JavaCompile> {

@@ -17,7 +17,8 @@ include(
     "pow",
     "vui",
     "wfc",
-    "woodset"
+    "woodset",
+    "tests"
 )
 
 project(":config").projectDir = file("modules/config")
@@ -28,3 +29,5 @@ project(":pow").projectDir = file("modules/pow")
 project(":vui").projectDir = file("modules/vui")
 project(":wfc").projectDir = file("modules/wfc")
 project(":woodset").projectDir = file("modules/woodset")
+
+project(":tests").projectDir = file("modules/tests")
