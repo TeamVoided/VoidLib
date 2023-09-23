@@ -10,18 +10,10 @@ import kotlinx.serialization.encoding.Encoder
 @OptIn(ExperimentalSerializationApi::class)
 class ARGBSerializer: KSerializer<ARGB> {
     override fun serialize(encoder: Encoder, value: ARGB) {
-        encoder.encodeInt(value.alpha)
-        encoder.encodeInt(value.red)
-        encoder.encodeInt(value.green)
-        encoder.encodeInt(value.blue)
+        encoder.encodeInt(value.toInt())
     }
 
     override fun deserialize(decoder: Decoder): ARGB {
-        return ARGB(
-            decoder.decodeInt(),
-            decoder.decodeInt(),
-            decoder.decodeInt(),
-            decoder.decodeInt()
-        )
+        return ARGB.fromArgbInt(decoder.decodeInt())
     }
 }
