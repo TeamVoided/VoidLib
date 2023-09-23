@@ -1,9 +1,12 @@
 package org.teamvoided.voidlib.config.impl
 
+import io.netty.buffer.Unpooled
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
+import net.minecraft.network.PacketByteBuf
 import org.teamvoided.voidlib.config.ConfigManager
 import org.teamvoided.voidlib.config.VoidFigHelpers
 import org.teamvoided.voidlib.config.network.ConfigSyncPacket
@@ -33,6 +36,12 @@ object VoidFigImpl {
             ConfigManager.commonConfigs.forEach { (_, config) ->
                 config.serialize()
             }
+        }
+
+        ServerPlayConnectionEvents.JOIN.register { _, sender, _ ->
+            val buf = PacketByteBuf(Unpooled.buffer())
+            ConfigSyncPacket.serverHandshakeInit(buf)
+            sender.sendPacket(ConfigSyncPacket.id, buf)
         }
     }
 
