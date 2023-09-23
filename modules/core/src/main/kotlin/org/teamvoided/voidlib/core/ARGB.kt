@@ -5,7 +5,7 @@ import com.google.gson.JsonObject
 import kotlinx.serialization.Serializable
 import net.minecraft.util.math.MathHelper
 
-@Serializable
+@Serializable(with = ARGBSerializer::class)
 data class ARGB(var alpha: Int, var red: Int, var green: Int, var blue: Int) {
     companion object {
         fun fromHexString(hex: String) = fromArgbInt(hex.toInt(16))
