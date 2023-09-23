@@ -11,6 +11,7 @@ import net.minecraft.server.network.ServerPlayNetworkHandler
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
+import org.jetbrains.annotations.ApiStatus
 import org.teamvoided.voidlib.config.ConfigManager
 import org.teamvoided.voidlib.config.VoidFig
 import org.teamvoided.voidlib.config.VoidFigHelpers
@@ -18,27 +19,27 @@ import org.teamvoided.voidlib.config.screen.ConfigSyncScreen
 import org.teamvoided.voidlib.core.i
 import org.teamvoided.voidlib.core.id
 
-class ConfigSyncPacket: ClientPlayNetworking.PlayChannelHandler, (MinecraftServer, ServerPlayerEntity, ServerPlayNetworkHandler, PacketByteBuf, PacketSender) -> Unit {
-    companion object {
-        val id = id("config_sync_packet")
+object ConfigSyncPacket: ClientPlayNetworking.PlayChannelHandler, (MinecraftServer, ServerPlayerEntity, ServerPlayNetworkHandler, PacketByteBuf, PacketSender) -> Unit {
+    val id = id("config_sync_packet")
 
-        fun serverHandshakeInit(buf: PacketByteBuf): PacketByteBuf {
-            buf.writeByte(ConfigSyncState.SERVER_HANDSHAKE_INIT.ordinal)
-            buf.writeMap(ConfigManager.commonConfigs, { buf2, key ->
-                buf2.writeIdentifier(key)
-            }) { buf2, value ->
-                buf2.writeString(VoidFigHelpers.getConfigData(value))
-            }
-
-            return buf
+    @ApiStatus.Internal
+    fun serverHandshakeInit(buf: PacketByteBuf): PacketByteBuf {
+        buf.writeByte(ConfigSyncState.SERVER_HANDSHAKE_INIT.ordinal)
+        buf.writeMap(ConfigManager.commonConfigs, { buf2, key ->
+            buf2.writeIdentifier(key)
+        }) { buf2, value ->
+            buf2.writeString(VoidFigHelpers.getConfigData(value))
         }
 
-        fun clientHandshakeEnd(buf: PacketByteBuf, configChanged: Boolean): PacketByteBuf {
-            buf.writeByte(ConfigSyncState.SERVER_HANDSHAKE_INIT.ordinal)
-            buf.writeBoolean(configChanged)
+        return buf
+    }
 
-            return buf
-        }
+    @ApiStatus.Internal
+    fun clientHandshakeEnd(buf: PacketByteBuf, configChanged: Boolean): PacketByteBuf {
+        buf.writeByte(ConfigSyncState.SERVER_HANDSHAKE_INIT.ordinal)
+        buf.writeBoolean(configChanged)
+
+        return buf
     }
 
     override fun receive(

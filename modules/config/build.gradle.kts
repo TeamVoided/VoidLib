@@ -8,6 +8,9 @@ plugins {
 modSettings {
 	modId("voidlib-config")
 	modName("VoidLib: Config")
+
+	entrypoint("main", "org.teamvoided.voidlib.config.impl.VoidFigImpl::commonSetup")
+	entrypoint("client", "org.teamvoided.voidlib.config.impl.VoidFigImpl::clientSetup")
 }
 
 publishScript {
