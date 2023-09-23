@@ -13,7 +13,6 @@ import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import org.jetbrains.annotations.ApiStatus
 import org.teamvoided.voidlib.config.ConfigManager
-import org.teamvoided.voidlib.config.VoidFig
 import org.teamvoided.voidlib.config.VoidFigHelpers
 import org.teamvoided.voidlib.config.screen.ConfigSyncScreen
 import org.teamvoided.voidlib.core.i
@@ -56,21 +55,20 @@ object ConfigSyncPacket: ClientPlayNetworking.PlayChannelHandler, (MinecraftServ
 
             val notMatching: MutableMap<Identifier, String> = HashMap()
 
-            val serverConfigs: MutableMap<Identifier, VoidFig> =
-                buf.readMap({
-                    currentId = it.readIdentifier()
-                    currentId
-                }) {
-                    val voidFig = ConfigManager.commonConfigs[currentId]!!
+            buf.readMap({
+                currentId = it.readIdentifier()
+                currentId
+            }) {
+                val voidFig = ConfigManager.commonConfigs[currentId]!!
 
-                    val rawData = it.readString()
+                val rawData = it.readString()
 
-                    if (!voidFig.matchesRawData(rawData)) {
-                        notMatching[currentId] = rawData
-                    }
-
-                    voidFig
+                if (!voidFig.matchesRawData(rawData)) {
+                    notMatching[currentId] = rawData
                 }
+
+                voidFig
+            }
 
             responseSender.sendPacket(id, clientHandshakeEnd(PacketByteBuf(Unpooled.buffer()), notMatching.isNotEmpty()))
 
@@ -89,7 +87,8 @@ object ConfigSyncPacket: ClientPlayNetworking.PlayChannelHandler, (MinecraftServ
         val state = ConfigSyncState.entries[ordinal]
 
         if (state == ConfigSyncState.CLIENT_HANDSHAKE_END && buf.readBoolean()) {
-            player.networkHandler.disconnect(Text.empty())
+            if (player.networkHandler.isConnectionOpen)
+                player.networkHandler.disconnect(Text.empty())
         }
     }
 }

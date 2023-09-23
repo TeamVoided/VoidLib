@@ -7,7 +7,7 @@ import net.minecraft.util.math.MathHelper
 
 @Serializable
 data class ARGB(var alpha: Int, var red: Int, var green: Int, var blue: Int) {
-    companion object Serializer {
+    companion object {
         fun fromHexString(hex: String) = fromArgbInt(hex.toInt(16))
 
         fun fromHSV(hue: Float, saturation: Float, value: Float, alpha: Float) =

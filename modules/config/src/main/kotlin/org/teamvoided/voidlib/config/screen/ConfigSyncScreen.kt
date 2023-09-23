@@ -24,16 +24,19 @@ class ConfigSyncScreen(val mismatched: Map<Identifier, String>): VuiScreen<BoxNo
     val serverList = ButtonNode(Vec2i(width / 2 - 40, height / 2 - 10), Vec2i(80, 20), Text.literal("Back to Server List"))
 
     override fun vuiInit() {
+        root.addChild(syncAndRestart)
+        root.addChild(serverList)
+
         syncAndRestart.buttonPressCallback += {
             mismatched.forEach { (id, rawData) ->
                 VoidFigHelpers.writeConfigData(ConfigManager.commonConfigs[id]!!, rawData)
                 exitProcess(0)
             }
+        }
 
-            serverList.buttonPressCallback += {
-                val client = MinecraftClient.getInstance()
-                client.setScreen(MultiplayerScreen(TitleScreen(true)))
-            }
+        serverList.buttonPressCallback += {
+            val client = MinecraftClient.getInstance()
+            client.setScreen(MultiplayerScreen(TitleScreen(true)))
         }
     }
 
