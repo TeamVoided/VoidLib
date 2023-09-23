@@ -30,7 +30,7 @@ abstract class KotlinXVoidFig<Config: Any>(
 
     override fun serialize() {
         val file = VoidFigHelpers.getConfigFile(id, side, fileType)
-        file.mkdirs()
+        file.parentFile.mkdirs()
         file.createNewFile()
 
         file.writeText(serialize(config))
