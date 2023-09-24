@@ -12,11 +12,6 @@ modSettings {
     entrypoint("client", "org.teamvoided.voidlib.tests.Tests::clientSetup")
 }
 
-publishScript {
-    repository("TeamVoided", "https://maven.teamvoided.org/releases")
-    publicationName(modSettings.modId())
-}
-
 base.archivesName.set("voidlib-tests")
 version = project.properties["mod_version"] as String
 group = project.properties["maven_group"] as String
