@@ -12,7 +12,7 @@ abstract class VuiScreen<R : Node>(title: Text) : Screen(title) {
     abstract val uiAdapter: VoidUIAdapter<R>
     val root get() = uiAdapter.rootNode
     protected open var scale = 1.0
-    private var oldScaleFactor = 1.0
+    protected var oldScaleFactor = 1.0
     private var isInit = false
 
     open fun vuiInit() {}
