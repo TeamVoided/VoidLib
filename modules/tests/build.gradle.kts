@@ -5,8 +5,8 @@ plugins {
 }
 
 modSettings {
-    modId("voidlib-config")
-    modName("VoidLib: Config")
+    modId("voidlib-tests")
+    modName("VoidLib: Tests")
 
     entrypoint("main", "org.teamvoided.voidlib.tests.Tests::commonSetup")
     entrypoint("client", "org.teamvoided.voidlib.tests.Tests::clientSetup")
@@ -17,7 +17,7 @@ publishScript {
     publicationName(modSettings.modId())
 }
 
-base.archivesName.set("voidlib-config")
+base.archivesName.set("voidlib-tests")
 version = project.properties["mod_version"] as String
 group = project.properties["maven_group"] as String
 
