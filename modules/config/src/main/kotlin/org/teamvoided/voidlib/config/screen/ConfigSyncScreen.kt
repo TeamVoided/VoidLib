@@ -7,6 +7,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import org.teamvoided.voidlib.config.ConfigManager
 import org.teamvoided.voidlib.config.VoidFigHelpers
+import org.teamvoided.voidlib.config.impl.VoidFigImpl
 import org.teamvoided.voidlib.core.ARGB
 import org.teamvoided.voidlib.core.datastructures.vector.Vec2i
 import org.teamvoided.voidlib.vui.v2.node.BoxNode
@@ -29,6 +30,7 @@ class ConfigSyncScreen(val mismatched: Map<Identifier, String>): VuiScreen<BoxNo
 
         syncAndRestart.buttonPressCallback += {
             mismatched.forEach { (id, rawData) ->
+                VoidFigImpl.saveCommonConfigsOnClient = false
                 VoidFigHelpers.writeConfigData(ConfigManager.commonConfigs[id]!!, rawData)
                 exitProcess(0)
             }

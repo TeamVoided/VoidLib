@@ -7,11 +7,15 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.network.PacketByteBuf
+import org.jetbrains.annotations.ApiStatus
 import org.teamvoided.voidlib.config.ConfigManager
 import org.teamvoided.voidlib.config.VoidFigHelpers
 import org.teamvoided.voidlib.config.network.ConfigSyncPacket
 
 object VoidFigImpl {
+    @ApiStatus.Internal
+    var saveCommonConfigsOnClient = true
+
     fun commonSetup() {
         ServerPlayNetworking.registerGlobalReceiver(ConfigSyncPacket.id, ConfigSyncPacket)
         ServerLifecycleEvents.SERVER_STARTING.register {
@@ -28,8 +32,6 @@ object VoidFigImpl {
 
         ServerLifecycleEvents.SERVER_STOPPING.register {
             ConfigManager.serverConfigs.forEach { (_, config) ->
-                if (!VoidFigHelpers.getConfigFile(config.id, config.side, config.fileType).exists())
-                    config.serialize()
                 config.serialize()
             }
 
@@ -61,13 +63,11 @@ object VoidFigImpl {
 
         ClientLifecycleEvents.CLIENT_STOPPING.register {
             ConfigManager.clientConfigs.forEach { (_, config) ->
-                if (!VoidFigHelpers.getConfigFile(config.id, config.side, config.fileType).exists())
-                    config.serialize()
                 config.serialize()
             }
 
             ConfigManager.commonConfigs.forEach { (_, config) ->
-                config.serialize()
+                if (saveCommonConfigsOnClient) config.serialize()
             }
         }
     }
