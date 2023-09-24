@@ -89,12 +89,18 @@ object Packets {
 
     fun <PacketData> Chain.openClient(packet: S2CVoidPacket<PacketData>) =
         openChainClient(this, packet)
-    
+
     fun <PacketData> Chain.open(packet: C2SVoidPacket<PacketData>) =
         openChainServer(this, packet)
 
     fun <PacketData> Chain.openServer(packet: C2SVoidPacket<PacketData>) =
         openChainServer(this, packet)
+
+    fun <PacketData> ChainC2SVoidPacket<PacketData>.open() =
+        openChainServer(this, this)
+
+    fun <PacketData> ChainS2CVoidPacket<PacketData>.open() =
+        openChainClient(this, this)
 
     fun createBuffer() = PacketByteBuf(Unpooled.buffer())
 }

@@ -22,3 +22,5 @@ interface S2CVoidPacket<PacketData>: VoidPacket<PacketData> {
         handleS2C(client, handler, decode(buf), responseSender)
     }
 }
+
+typealias ClientReciever<PacketData> = S2CVoidPacket<PacketData>

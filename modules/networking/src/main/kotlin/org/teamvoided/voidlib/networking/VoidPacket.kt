@@ -16,3 +16,5 @@ interface VoidPacket<PacketData> {
         return format.decodeFromByteArray(serializer, buf.readByteArray())
     }
 }
+
+typealias Reciever<PacketData> = VoidPacket<PacketData>

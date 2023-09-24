@@ -25,3 +25,5 @@ interface C2SVoidPacket<PacketData>: VoidPacket<PacketData> {
         handleC2S(server, player, handler, decode(buf), responseSender)
     }
 }
+
+typealias ServerReciever<PacketData> = C2SVoidPacket<PacketData>
