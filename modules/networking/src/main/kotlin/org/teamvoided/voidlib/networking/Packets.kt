@@ -39,6 +39,7 @@ object Packets {
         ClientPlayNetworking.send(chainId, buf)
     }
 
+    @JvmName("staticSendToServer")
     fun <PacketData> sendToServer(
         packet: ChainC2SVoidPacket<PacketData>,
         data: PacketData
