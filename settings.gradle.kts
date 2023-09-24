@@ -14,6 +14,7 @@ include(
     "core",
     "cresm",
     "dimutil",
+    "networking",
     "pow",
     "vui",
     "wfc",
@@ -25,6 +26,7 @@ project(":config").projectDir = file("modules/config")
 project(":core").projectDir = file("modules/core")
 project(":cresm").projectDir = file("modules/cresm")
 project(":dimutil").projectDir = file("modules/dimutil")
+project(":networking").projectDir = file("modules/networking")
 project(":pow").projectDir = file("modules/pow")
 project(":vui").projectDir = file("modules/vui")
 project(":wfc").projectDir = file("modules/wfc")
