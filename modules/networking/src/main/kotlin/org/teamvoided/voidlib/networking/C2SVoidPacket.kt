@@ -26,4 +26,4 @@ interface C2SVoidPacket<PacketData>: VoidPacket<PacketData> {
     }
 }
 
-typealias ServerReciever<PacketData> = C2SVoidPacket<PacketData>
+typealias ServerReceiver<PacketData> = C2SVoidPacket<PacketData>

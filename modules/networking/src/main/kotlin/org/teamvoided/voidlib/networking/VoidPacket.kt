@@ -17,4 +17,4 @@ interface VoidPacket<PacketData> {
     }
 }
 
-typealias Reciever<PacketData> = VoidPacket<PacketData>
+typealias Receiver<PacketData> = VoidPacket<PacketData>

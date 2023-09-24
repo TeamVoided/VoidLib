@@ -23,4 +23,4 @@ interface S2CVoidPacket<PacketData>: VoidPacket<PacketData> {
     }
 }
 
-typealias ClientReciever<PacketData> = S2CVoidPacket<PacketData>
+typealias ClientReceiver<PacketData> = S2CVoidPacket<PacketData>
