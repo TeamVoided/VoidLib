@@ -21,7 +21,7 @@ abstract class VuiScreen<R : Node>(title: Text) : Screen(title) {
     override fun init() {
         val window = MinecraftClient.getInstance().window
         oldScaleFactor = window.scaleFactor
-        window.scaleFactor = 1.4
+        window.scaleFactor = scale
         this.width = window.scaledWidth
         this.height = window.scaledHeight
 
