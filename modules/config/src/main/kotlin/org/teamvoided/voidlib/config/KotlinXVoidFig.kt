@@ -7,12 +7,12 @@ import kotlin.reflect.KClass
 abstract class KotlinXVoidFig<Config: Any>(
     override val id: Identifier,
     override val side: Side,
-    protected var config: Config,
+    override var config: Config,
     val configFormat: StringFormat,
     //Typically obtained from Class.serializer() if the class is @Serializable (kotlinx.serialization)
     val configSerializer: KSerializer<Config>,
     override val fileType: String
-): VoidFig {
+): VoidFig<Config> {
 
     @OptIn(ExperimentalSerializationApi::class)
     constructor(
@@ -49,7 +49,4 @@ abstract class KotlinXVoidFig<Config: Any>(
 
         config = deserialize(file.readText())
     }
-
-    @JvmName("get_config")
-    fun getConfig() = config
 }

@@ -16,13 +16,16 @@ object VoidFigHelpers {
             }
         }
 
-    fun getConfigData(voidFig: VoidFig): String {
+    fun getConfigFile(voidFig: VoidFig<*>) =
+        getConfigFile(voidFig.id, voidFig.side, voidFig.fileType)
+
+    fun getConfigData(voidFig: VoidFig<*>): String {
         voidFig.serialize()
         return getConfigFile(voidFig.id, voidFig.side, voidFig.fileType).readText()
     }
 
     @ApiStatus.Internal
-    fun writeConfigData(voidFig: VoidFig, rawData: String) {
+    fun writeConfigData(voidFig: VoidFig<*>, rawData: String) {
         val file = getConfigFile(voidFig.id, voidFig.side, voidFig.fileType)
         file.writeText(rawData)
     }
