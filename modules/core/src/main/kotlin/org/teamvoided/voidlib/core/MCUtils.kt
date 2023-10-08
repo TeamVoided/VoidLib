@@ -10,8 +10,8 @@ import net.minecraft.util.shape.VoxelShapes
 
 fun mc(path: String) = Identifier(path)
 
-val Item.id get() = Registries.ITEM.getId(this)
-val Block.id get() = Registries.BLOCK.getId(this)
+val Item.getId get() = Registries.ITEM.getId(this)
+val Block.getId get() = Registries.BLOCK.getId(this)
 
 fun rotateVoxelShape(times: Int, shape: VoxelShape): VoxelShape {
     val shapes = arrayOf(shape, VoxelShapes.empty())
