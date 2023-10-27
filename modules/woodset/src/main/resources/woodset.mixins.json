@@ -1,7 +1,6 @@
 {
   "package": "org.teamvoided.voidlib.woodset.mixin",
   "mixins": [
-    "FabricTagProviderInvoker",
     "MixinBlockEntityType"
   ]
 }
