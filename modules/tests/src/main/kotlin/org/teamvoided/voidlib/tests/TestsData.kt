@@ -3,13 +3,11 @@ package org.teamvoided.voidlib.tests
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
-import net.minecraft.registry.RegistryWrapper
 import org.teamvoided.voidlib.tests.Tests.BlackMill
 import org.teamvoided.voidlib.tests.Tests.LOGGER
 import org.teamvoided.voidlib.tests.data.providers.LootTableProv
 import org.teamvoided.voidlib.tests.data.providers.ModelProv
 import org.teamvoided.voidlib.tests.data.providers.RecipeProv
-import java.util.concurrent.CompletableFuture
 
 @Suppress("unused")
 class TestsData : DataGeneratorEntrypoint {
