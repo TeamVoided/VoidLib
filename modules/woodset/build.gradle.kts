@@ -18,11 +18,12 @@ modSettings {
 	mixinFile("woodset.mixins.json")
 }
 
+publishScript {
+	releaseRepository("TeamVoided", "https://maven.teamvoided.org/releases")
+	publication(modSettings.modId(), isSnapshot = false)
+	publication(modSettings.modId() + "Snapshot", isSnapshot = true)
+}
+
 dependencies {
 	implementation(dependencyHelper.modProject(":core"))
 }
-publishScript {
-	repository("TeamVoided", "https://maven.teamvoided.org/releases")
-	publicationName(modSettings.modId())
-}
-

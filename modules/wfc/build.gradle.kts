@@ -12,8 +12,9 @@ modSettings {
 }
 
 publishScript {
-	repository("TeamVoided", "https://maven.teamvoided.org/releases")
-	publicationName(modSettings.modId())
+	releaseRepository("TeamVoided", "https://maven.teamvoided.org/releases")
+	publication(modSettings.modId(), isSnapshot = false)
+	publication(modSettings.modId() + "Snapshot", isSnapshot = true)
 }
 
 base.archivesName.set("voidlib-wfc")
